@@ -1,0 +1,35 @@
+body {
+	background-color: #f5f5f5;
+}
+
+#main-content {
+	max-width: 940px;
+	padding: 2em 3em;
+	margin: 0 auto 20px;
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.chat-panel .panel-body {
+    height: 700px;
+    overflow-y: scroll;
+}
+
+.chat {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.chat li {
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #999999;
+}
+
+.form-group {
+	margin-bottom: 0px !important;
+}
