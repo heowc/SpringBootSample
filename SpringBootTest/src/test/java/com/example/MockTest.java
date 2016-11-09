@@ -3,7 +3,6 @@ package com.example;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,6 @@ public class MockTest {
 	
 	@MockBean
 	private BasicService service;
-	
-	@Before
-	public void onBefore() {
-		
-	}
 	
 	@Test
 	public void test() {

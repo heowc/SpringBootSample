@@ -17,10 +17,8 @@ public class BasicServiceImpl implements BasicService {
 		return null;
 	}
 
-
 	@Override
 	public TestVo jsonTest() {
-		// TODO Auto-generated method stub
 		return new TestVo("wonchul", 0);
 	}
 }
