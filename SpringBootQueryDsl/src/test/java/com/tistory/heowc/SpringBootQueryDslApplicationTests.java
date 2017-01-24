@@ -35,11 +35,26 @@ public class SpringBootQueryDslApplicationTests {
 	}
 	
 	@Test
-	public void test_querydsl() {
-		System.out.println("============================== Test");
-		studentRepository.findStudentByName("wonchul")
-							.stream()
-							.map(student -> student.toString())
-							.forEach(System.out::println);
+	public void test_findStudentByName() {
+		System.out.println("============================== findStudentByName");
+//		studentRepository.findStudentByName("wonchul")
+//							.stream()
+//							.map(student -> student.toString())
+//							.forEach(System.out::println);
+	}
+	
+	@Test
+	public void test_findStudentByGradeAndHeight() {
+		System.out.println("============================== findStudentByGradeAndHeight");
+//		studentRepository.findStudentByGradeAndHeight(1, 165.0)
+//							.stream()
+//							.map(student -> student.toString())
+//							.forEach(System.out::println);
+	}
+	
+	@Test
+	public void test_findGradeByNameOfStudent() {
+		System.out.println("============================== findGradeByNameOfStudent");
+		System.out.println(gradeRepository.findGradeByNameOfStudent("wonchul"));
 	}
 }

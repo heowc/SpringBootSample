@@ -2,24 +2,31 @@ package com.tistory.heowc.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
-import com.querydsl.jpa.impl.JPAQuery;
-import com.tistory.heowc.domain.QStudent;
 import com.tistory.heowc.domain.Student;
 
-public class StudentRepositoryImpl implements StudentRepositoryCustom {
+public class StudentRepositoryImpl extends QueryDslRepositorySupport implements StudentRepositoryCustom {
 
-	@PersistenceContext
-	EntityManager em;
-	
+	public StudentRepositoryImpl() {
+		super(Student.class);
+	}
 	@Override
 	public List<Student> findStudentByName(String name) {
-		JPAQuery<Student> query = new JPAQuery<>(em);
-		QStudent student = QStudent.student;
-		return query.from(student)
-					.where(student.name.eq(name))
-					.fetch();
+//		QStudent student = QStudent.student;
+//		return from(student)
+//				.where(student.name.eq(name))
+//				.fetch();
+		return null;
+	}
+	
+	@Override
+	public List<Student> findStudentByGradeAndHeight(Integer grade, Double height) {
+//		QStudent student = QStudent.student;
+//		return from(student)
+//				.where(student.gradeNum.eq(grade).and(student.height.goe(height)))
+////				.where(student.gradeNum.eq(grade), student.height.goe(height))  
+//				.fetch();
+		return null;
 	}
 }
