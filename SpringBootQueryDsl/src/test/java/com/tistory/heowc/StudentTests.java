@@ -54,6 +54,11 @@ public class StudentTests {
 		
 		studentRepository.findAll(studentRepository.equalName("wonchul"))
 							.forEach(student -> System.out.println(student.toString()));
+		
+		studentRepository.findStudentByNameExtension("wonchul")
+							.stream()
+							.map(student -> student.toString())
+							.forEach(System.out::println);
 	}
 	
 	@Test
@@ -84,11 +89,16 @@ public class StudentTests {
 	}
 	
 	@Test
-	public void test() {
-		System.out.println("============================== test");
-		PathBuilder<Student> studentPath = new PathBuilder<>(Student.class, "student");
+	public void test_findCaseStudentAll() {
+		System.out.println("============================== findCaseStudentAll");
+		studentRepository.findCaseStudentAll_Tuple()
+							.stream()
+							.map(student -> student.toString())
+							.forEach(System.out::println);
 		
-		studentPath.get("student_name", String.class);
-		
+//		studentRepository.findCaseStudentAll_Student()
+//							.stream()
+//							.map(student -> student.toString())
+//							.forEach(System.out::println);
 	}
 }
