@@ -86,8 +86,8 @@ public class StudentRepositoryImpl implements StudentRepositoryCustom {
 	public List<Integer> findStudentGroupingByGradeNum() {
 		QStudent student = QStudent.student;
 		return queryFactory
-				.selectFrom(student)
 				.select(student.gradeNum)
+				.from(student)
 				.groupBy(student.gradeNum)
 				.fetch();
 	}

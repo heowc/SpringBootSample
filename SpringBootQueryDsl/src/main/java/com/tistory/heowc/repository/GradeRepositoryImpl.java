@@ -47,7 +47,7 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom {
 		QStudent student = QStudent.student;
 		return queryFactory
 				.selectFrom(grade)
-				.where(grade.gradeNum.eq(JPAExpressions
+				.where(grade.gradeNum.eq(queryFactory
 										.select(student.gradeNum)
 										.from(student)
 										.where(student.name.eq(name))))
