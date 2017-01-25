@@ -1,35 +1,35 @@
 package com.tistory.heowc.domain;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-public class Grade {
+@RequiredArgsConstructor
+public class Grade implements Serializable {
 
-	@Id @GeneratedValue
-	@Column(name = "GRADE_NUM")
+	private static final long serialVersionUID = -4432332213569816450L;
+
+	@Id
+	@Column(name = "GRADE_NUM") @NonNull
 	private Integer gradeNum;
 	
-	@Column(name = "GRADE_NAME")
+	@Column(name = "GRADE_NAME") @NonNull
 	private String gradeName;
 	
-	@OneToMany(mappedBy="grade", targetEntity=Student.class)
-	private List<Student> students = new ArrayList<Student>();
-	
-	public Grade(Integer gradeNum, String gradeName) {
-		this.gradeNum  = gradeNum;
-		this.gradeName = gradeName;
-	}
+	@OneToMany
+	@JoinColumn(name = "GRADE_NUM")
+	private List<Student> students;
 	
 	protected Grade() {}
-	
 }

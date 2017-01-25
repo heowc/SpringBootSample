@@ -1,42 +1,34 @@
 package com.tistory.heowc.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-public class Student {
+@RequiredArgsConstructor
+public class Student implements Serializable {
 
-	@Id @GeneratedValue
-	@Column(name = "STUDENT_ID")
+	private static final long serialVersionUID = -2575227151310448540L;
+
+	@Id
+	@Column(name = "STUDENT_ID") @NonNull
 	private Integer id;
 
-	@Column(name = "STUDENT_NAME")
+	@Column(name = "STUDENT_NAME") @NonNull
 	private String  name;
 	
-	@Column(name = "STUDENT_HEIGHT")
+	@Column(name = "STUDENT_HEIGHT") @NonNull
 	private Double  height;
 	
-	@Column(name = "GRADE_NUM")
+	@Column(name = "GRADE_NUM") @NonNull
 	private Integer gradeNum;
 	
-	public Student(Integer id, String name, Double height, Integer gradeNum) {
-		this.id       = id;
-		this.name     = name;
-		this.height   = height;
-		this.gradeNum = gradeNum;
-	}
-	
-	@ManyToOne(targetEntity=Grade.class)
-	@JoinColumn(referencedColumnName = "GRADE_NUM")
-	private Grade grade;
-	
 	protected Student() {}
-	
 }
