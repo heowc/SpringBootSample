@@ -1,4 +1,7 @@
 *.class
+*.bin
+*.jar
+*.bat
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
