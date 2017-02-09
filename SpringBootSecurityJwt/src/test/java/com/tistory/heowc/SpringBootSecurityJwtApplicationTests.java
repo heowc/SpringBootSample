@@ -2,12 +2,11 @@ package com.tistory.heowc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,30 +24,36 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 @SpringBootTest
 public class SpringBootSecurityJwtApplicationTests {
 	
-	private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
-	
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	
-	private static final String JWT_TOKEN =
-           "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoMCIsImV4cCI6MTQ4NTkxODAwMH0.cxgLcrlqKo8vWQBhR_2mMhM8NXjqkNj2Y7DPJrG74n0";
-          /*-------header-------.-------------------claim-------------------.------------------signature----------------*/
+//  "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoMCIsImV4cCI6MTQ4NTkxODAwMH0.cxgLcrlqKo8vWQBhR_2mMhM8NXjqkNj2Y7DPJrG74n0";
+// /*-------header-------.-------------------claim-------------------.------------------signature----------------*/
+
+	private static String JWT_TOKEN = null;
 	
 	private static final String JWT_SECRECT_KEY = "heowc.tistory.com";
 	
-	private static final LocalDateTime STANDARD_DATE = LocalDateTime.of(2017, 2 , 1, 12, 0, 0, 0);
-	
+	private static final LocalDateTime STANDARD_LOCAL = LocalDateTime.of(2017, 2 , 9, 0, 0, 0);
+	private static final LocalDateTime EXPIRES_LOCAL  = LocalDateTime.of(2017, 2 , 15, 0, 0, 0);
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	
-	@Test
-	public void test_createJwtToken() throws Exception {
+	private static Date STANDARD_DATE;
+	private static Date EXPIRES_DATE;
+	
+	private static Long DAY = 3600L * 24;
+	
+	@BeforeClass
+	public static void beforeClass_createJwtToken() throws Exception {
+		STANDARD_DATE = Date.from(STANDARD_LOCAL.toInstant(ZoneOffset.ofHours(9)));
+		EXPIRES_DATE  = Date.from(EXPIRES_LOCAL.toInstant(ZoneOffset.ofHours(9)));
 		
 		try {
-			String token = JWT.create()
-					.withIssuer("auth0")
-					.withExpiresAt(Date.from(STANDARD_DATE.toInstant(ZoneOffset.ofHours(9))))
-					.sign(Algorithm.HMAC256(JWT_SECRECT_KEY));
-			
-			assertThat(token).isEqualTo(JWT_TOKEN);
+			JWT_TOKEN = JWT.create()
+							.withIssuer("wonchul")
+							.withIssuedAt(STANDARD_DATE) // 발행일
+							.withExpiresAt(EXPIRES_DATE) // 만료일
+							.sign(Algorithm.HMAC256(JWT_SECRECT_KEY));
+
 		} catch (JWTCreationException createEx) {
 			System.out.println("Create Error");
 			createEx.printStackTrace();
@@ -59,7 +64,7 @@ public class SpringBootSecurityJwtApplicationTests {
 	public void test_decodeJwtToken() throws Exception {
 		
 		try {
-			JWT jwt = JWT.decode(JWT_TOKEN);
+			JWT.decode(JWT_TOKEN);
 		} catch (JWTDecodeException decodeEx) {
 			System.out.println("Decode Error");
 			decodeEx.printStackTrace();
@@ -70,9 +75,11 @@ public class SpringBootSecurityJwtApplicationTests {
 	public void test_verifyJwtToken() throws Exception {
 		try {
 			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JWT_SECRECT_KEY))
-										.withIssuer("auth0")
+										.withIssuer("wonchul")
+										.acceptIssuedAt(DAY * 1)
+//										.acceptExpiresAt(DAY * 10)
 										.build();
-
+			
 			DecodedJWT jwt = verifier.verify(JWT_TOKEN);
 			
 			System.out.println("=================== test_verifyJwtToken ===================");
@@ -80,7 +87,8 @@ public class SpringBootSecurityJwtApplicationTests {
 			System.out.println("jwt algorithm     : " + jwt.getAlgorithm());
 			System.out.println("jwt claims        : " + jwt.getClaims());
 			System.out.println("jwt issuer        : " + jwt.getIssuer());
-			System.out.println("jwt expires       : " + jwt.getExpiresAt());
+			System.out.println("jwt issuer date   : " + jwt.getIssuedAt());
+			System.out.println("jwt expires date  : " + jwt.getExpiresAt());
 			System.out.println("jwt signature     : " + jwt.getSignature());
 			System.out.println("jwt type          : " + jwt.getType());
 			System.out.println("jwt key id        : " + jwt.getKeyId());
@@ -91,7 +99,6 @@ public class SpringBootSecurityJwtApplicationTests {
 			
 		} catch (JWTVerificationException verificationEx) {
 			System.out.println("Verify Error");
-			System.out.println("com.auth0.jwt.exceptions.InvalidClaimException: The Token has expired on Wed Feb 01 12:00:00 KST 2017.");
 			verificationEx.printStackTrace();
 		}
 	}
