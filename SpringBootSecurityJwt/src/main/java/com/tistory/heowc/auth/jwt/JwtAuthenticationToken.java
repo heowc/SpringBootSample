@@ -25,7 +25,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 		super(authorities);
 		this.eraseCredentials();
 		this.member = member;
-		this.setAuthenticated(true);
+		super.setAuthenticated(true);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
 	@Override
 	public void eraseCredentials() {
-		this.eraseCredentials();
+		super.eraseCredentials();
 		this.token = null;
 	}
 }

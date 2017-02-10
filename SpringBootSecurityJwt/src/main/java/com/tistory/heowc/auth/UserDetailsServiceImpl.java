@@ -2,7 +2,6 @@ package com.tistory.heowc.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private MemberRepository repository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) {
+	public UserDetailsImpl loadUserByUsername(String username) {
 		
 		Member user = repository.findOne(username);
 		
@@ -25,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(username + "라는 사용자가 없습니다.");
 		}
 		
-		return new UserDetailsImpl(user.getId(), AuthorityUtils.createAuthorityList(user.getRole()));
+		return new UserDetailsImpl(user, AuthorityUtils.createAuthorityList(user.getRole()));
 	}
 
 }

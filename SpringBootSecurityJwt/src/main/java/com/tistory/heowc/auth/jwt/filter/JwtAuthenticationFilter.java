@@ -20,25 +20,22 @@ import com.tistory.heowc.auth.jwt.JwtAuthenticationToken;
 import com.tistory.heowc.auth.jwt.JwtFactory;
 import com.tistory.heowc.auth.jwt.JwtInfo;
 
-public class JwtAuthenticationFilter extends
-		AbstractAuthenticationProcessingFilter {
+public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 	JwtFactory jwtFactory;
 
 	@Autowired
 	public JwtAuthenticationFilter(RequestMatcher requestMatcher,
-			JwtFactory jwtFactory) {
+									JwtFactory jwtFactory) {
 		super(requestMatcher);
 		this.jwtFactory = jwtFactory;
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException,
-			IOException, ServletException {
-		System.out.println(request.getRequestURI());
+												HttpServletResponse response) throws AuthenticationException,
+																					IOException, ServletException {
 		String token = request.getHeader(JwtInfo.HEADER_NAME);
-		System.out.println(token);
 
 		Boolean isVerify = jwtFactory.verifyToken(token);
 		if (isVerify) {
@@ -54,7 +51,6 @@ public class JwtAuthenticationFilter extends
 											HttpServletResponse response, 
 											FilterChain chain,
 											Authentication authResult) throws IOException, ServletException {
-		System.out.println("success");
 		SecurityContext context = SecurityContextHolder.createEmptyContext();
 		context.setAuthentication(authResult);
 		SecurityContextHolder.setContext(context);

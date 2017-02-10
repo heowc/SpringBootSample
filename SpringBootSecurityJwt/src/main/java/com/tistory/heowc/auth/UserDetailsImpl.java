@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.tistory.heowc.domain.Member;
+
 @SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
 
-	private String id;
+	private Member member;
 	private List<GrantedAuthority> authorities;
 	
 	private Boolean accountNonExpired = false;
@@ -17,8 +19,8 @@ public class UserDetailsImpl implements UserDetails {
 	private Boolean credentialsNonExpired = false;
 	private Boolean enabled = false;
 
-	public UserDetailsImpl(String id, List<GrantedAuthority> authorities) {
-		this.id = id;
+	public UserDetailsImpl(Member member, List<GrantedAuthority> authorities) {
+		this.member = member;
 		this.authorities = authorities;
 	}
 	
@@ -27,6 +29,10 @@ public class UserDetailsImpl implements UserDetails {
 		return authorities;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+	
 	@Override
 	public String getPassword() {
 		return "";
@@ -34,7 +40,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return id;
+		return member.getId();
 	}
 
 	@Override

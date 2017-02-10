@@ -4,44 +4,38 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tistory.heowc.auth.UserDetailsServiceImpl;
 import com.tistory.heowc.auth.ajax.AjaxAuthenticationProvider;
 import com.tistory.heowc.auth.ajax.AjaxSecurityHandler;
 import com.tistory.heowc.auth.ajax.filter.AjaxAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.JwtAuthenticationProvider;
 import com.tistory.heowc.auth.jwt.JwtFactory;
-import com.tistory.heowc.auth.jwt.JwtSecurityHandler;
 import com.tistory.heowc.auth.jwt.filter.JwtAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired JwtAuthenticationProvider jwtProvider;
-	
 	@Autowired AjaxAuthenticationProvider ajaxProvider;
 	
 	@Autowired AjaxSecurityHandler ajaxHandler;
-	@Autowired JwtSecurityHandler jwtHandler;
 	
 	@Autowired JwtFactory jwtFactory;
-	
 	@Autowired ObjectMapper objectMapper;
 	
 	private static final String LOGIN_END_POINT = "/login";
@@ -71,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(LOGIN_END_POINT).permitAll()
 				.antMatchers("/**").authenticated();
 //			.and()
-//				.formLogin()
+//				.formLogin();
 //				.loginProcessingUrl(TOKEN_END_POINT);
 	}
 	
@@ -98,14 +92,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
 		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher(), jwtFactory);
 		filter.setAuthenticationManager(authenticationManager());
-//		filter.setAuthenticationSuccessHandler(jwtHandler);
-//		filter.setAuthenticationFailureHandler(jwtHandler);
 		return filter;
-	}
-
-	@Bean
-	@Override
-	public UserDetailsService userDetailsServiceBean() throws Exception {
-		return new UserDetailsServiceImpl();
 	}
 }

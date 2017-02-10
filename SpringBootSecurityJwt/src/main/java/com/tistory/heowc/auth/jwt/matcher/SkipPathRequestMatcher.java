@@ -30,7 +30,6 @@ public class SkipPathRequestMatcher implements RequestMatcher {
 			return false;
 		}
 		
-		Boolean isMatche = requestMatcher.matches(request) ? true : false;
-		return isMatche;
+		return requestMatcher.matches(request) ? false : true;
 	}
 }
