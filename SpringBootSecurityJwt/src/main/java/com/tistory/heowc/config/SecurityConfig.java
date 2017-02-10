@@ -1,12 +1,12 @@
 package com.tistory.heowc.config;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -20,6 +20,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tistory.heowc.auth.UserDetailsServiceImpl;
 import com.tistory.heowc.auth.ajax.AjaxAuthenticationProvider;
+import com.tistory.heowc.auth.ajax.AjaxSecurityHandler;
 import com.tistory.heowc.auth.ajax.filter.AjaxAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.JwtAuthenticationProvider;
 import com.tistory.heowc.auth.jwt.JwtFactory;
@@ -32,20 +33,19 @@ import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	JwtAuthenticationProvider jwtProvider;
+	@Autowired JwtAuthenticationProvider jwtProvider;
 	
-	@Autowired
-	AjaxAuthenticationProvider ajaxProvider;
+	@Autowired AjaxAuthenticationProvider ajaxProvider;
 	
-	@Autowired
-	JwtSecurityHandler securityHandler;
+	@Autowired AjaxSecurityHandler ajaxHandler;
+	@Autowired JwtSecurityHandler jwtHandler;
 	
-	@Autowired
-	JwtFactory jwtFactory;
+	@Autowired JwtFactory jwtFactory;
 	
-	@Autowired
-	ObjectMapper objectMapper;
+	@Autowired ObjectMapper objectMapper;
+	
+	private static final String LOGIN_END_POINT = "/login";
+	private static final String TOKEN_END_POINT = "/token";
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -54,8 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(jwtProvider)
-			.authenticationProvider(ajaxProvider);
+		auth.authenticationProvider(ajaxProvider)
+			.authenticationProvider(jwtProvider);
 	}
 
 	@Override
@@ -67,26 +67,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 				.authorizeRequests()
-				.anyRequest().authenticated()
-			.and()
-				.formLogin()
-				.loginProcessingUrl("/token");
+				.antMatchers(TOKEN_END_POINT).permitAll()
+				.antMatchers(LOGIN_END_POINT).permitAll()
+				.antMatchers("/**").authenticated();
+//			.and()
+//				.formLogin()
+//				.loginProcessingUrl(TOKEN_END_POINT);
+	}
+	
+	private AntPathRequestMatcher antPathRequestMatcher() {
+		return new AntPathRequestMatcher(TOKEN_END_POINT, HttpMethod.POST.name());
 	}
 	
 	public AjaxAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
-		AjaxAuthenticationFilter filter = new AjaxAuthenticationFilter(new AntPathRequestMatcher("/token", HttpMethod.POST.name()), objectMapper);
+		AjaxAuthenticationFilter filter = new AjaxAuthenticationFilter(antPathRequestMatcher(), objectMapper);
 		filter.setAuthenticationManager(authenticationManager());
-		filter.setAuthenticationSuccessHandler(securityHandler);
-		filter.setAuthenticationFailureHandler(securityHandler);
+		filter.setAuthenticationSuccessHandler(ajaxHandler);
+		filter.setAuthenticationFailureHandler(ajaxHandler);
 		return filter;
+	}
+	
+	private SkipPathRequestMatcher skipPathRequestMatcher() {
+		return new SkipPathRequestMatcher(skipPaths(), LOGIN_END_POINT);
+	}
+	
+	private List<String> skipPaths() {
+		return Arrays.asList(LOGIN_END_POINT, TOKEN_END_POINT);
 	}
 	
 	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(new SkipPathRequestMatcher(Arrays.asList("/login", "/token"), "/login"), jwtFactory);
+		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher(), jwtFactory);
 		filter.setAuthenticationManager(authenticationManager());
+//		filter.setAuthenticationSuccessHandler(jwtHandler);
+//		filter.setAuthenticationFailureHandler(jwtHandler);
 		return filter;
 	}
-	
+
 	@Bean
 	@Override
 	public UserDetailsService userDetailsServiceBean() throws Exception {

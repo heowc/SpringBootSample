@@ -1,12 +1,14 @@
 package com.tistory.heowc.auth.ajax.filter;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -32,9 +34,13 @@ public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFi
 												HttpServletResponse response) throws AuthenticationException,
 																					IOException,
 																					ServletException {
-		System.out.println(request.getRequestURI());
-		Member member = objectMapper.readValue(request.getReader(), Member.class);
-		System.out.println(member.toString());
-		return getAuthenticationManager().authenticate(new AjaxAuthenticationToken(member.getId()));
+		if(request.getContentType().matches(MediaType.APPLICATION_JSON_VALUE)) {
+			System.out.println(request.getRequestURI());
+			Member member = objectMapper.readValue(request.getReader(), Member.class);
+			System.out.println(member.toString());
+			return getAuthenticationManager().authenticate(new AjaxAuthenticationToken(member.getId()));
+		} else {
+			throw new AccessDeniedException("Don't use content type for " + request.getContentType());
+		}
 	}
 }

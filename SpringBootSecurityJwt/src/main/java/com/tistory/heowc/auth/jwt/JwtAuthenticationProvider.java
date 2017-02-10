@@ -22,7 +22,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 		
 		JWT jwt = jwtUtil.tokenToJwt(token);
 		
-		return new JwtAuthenticationToken(jwt.getClaim("member").as(Member.class), AuthorityUtils.createAuthorityList(jwt.getClaim("role").asString()));
+		return new JwtAuthenticationToken(jwt.getClaim("id").as(Member.class), AuthorityUtils.createAuthorityList(jwt.getClaim("role").asString()));
 	}
 
 	@Override

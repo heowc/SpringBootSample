@@ -18,14 +18,15 @@ public class JwtUtil {
 	@Autowired
 	private DateUtil dateUtil;
 	
-	public String createToken() {
-		return createToken(dateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMMIT));
+	public String createToken(String member) {
+		return createToken(member, dateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMMIT));
 	}
 	
-	private String createToken(Date date) {
+	private String createToken(String member, Date date) {
 		try {
 			return JWT.create()
 					.withIssuer(JwtInfo.ISSUER)
+					.withClaim("member", member)
 					.withExpiresAt(date)
 					.sign(JwtInfo.getAlgorithm());
 		} catch (JWTCreationException createEx) {

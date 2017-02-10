@@ -12,8 +12,8 @@ public class JwtFactory implements AuthFactory {
 	private JwtUtil jwtUtil;
 	
 	@Override
-	public String createToken() {
-		return jwtUtil.createToken();
+	public String createToken(String info) {
+		return jwtUtil.createToken(info);
 	}
 	
 	@Override

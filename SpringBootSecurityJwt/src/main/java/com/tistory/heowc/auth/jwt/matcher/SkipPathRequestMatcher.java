@@ -19,10 +19,8 @@ public class SkipPathRequestMatcher implements RequestMatcher {
 			List<RequestMatcher> requestMatcherList = skipPathList.stream()
 																	.map(skipPath -> new AntPathRequestMatcher(skipPath))
 																	.collect(Collectors.toList());
-			
 			skipRequestMatcher = new OrRequestMatcher(requestMatcherList);
 		}
-		
 		requestMatcher = new AntPathRequestMatcher(rediectPath);
 	}
 	
