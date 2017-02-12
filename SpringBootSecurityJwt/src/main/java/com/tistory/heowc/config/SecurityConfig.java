@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private static final String LOGIN_END_POINT = "/login";
 	private static final String TOKEN_END_POINT = "/token";
+	private static final String ROOT_END_POINT  = "/**";
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -63,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(TOKEN_END_POINT).permitAll()
 				.antMatchers(LOGIN_END_POINT).permitAll()
-				.antMatchers("/**").authenticated();
+				.antMatchers(ROOT_END_POINT).authenticated();
 //			.and()
 //				.formLogin();
 //				.loginProcessingUrl(TOKEN_END_POINT);

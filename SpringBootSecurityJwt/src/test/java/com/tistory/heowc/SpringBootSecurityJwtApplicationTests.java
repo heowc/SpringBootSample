@@ -33,25 +33,21 @@ public class SpringBootSecurityJwtApplicationTests {
 	
 	private static final String JWT_SECRECT_KEY = "heowc.tistory.com";
 	
-	private static final LocalDateTime STANDARD_LOCAL = LocalDateTime.of(2017, 2 , 8, 0, 0, 0);
-	private static final LocalDateTime EXPIRES_LOCAL  = LocalDateTime.of(2017, 2 , 8, 0, 0, 0);
+	private static final LocalDateTime EXPIRES_LOCAL  = LocalDateTime.of(2017, 2 , 12, 0, 0, 0);
 	
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	
-	private static Date STANDARD_DATE;
 	private static Date EXPIRES_DATE;
 	
 	private static Long DAY = 3600L * 24;
 	
 	@BeforeClass
 	public static void beforeClass_createJwtToken() throws Exception {
-		STANDARD_DATE = Date.from(STANDARD_LOCAL.toInstant(ZoneOffset.ofHours(9)));
 		EXPIRES_DATE  = Date.from(EXPIRES_LOCAL.toInstant(ZoneOffset.ofHours(9)));
 		
 		try {
 			JWT_TOKEN = JWT.create()
 							.withIssuer("wonchul")
-//							.withIssuedAt(STANDARD_DATE) // 발행일
 							.withExpiresAt(EXPIRES_DATE) // 만료일
 							.sign(Algorithm.HMAC256(JWT_SECRECT_KEY));
 
@@ -77,9 +73,7 @@ public class SpringBootSecurityJwtApplicationTests {
 		try {
 			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JWT_SECRECT_KEY))
 										.withIssuer("wonchul")
-//										.acceptLeeway(DAY * 1) //    발행일 +1일 
 										.acceptExpiresAt(DAY * 4) // 만료일 -4일
-//										.acceptIssuedAt(DAY * 1)
 										.build();
 			
 			DecodedJWT jwt = verifier.verify(JWT_TOKEN);
