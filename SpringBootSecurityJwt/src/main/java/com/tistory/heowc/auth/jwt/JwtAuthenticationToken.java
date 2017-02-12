@@ -2,18 +2,17 @@ package com.tistory.heowc.auth.jwt;
 
 import java.util.Collection;
 
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
+import com.tistory.heowc.auth.BaseAuthenticationToken;
 import com.tistory.heowc.domain.Member;
 
 
 @SuppressWarnings("serial")
-public class JwtAuthenticationToken extends AbstractAuthenticationToken {
+public class JwtAuthenticationToken extends BaseAuthenticationToken {
 
 	private String token;
-	private Member member;
 	
 	public JwtAuthenticationToken(String token) {
 		super(AuthorityUtils.NO_AUTHORITIES);
@@ -21,21 +20,14 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 		this.setAuthenticated(false);
 	}
 
-	public JwtAuthenticationToken(Member member, Collection<? extends GrantedAuthority> authorities) {
-		super(authorities);
-		this.eraseCredentials();
-		this.member = member;
-		super.setAuthenticated(true);
+	public JwtAuthenticationToken(Member member,
+			Collection<? extends GrantedAuthority> authorities) {
+		super(member, authorities);
 	}
 	
 	@Override
 	public Object getCredentials() {
 		return token;
-	}
-
-	@Override
-	public Object getPrincipal() {
-		return member;
 	}
 
 	@Override

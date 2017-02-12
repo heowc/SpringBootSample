@@ -27,7 +27,7 @@ import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired JwtAuthenticationProvider jwtProvider;
@@ -35,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired AjaxSecurityHandler ajaxHandler;
 	
-	@Autowired JwtFactory jwtFactory;
 	@Autowired ObjectMapper objectMapper;
 	
 	private static final String LOGIN_END_POINT = "/login";
@@ -91,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher(), jwtFactory);
+		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher());
 		filter.setAuthenticationManager(authenticationManager());
 		return filter;
 	}

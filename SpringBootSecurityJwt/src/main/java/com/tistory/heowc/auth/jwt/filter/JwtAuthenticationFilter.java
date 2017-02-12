@@ -15,20 +15,16 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.util.StringUtils;
 
 import com.tistory.heowc.auth.jwt.JwtAuthenticationToken;
-import com.tistory.heowc.auth.jwt.JwtFactory;
 import com.tistory.heowc.auth.jwt.JwtInfo;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	JwtFactory jwtFactory;
-
 	@Autowired
-	public JwtAuthenticationFilter(RequestMatcher requestMatcher,
-									JwtFactory jwtFactory) {
+	public JwtAuthenticationFilter(RequestMatcher requestMatcher) {
 		super(requestMatcher);
-		this.jwtFactory = jwtFactory;
 	}
 
 	@Override
@@ -37,12 +33,11 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 																					IOException, ServletException {
 		String token = request.getHeader(JwtInfo.HEADER_NAME);
 
-		Boolean isVerify = jwtFactory.verifyToken(token);
-		if (isVerify) {
+		if(!StringUtils.isEmpty(token)) {
 			return getAuthenticationManager().authenticate(
 					new JwtAuthenticationToken(token));
 		} else {
-			throw new AccessDeniedException("접근 불가 사용자입니다.");
+			throw new AccessDeniedException("Not empty Token");
 		}
 	}
 

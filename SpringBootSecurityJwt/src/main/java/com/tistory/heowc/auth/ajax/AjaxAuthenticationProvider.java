@@ -7,13 +7,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import com.tistory.heowc.auth.UserDetailsImpl;
-import com.tistory.heowc.auth.UserDetailsServiceImpl;
 
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	AjaxUserDetailsService userDetailsService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

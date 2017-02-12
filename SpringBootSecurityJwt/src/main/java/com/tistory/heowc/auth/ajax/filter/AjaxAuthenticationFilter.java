@@ -35,9 +35,7 @@ public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFi
 																					IOException,
 																					ServletException {
 		if(request.getContentType().matches(MediaType.APPLICATION_JSON_VALUE)) {
-			System.out.println(request.getRequestURI());
 			Member member = objectMapper.readValue(request.getReader(), Member.class);
-			System.out.println(member.toString());
 			return getAuthenticationManager().authenticate(new AjaxAuthenticationToken(member.getId()));
 		} else {
 			throw new AccessDeniedException("Don't use content type for " + request.getContentType());

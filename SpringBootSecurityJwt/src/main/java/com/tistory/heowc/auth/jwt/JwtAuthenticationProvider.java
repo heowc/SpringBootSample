@@ -17,21 +17,23 @@ import com.tistory.heowc.domain.Member;
 @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
-	@Autowired
-	ObjectMapper objectMapper;
+	@Autowired ObjectMapper objectMapper;
 	
-	@Autowired
-	JwtUtil jwtUtil;
+	@Autowired JwtUtil jwtUtil;
+	@Autowired JwtFactory jwtFactory;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String token = (String) authentication.getCredentials();
+		
+		if(!jwtFactory.verifyToken(token)) {
+			throw new BadCredentialsException("Not used Token");
+		}
+		
 		JWT jwt = jwtUtil.tokenToJwt(token);
 		Member member = getStringToMember(jwt.getClaim("member").asString());
 
 		if(member != null) {
-			System.out.println(member);
-			System.out.println(member.getId() + "/" + member.getRole());
 			return new JwtAuthenticationToken(member, AuthorityUtils.createAuthorityList(member.getRole()));
 		} else {
 			throw new BadCredentialsException("Not used Token");

@@ -1,4 +1,4 @@
-package com.tistory.heowc.auth;
+package com.tistory.heowc.auth.ajax;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -6,11 +6,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import com.tistory.heowc.auth.UserDetailsImpl;
 import com.tistory.heowc.domain.Member;
 import com.tistory.heowc.repository.MemberRepository;
 
 @Component
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class AjaxUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private MemberRepository repository;
