@@ -17,11 +17,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tistory.heowc.auth.BaseSecurityHandler;
 import com.tistory.heowc.auth.ajax.AjaxAuthenticationProvider;
-import com.tistory.heowc.auth.ajax.AjaxSecurityHandler;
 import com.tistory.heowc.auth.ajax.filter.AjaxAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.JwtAuthenticationProvider;
-import com.tistory.heowc.auth.jwt.JwtFactory;
 import com.tistory.heowc.auth.jwt.filter.JwtAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
 
@@ -33,13 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired JwtAuthenticationProvider jwtProvider;
 	@Autowired AjaxAuthenticationProvider ajaxProvider;
 	
-	@Autowired AjaxSecurityHandler ajaxHandler;
+	@Autowired BaseSecurityHandler ajaxHandler;
 	
 	@Autowired ObjectMapper objectMapper;
 	
-	private static final String LOGIN_END_POINT = "/login";
-	private static final String TOKEN_END_POINT = "/token";
-	private static final String ROOT_END_POINT  = "/**";
+	public static final String LOGIN_END_POINT = "/login";
+	public static final String TOKEN_END_POINT = "/token";
+	public static final String ROOT_END_POINT  = "/**";
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -92,6 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
 		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher());
 		filter.setAuthenticationManager(authenticationManager());
+		filter.setAuthenticationFailureHandler(ajaxHandler);
 		return filter;
 	}
 }

@@ -11,8 +11,7 @@ import com.tistory.heowc.auth.UserDetailsImpl;
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
 
-	@Autowired
-	AjaxUserDetailsService userDetailsService;
+	@Autowired AjaxUserDetailsService userDetailsService;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {

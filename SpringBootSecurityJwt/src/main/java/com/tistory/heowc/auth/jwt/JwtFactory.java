@@ -8,8 +8,7 @@ import com.tistory.heowc.auth.AuthFactory;
 @Component
 public class JwtFactory implements AuthFactory {
 
-	@Autowired
-	private JwtUtil jwtUtil;
+	@Autowired JwtUtil jwtUtil;
 	
 	@Override
 	public String createToken(String info) {

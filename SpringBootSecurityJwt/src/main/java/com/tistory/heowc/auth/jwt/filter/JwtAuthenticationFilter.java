@@ -32,10 +32,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 												HttpServletResponse response) throws AuthenticationException,
 																					IOException, ServletException {
 		String token = request.getHeader(JwtInfo.HEADER_NAME);
-
+		
 		if(!StringUtils.isEmpty(token)) {
-			return getAuthenticationManager().authenticate(
-					new JwtAuthenticationToken(token));
+			return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
 		} else {
 			throw new AccessDeniedException("Not empty Token");
 		}
@@ -57,5 +56,6 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 												HttpServletResponse response,
 												AuthenticationException failed) throws IOException, ServletException {
 		SecurityContextHolder.clearContext();
+		getFailureHandler().onAuthenticationFailure(request, response, failed);
 	}
 }

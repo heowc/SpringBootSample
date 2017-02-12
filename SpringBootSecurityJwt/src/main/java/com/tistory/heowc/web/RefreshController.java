@@ -1,8 +1,5 @@
 package com.tistory.heowc.web;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +25,11 @@ public class RefreshController {
 	
 	@GetMapping
 	public ResponseEntity<String> refreshToken(Authentication authentication) {
+		System.out.println("refreshToken");
 		Member member = (Member)authentication.getPrincipal();
 		
 		try {
-			String token = jwtFactory.createToken(objectMapper.writeValueAsString(member));
+			String token = jwtFactory.refreshToken(objectMapper.writeValueAsString(member));
 			
 			MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 			headers.add(JwtInfo.HEADER_NAME, token);

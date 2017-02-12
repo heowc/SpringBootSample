@@ -1,4 +1,4 @@
-package com.tistory.heowc.auth.ajax;
+package com.tistory.heowc.auth;
 
 import java.io.IOException;
 
@@ -20,18 +20,17 @@ import com.tistory.heowc.auth.jwt.JwtInfo;
 import com.tistory.heowc.domain.Member;
 
 @Component
-public class AjaxSecurityHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
+public class BaseSecurityHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 
-	@Autowired
-	JwtFactory JwtFactory;
+	@Autowired JwtFactory JwtFactory;
 	
 	@Autowired ObjectMapper objectMapper;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request,
-			HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		Member member = (Member)((AjaxAuthenticationToken)authentication).getPrincipal();
+										HttpServletResponse response,
+										Authentication authentication) throws IOException, ServletException {
+		Member member = (Member)authentication.getPrincipal();
 		String jsonToMember = objectMapper.writeValueAsString(member);
 		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		response.setHeader(JwtInfo.HEADER_NAME, JwtFactory.createToken(jsonToMember));
@@ -39,8 +38,8 @@ public class AjaxSecurityHandler implements AuthenticationSuccessHandler, Authen
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request,
-			HttpServletResponse response, AuthenticationException exception)
-			throws IOException, ServletException {
-		throw new IllegalStateException(exception.getMessage());
+										HttpServletResponse response,
+										AuthenticationException exception) throws IOException, ServletException {
+		throw exception;
 	}
 }

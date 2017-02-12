@@ -13,8 +13,7 @@ import com.tistory.heowc.repository.MemberRepository;
 @Component
 public class AjaxUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	private MemberRepository repository;
+	@Autowired MemberRepository repository;
 	
 	@Override
 	public UserDetailsImpl loadUserByUsername(String username) {
@@ -27,5 +26,4 @@ public class AjaxUserDetailsService implements UserDetailsService {
 		
 		return new UserDetailsImpl(user, AuthorityUtils.createAuthorityList(user.getRole()));
 	}
-
 }

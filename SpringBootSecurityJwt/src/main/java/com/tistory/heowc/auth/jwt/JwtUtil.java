@@ -45,13 +45,8 @@ public class JwtUtil {
 		}
 	}
 
-	public String refreshToken(String token) {
-		try {
-			JWT jwt = JWT.decode(token);
-			return null;
-		} catch (JWTDecodeException decodeEx) {
-			return null;
-		}
+	public String refreshToken(String member) {
+		return createToken(member, dateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMMIT));
 	}
 	
 	public JWT tokenToJwt(String token) {
