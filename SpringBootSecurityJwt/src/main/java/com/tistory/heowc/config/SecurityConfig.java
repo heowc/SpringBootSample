@@ -1,7 +1,6 @@
 package com.tistory.heowc.config;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired JwtAuthenticationProvider jwtProvider;
 	@Autowired AjaxAuthenticationProvider ajaxProvider;
 	
-	@Autowired BaseSecurityHandler ajaxHandler;
+	@Autowired BaseSecurityHandler securityHandler;
 	
 	@Autowired ObjectMapper objectMapper;
 	
@@ -62,9 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(TOKEN_END_POINT).permitAll()
 				.antMatchers(LOGIN_END_POINT).permitAll()
-				.antMatchers(ROOT_END_POINT).authenticated();
-//			.and()
-//				.formLogin();
+				.antMatchers(ROOT_END_POINT).authenticated()
+			.and()
+				.formLogin();
 //				.loginProcessingUrl(TOKEN_END_POINT);
 	}
 	
@@ -75,23 +74,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AjaxAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
 		AjaxAuthenticationFilter filter = new AjaxAuthenticationFilter(antPathRequestMatcher(), objectMapper);
 		filter.setAuthenticationManager(authenticationManager());
-		filter.setAuthenticationSuccessHandler(ajaxHandler);
-		filter.setAuthenticationFailureHandler(ajaxHandler);
+		filter.setAuthenticationSuccessHandler(securityHandler);
+		filter.setAuthenticationFailureHandler(securityHandler);
 		return filter;
 	}
 	
 	private SkipPathRequestMatcher skipPathRequestMatcher() {
-		return new SkipPathRequestMatcher(skipPaths(), LOGIN_END_POINT);
-	}
-	
-	private List<String> skipPaths() {
-		return Arrays.asList(LOGIN_END_POINT, TOKEN_END_POINT);
+		return new SkipPathRequestMatcher(Arrays.asList(LOGIN_END_POINT, TOKEN_END_POINT));
 	}
 	
 	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
 		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher());
 		filter.setAuthenticationManager(authenticationManager());
-		filter.setAuthenticationFailureHandler(ajaxHandler);
+		filter.setAuthenticationFailureHandler(securityHandler);
 		return filter;
 	}
 }

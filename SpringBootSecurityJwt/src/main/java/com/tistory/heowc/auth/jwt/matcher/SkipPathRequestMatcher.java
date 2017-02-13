@@ -12,24 +12,22 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 public class SkipPathRequestMatcher implements RequestMatcher {
 
 	private OrRequestMatcher skipRequestMatcher;
-	private RequestMatcher requestMatcher;
 	
-	public SkipPathRequestMatcher(List<String> skipPathList, String rediectPath) {
+	public SkipPathRequestMatcher(List<String> skipPathList) {
 		if(!skipPathList.isEmpty()) {
 			List<RequestMatcher> requestMatcherList = skipPathList.stream()
 																	.map(skipPath -> new AntPathRequestMatcher(skipPath))
 																	.collect(Collectors.toList());
 			skipRequestMatcher = new OrRequestMatcher(requestMatcherList);
 		}
-		requestMatcher = new AntPathRequestMatcher(rediectPath);
 	}
 	
 	@Override
 	public boolean matches(HttpServletRequest request) {
 		if(skipRequestMatcher.matches(request)) {
 			return false;
+		} else {
+			return true;
 		}
-		
-		return requestMatcher.matches(request) ? false : true;
 	}
 }
