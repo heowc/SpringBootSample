@@ -32,6 +32,6 @@ dependencies {
 	compile('com.auth0:java-jwt:3.1.0')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('com.h2database:h2')
-	compileOnly('org.projectlombok:lombok')
+	compile('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
