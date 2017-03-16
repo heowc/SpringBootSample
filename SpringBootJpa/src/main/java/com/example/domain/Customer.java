@@ -1,23 +1,21 @@
 package com.example.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
 @AllArgsConstructor
+@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "idx", name = "idx")
 public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "idx")
 	private long idx;
 	
 	@Column(length=50)

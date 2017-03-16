@@ -25,7 +25,7 @@ public class EntityManagerTests {
 
     // 준영속성 데이터
     private Customer getNotPersistenceContextCustomer() {
-        return new Customer(10L,"heo won chul", "010-xxxx-xxxx", "developer");
+        return new Customer(1L,"heo won chul", "010-xxxx-xxxx", "developer");
     }
 
     @Transactional
