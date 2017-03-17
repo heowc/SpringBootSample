@@ -11,11 +11,19 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Data
 @AllArgsConstructor
-@SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "idx", name = "idx")
+@GenericGenerator(
+		name = "CustomerSequenceGenerator",
+		strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+		parameters = {
+				@org.hibernate.annotations.Parameter(name = "sequence_name", value = "ORDER_SEQ"),
+				@org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+				@org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
+		}
+)
 public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "idx")
+	@GeneratedValue(generator = "CustomerSequenceGenerator")
 	private long idx;
 	
 	@Column(length=50)

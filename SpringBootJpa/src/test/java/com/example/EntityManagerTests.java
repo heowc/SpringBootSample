@@ -51,14 +51,14 @@ public class EntityManagerTests {
         em.flush(); // Database 동기화
         em.clear(); // Persistence Context 초기화
 
-        Customer customer = em.find(Customer.class, 10L);
+        Customer customer = em.find(Customer.class, 1L);
         System.out.println(customer);
         customer.setBigo("Developer");
         em.merge(customer); // Persistence Context 추가
         em.flush(); // Database 동기화
         em.clear(); // Persistence Context 초기화
 
-        Customer result = em.find(Customer.class, 10L);
+        Customer result = em.find(Customer.class, 1L);
         System.out.println(result);
     }
 
@@ -69,14 +69,14 @@ public class EntityManagerTests {
         em.flush(); // Database 동기화
 //        em.clear(); // Persistence Context 초기화
 
-        Customer customer = em.find(Customer.class, 10L);
+        Customer customer = em.find(Customer.class, 1L);
         System.out.println(customer);
         customer.setBigo("Developer");
         em.merge(customer); // Persistence Context 추가
         em.flush(); // Database 동기화
 //        em.clear(); // Persistence Context 초기화
 
-        Customer result = em.find(Customer.class, 10L);
+        Customer result = em.find(Customer.class, 1L);
         System.out.println(result);
     }
 }
