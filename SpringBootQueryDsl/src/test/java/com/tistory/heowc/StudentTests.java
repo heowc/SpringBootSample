@@ -39,8 +39,6 @@ public class StudentTests {
 	public void test_findAllStudent() {
 		System.out.println("============================== findAllStudent");
 		studentRepository.findAll()
-							.stream()
-							.map(student -> student.toString())
 							.forEach(System.out::println);
 	}
 	
@@ -48,16 +46,12 @@ public class StudentTests {
 	public void test_findStudentByName() {
 		System.out.println("============================== findStudentByName");
 		studentRepository.findStudentByName("wonchul")
-							.stream()
-							.map(student -> student.toString())
 							.forEach(System.out::println);
 		
 		studentRepository.findAll(studentRepository.equalName("wonchul"))
-							.forEach(student -> System.out.println(student.toString()));
+							.forEach(System.out::println);
 		
 		studentRepository.findStudentByNameExtension("wonchul")
-							.stream()
-							.map(student -> student.toString())
 							.forEach(System.out::println);
 	}
 	
@@ -65,8 +59,6 @@ public class StudentTests {
 	public void test_findStudentByGradeAndHeight() {
 		System.out.println("============================== findStudentByGradeAndHeight");
 		studentRepository.findStudentByGradeAndHeight(1, 165.0)
-							.stream()
-							.map(student -> student.toString())
 							.forEach(System.out::println);
 	}
 	
@@ -74,8 +66,6 @@ public class StudentTests {
 	public void test_findStudentOrderByName() {
 		System.out.println("============================== findStudentOrderByName");
 		studentRepository.findStudentOrderByName()
-							.stream()
-							.map(student -> student.toString())
 							.forEach(System.out::println);
 	}
 	
@@ -92,13 +82,9 @@ public class StudentTests {
 	public void test_findCaseStudentAll() {
 		System.out.println("============================== findCaseStudentAll");
 		studentRepository.findCaseStudentAll_Tuple()
-							.stream()
-							.map(student -> student.toString())
 							.forEach(System.out::println);
 		
 //		studentRepository.findCaseStudentAll_Student()
-//							.stream()
-//							.map(student -> student.toString())
 //							.forEach(System.out::println);
 	}
 }

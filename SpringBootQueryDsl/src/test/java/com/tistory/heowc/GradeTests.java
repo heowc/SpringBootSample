@@ -40,8 +40,6 @@ public class GradeTests {
 	public void test_findAllGrade() {
 		System.out.println("============================== findAllGrade");
 		gradeRepository.findAll()
-						.stream()
-						.map(grade -> grade.toString())
 						.forEach(System.out::println);
 	}
 	
@@ -50,8 +48,6 @@ public class GradeTests {
 	public void test_findGradeJoinNameOfStudent() {
 		System.out.println("============================== findGradeJoinNameOfStudent");
 		gradeRepository.findGradeJoinNameOfStudent("wonchul")
-						.stream()
-						.map(grade -> grade.toString())
 						.forEach(System.out::println);
 	}
 	
@@ -60,8 +56,6 @@ public class GradeTests {
 	public void test_findGradeSubQueryNameOfStudent() {
 		System.out.println("============================== findGradeSubQueryNameOfStudent");
 		gradeRepository.findGradeSubQueryNameOfStudent("wonchul")
-						.stream()
-						.map(grade -> grade.toString())
 						.forEach(System.out::println);
 	}
 	
