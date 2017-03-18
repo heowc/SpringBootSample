@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,26 +14,39 @@ import com.tistory.heowc.domain.Student;
 import com.tistory.heowc.repository.GradeRepository;
 import com.tistory.heowc.repository.StudentRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StudentTests {
 
-	@Autowired
-	StudentRepository studentRepository;
+	@Autowired StudentRepository studentRepository;
 	
-	@Autowired
-	GradeRepository gradeRepository;
-	
+	@Autowired GradeRepository gradeRepository;
+
 	@Before
 	public void beforeTest() {
 		System.out.println("============================== Before");
-		gradeRepository.save(new Grade(1, "일학년"));
-		gradeRepository.save(new Grade(2, "이학년"));
-		gradeRepository.save(new Grade(3, "삼학년"));
-		
-		studentRepository.save(new Student(1, "wonchul", 173.8, 2));
-		studentRepository.save(new Student(2, "naeun",   165.2, 2));
-		studentRepository.save(new Student(3, "tistory", 160.0, 1));
+		Grade firstGrade = new Grade("일학년");
+		Grade secondGrade = new Grade("이학년");
+		Grade thirdGrade = new Grade("삼학년");
+
+		Student wonchul = new Student("wonchul", 173.8);
+		Student naeun = new Student("naeun", 165.2);
+		Student tistory = new Student("tistory", 160.0);
+
+		firstGrade.getStudents().add(wonchul);
+		secondGrade.getStudents().add(naeun);
+		thirdGrade.getStudents().add(tistory);
+
+		gradeRepository.save(firstGrade);
+		gradeRepository.save(secondGrade);
+		gradeRepository.save(thirdGrade);
+
+		studentRepository.save(wonchul);
+		studentRepository.save(naeun);
+		studentRepository.save(tistory);
 	}
 	
 	@Test
@@ -56,9 +70,9 @@ public class StudentTests {
 	}
 	
 	@Test
-	public void test_findStudentByGradeAndHeight() {
-		System.out.println("============================== findStudentByGradeAndHeight");
-		studentRepository.findStudentByGradeAndHeight(1, 165.0)
+	public void test_findStudentByNameAndHeight() {
+		System.out.println("============================== test_findStudentByNameAndHeight");
+		studentRepository.findStudentByNameAndHeight("wonchul", 165.0)
 							.forEach(System.out::println);
 	}
 	
@@ -74,7 +88,7 @@ public class StudentTests {
 		System.out.println("============================== findStudentGroupingByGradeNum");
 		studentRepository.findStudentGroupingByGradeNum()
 							.stream()
-							.map(student -> "학년 : " + student.toString())
+							.map(gradeNum -> "학년 : " + gradeNum)
 							.forEach(System.out::println);
 	}
 	

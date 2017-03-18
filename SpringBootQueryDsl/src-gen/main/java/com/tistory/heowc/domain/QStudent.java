@@ -19,8 +19,6 @@ public class QStudent extends EntityPathBase<Student> {
 
     public static final QStudent student = new QStudent("student");
 
-    public final NumberPath<Integer> gradeNum = createNumber("gradeNum", Integer.class);
-
     public final NumberPath<Double> height = createNumber("height", Double.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);

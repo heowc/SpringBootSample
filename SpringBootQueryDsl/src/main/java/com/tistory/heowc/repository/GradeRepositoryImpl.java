@@ -16,13 +16,13 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom {
 	private JPAQueryFactory queryFactory;
 	
 	/*
-	 * select		grade.grade_num , grade.grade_name
-	 * from			grade
-	 * inner join	student
-	 * on 			grade.grade_num = student.grade_num 
-	 * where 		student.student_name=?
+	 select 	grade.grade_num, grade.grade_name
+	 from 		grade
+	 inner join	student
+	 on 		grade.grade_num=student.grade_num
+	 where 		student.student_name=?
 	 */
-	
+
 	@Override
 	public List<Grade> findGradeJoinNameOfStudent(String name) {
 		QGrade grade = QGrade.grade;
@@ -36,11 +36,15 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom {
 	}
 
 	/*
-	 * select	grade_num, grade_name
-	 * from		grade 
-	 * where	grade_num = (select grade_num from student where student_name=?)
+	 select grade.grade_num, grade.grade_name
+	 from 	grade
+	 where 	grade.grade_num=(select		grade1_.grade_num
+							 from 		grade grade1_
+							 inner join student
+							 on 		grade1_.grade_num=student.grade_num
+							 where 		student.student_name=?)
 	 */
-	
+
 	@Override
 	public List<Grade> findGradeSubQueryNameOfStudent(String name) {
 		QGrade grade = QGrade.grade;
@@ -48,12 +52,18 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom {
 		return queryFactory
 				.selectFrom(grade)
 				.where(grade.gradeNum.eq(queryFactory
-										.select(student.gradeNum)
-										.from(student)
-										.where(student.name.eq(name))))
+										.select(grade.gradeNum)
+										.from(grade)
+										.join(grade.students, student)
+										.where(student.name.eq(name)))
+				)
 				.fetch();
 	}
-	
+
+	/*
+	 delete from grade where grade_num=?
+	*/
+
 	@Override
 	public Long deleteByNum(Integer num) {
 		QGrade grade = QGrade.grade;
@@ -62,7 +72,11 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom {
 				.where(grade.gradeNum.eq(num))
 				.execute();
 	}
-	
+
+	/*
+	 update grade set grade_name=? where grade_num=?
+	 */
+
 	@Override
 	public Long setFixedNameByNum(Grade grade) {
 		QGrade _grade = QGrade.grade;
