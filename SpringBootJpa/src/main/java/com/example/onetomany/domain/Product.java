@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.onetomany.domain;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,7 +37,8 @@ public class Product implements Serializable {
     @Column(name = "CONTENT") @NonNull
     private String content;
 
-    @OneToMany
-    @JoinColumn(name = "PRODUCT_IDX")
-    private List<Order> orders;
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Order> orders = new ArrayList<>();
+
+    protected Product() {}
 }

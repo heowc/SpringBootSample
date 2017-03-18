@@ -1,30 +1,27 @@
 package com.example;
 
-import com.example.domain.Customer;
-import com.example.domain.CustomerRepository;
+import com.example.simple.domain.Customer;
+import com.example.simple.domain.CustomerRepository;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runner.Runner;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataJpaTest
 @Transactional
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerRepositoryTests {
 
     @Autowired CustomerRepository repository;
-    @PersistenceContext EntityManager entityManager;
+    @Autowired TestEntityManager testEntityManager;
 
     // 비영속성 데이터
     private Customer getPersistenceContextCustomer() {
@@ -39,7 +36,7 @@ public class CustomerRepositoryTests {
     @Test
     public void test_insert() {
         assertEquals(repository.save(getPersistenceContextCustomer()), getNotPersistenceContextCustomer());
-        entityManager.flush();
+        testEntityManager.flush();
     }
 
     @Test
@@ -48,7 +45,7 @@ public class CustomerRepositoryTests {
         customer.setBigo("Developer");
 
         assertNotEquals(repository.save(customer), getNotPersistenceContextCustomer());
-        entityManager.flush();
+        testEntityManager.flush();
     }
 
     @Test

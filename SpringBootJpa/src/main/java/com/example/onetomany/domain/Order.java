@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.onetomany.domain;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -27,9 +27,6 @@ public class Order implements Serializable {
     @Column(name = "ORDER_IDX")
     private Long idx;
 
-    @Column(name = "PRODUCT_IDX") @NonNull
-    private Long productIdx;
-
     @Column(name = "PRODUCT_COUNT") @NonNull
     private Integer productCount;
 
@@ -37,5 +34,8 @@ public class Order implements Serializable {
     private String bigo;
 
     @ManyToOne
+    @JoinColumn(name = "PRODUCT_IDX")
     private Product product;
+
+    protected Order() {}
 }

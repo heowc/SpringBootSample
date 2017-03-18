@@ -1,10 +1,10 @@
-package com.example.web;
+package com.example.simple.web;
 
-import com.example.service.CustomService;
+import com.example.simple.service.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.domain.Customer;
+import com.example.simple.domain.Customer;
 
 @RestController
 @RequestMapping("/customer")

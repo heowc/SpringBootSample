@@ -1,6 +1,6 @@
-package com.example.service;
+package com.example.simple.service;
 
-import com.example.domain.Customer;
+import com.example.simple.domain.Customer;
 
 public interface CustomService {
 

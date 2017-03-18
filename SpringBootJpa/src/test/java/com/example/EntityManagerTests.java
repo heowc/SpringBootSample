@@ -1,10 +1,11 @@
 package com.example;
 
-import com.example.domain.Customer;
-import org.junit.FixMethodOrder;
+import com.example.simple.domain.Customer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +14,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataJpaTest
 public class EntityManagerTests {
 
-    @PersistenceContext EntityManager em;
+    @Autowired TestEntityManager testEntityManager;
 
     // 비영속성 데이터
     private Customer getPersistenceContextCustomer() {
@@ -32,51 +33,51 @@ public class EntityManagerTests {
     @Test
     public void test_insertA() {
 //        org.hibernate.PersistentObjectException: detached entity passed to persist
-//        em.persist(getNotPersistenceContextCustomer());
-        em.persist(getPersistenceContextCustomer());
-        em.flush();
+//        testEntityManager.persist(getNotPersistenceContextCustomer());
+        testEntityManager.persist(getPersistenceContextCustomer());
+        testEntityManager.flush();
     }
 
     @Transactional
     @Test
     public void test_insertB() {
-        em.merge(getNotPersistenceContextCustomer());
-        em.flush();
+        testEntityManager.merge(getNotPersistenceContextCustomer());
+        testEntityManager.flush();
     }
 
     @Transactional
     @Test
     public void test_insertClearAndFindAndUpdateClear() {
-        em.merge(getNotPersistenceContextCustomer()); // Persistence Context 추가
-        em.flush(); // Database 동기화
-        em.clear(); // Persistence Context 초기화
+        testEntityManager.merge(getNotPersistenceContextCustomer()); // Persistence Context 추가
+        testEntityManager.flush(); // Database 동기화
+        testEntityManager.clear(); // Persistence Context 초기화
 
-        Customer customer = em.find(Customer.class, 1L);
+        Customer customer = testEntityManager.find(Customer.class, 1L);
         System.out.println(customer);
         customer.setBigo("Developer");
-        em.merge(customer); // Persistence Context 추가
-        em.flush(); // Database 동기화
-        em.clear(); // Persistence Context 초기화
+        testEntityManager.merge(customer); // Persistence Context 추가
+        testEntityManager.flush(); // Database 동기화
+        testEntityManager.clear(); // Persistence Context 초기화
 
-        Customer result = em.find(Customer.class, 1L);
+        Customer result = testEntityManager.find(Customer.class, 1L);
         System.out.println(result);
     }
 
     @Transactional
     @Test
     public void test_insertAndFindAndUpdate() {
-        em.merge(getNotPersistenceContextCustomer()); // Persistence Context 추가
-        em.flush(); // Database 동기화
+        testEntityManager.merge(getNotPersistenceContextCustomer()); // Persistence Context 추가
+        testEntityManager.flush(); // Database 동기화
 //        em.clear(); // Persistence Context 초기화
 
-        Customer customer = em.find(Customer.class, 1L);
+        Customer customer = testEntityManager.find(Customer.class, 1L);
         System.out.println(customer);
         customer.setBigo("Developer");
-        em.merge(customer); // Persistence Context 추가
-        em.flush(); // Database 동기화
+        testEntityManager.merge(customer); // Persistence Context 추가
+        testEntityManager.flush(); // Database 동기화
 //        em.clear(); // Persistence Context 초기화
 
-        Customer result = em.find(Customer.class, 1L);
+        Customer result = testEntityManager.find(Customer.class, 1L);
         System.out.println(result);
     }
 }

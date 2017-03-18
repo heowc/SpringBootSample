@@ -1,11 +1,9 @@
-package com.example.domain;
+package com.example.simple.domain;
 
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
