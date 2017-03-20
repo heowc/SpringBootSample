@@ -14,11 +14,9 @@ import com.example.domain.CustomerRepository;
 @RestController
 public class CustomController {
 
-	@Autowired
-	private CustomerRepository repository;
+	@Autowired CustomerRepository repository;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@GetMapping(value="/")
 	public String index(){

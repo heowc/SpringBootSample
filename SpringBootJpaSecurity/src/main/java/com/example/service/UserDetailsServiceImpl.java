@@ -13,8 +13,7 @@ import com.example.security.UserDetailsImpl;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private CustomerRepository repository;
+	@Autowired CustomerRepository repository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String userId) {

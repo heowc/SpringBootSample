@@ -15,14 +15,11 @@ import com.example.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-//	@Autowired
-//	private DataSource dataSource;
+//	@Autowired DataSource dataSource;
 	
-	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
+	@Autowired UserDetailsServiceImpl userDetailsService;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -34,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 /* 1 */			.antMatchers("/**")
-				.permitAll()
+				.authenticated()
 			.and()
 /* 2 */		.formLogin()
 				.usernameParameter("userId")

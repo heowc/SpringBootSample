@@ -6,11 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Getter @Setter
+@Data
 public class Customer {
 	
 	@Id
@@ -28,15 +27,4 @@ public class Customer {
 	private String tel;
 	
 	private String bigo;
-
-	@Override
-	public String toString() {
-		return "Customer [idx=" + idx
-				+ ", userId=" + userId
-				+ ", userPassword=" + userPassword
-				+ ", name=" + name
-				+ ", tel=" + tel
-				+ ", bigo=" + bigo
-				+ "]";
-	}
 }
