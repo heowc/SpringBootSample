@@ -11,8 +11,7 @@ import com.tistory.heowc.repository.NoticeRepository;
 @Component
 public class InitRunner implements CommandLineRunner {
 	
-	@Autowired
-	NoticeRepository repository;
+	@Autowired NoticeRepository repository;
 	
 	@Transactional(readOnly=false)
 	@Override

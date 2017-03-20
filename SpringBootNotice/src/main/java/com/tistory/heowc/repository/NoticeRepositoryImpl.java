@@ -9,8 +9,7 @@ import com.tistory.heowc.domain.Notice;
 
 public class NoticeRepositoryImpl implements NoticeRepositoryCustom {
 
-	@PersistenceContext
-	private EntityManager em;
+	@PersistenceContext EntityManager em;
 	
 	@SuppressWarnings("unchecked")
 	@Override

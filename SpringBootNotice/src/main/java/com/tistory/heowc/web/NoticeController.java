@@ -13,8 +13,7 @@ import com.tistory.heowc.service.NoticeService;
 @RequestMapping("/notice")
 public class NoticeController {
 
-	@Autowired
-	NoticeService service;
+	@Autowired NoticeService service;
 	
 	@GetMapping
 	public NoticeAddPage getNotices(

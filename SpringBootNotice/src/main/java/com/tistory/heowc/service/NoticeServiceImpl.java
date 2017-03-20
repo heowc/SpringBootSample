@@ -16,11 +16,9 @@ import com.tistory.heowc.util.PageUtil;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
-	@Autowired
-	NoticeRepository repository;
+	@Autowired NoticeRepository repository;
 	
-	@Autowired
-	PageUtil pageUtil;
+	@Autowired PageUtil pageUtil;
 	
 	private static final int RECODE_SIZE = 10;
 	private static final Logger logger = Logger.getLogger(NoticeService.class);
