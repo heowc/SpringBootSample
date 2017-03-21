@@ -15,8 +15,7 @@ import com.tistory.heowc.domain.Base;
 @Component
 public class SendSchedler {
 
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
+	@Autowired RabbitTemplate rabbitTemplate;
 	
 	private static final Logger logger = Logger.getLogger(SendSchedler.class);
 	
