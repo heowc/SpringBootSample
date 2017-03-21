@@ -24,8 +24,7 @@ import com.example.domain.MemberRepository;
 @RequestMapping("/member")
 public class MemberController {
 
-	@Autowired
-	private MemberRepository repository;
+	@Autowired MemberRepository repository;
 
 	@ApiOperation(
 			value = "getId",
