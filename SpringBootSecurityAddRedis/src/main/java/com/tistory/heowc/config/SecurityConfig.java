@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.savedrequest.NullRequestCache;
 
 import com.tistory.heowc.component.SecurityHandler;
 import com.tistory.heowc.service.UserDetailsServiceImpl;
@@ -18,14 +17,11 @@ import com.tistory.heowc.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+	@Autowired UserDetailsService userDetailsService;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	@Autowired PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private SecurityHandler securityHandler;
+	@Autowired SecurityHandler securityHandler;
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {

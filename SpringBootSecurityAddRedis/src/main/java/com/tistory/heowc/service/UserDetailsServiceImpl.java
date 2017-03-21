@@ -13,8 +13,7 @@ import com.tistory.heowc.repository.MemberRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private MemberRepository repository;
+	@Autowired MemberRepository repository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String id) {

@@ -12,11 +12,9 @@ import com.tistory.heowc.repository.MemberRepository;
 @Component
 public class InitRunner implements CommandLineRunner {
 
-	@Autowired
-	MemberRepository repository;
+	@Autowired MemberRepository repository;
 	
-	@Autowired
-	PasswordEncoder passwordEncoder;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@Transactional
 	@Override
