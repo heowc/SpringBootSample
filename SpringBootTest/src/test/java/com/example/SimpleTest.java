@@ -44,7 +44,7 @@ public class SimpleTest {
 		logger.info("================= test1()");
 		assertThat(add(0, 0)).isEqualTo(0);
 		
-		//assertThat(33).as("check %s's age", "Won Chul").isEqualTo(33);
+//		assertThat(33).as("check %s's age", "Won Chul").isEqualTo(33);
 	}
 	
 	@Test

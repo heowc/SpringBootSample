@@ -23,11 +23,9 @@ import com.example.web.BasicController;
 @WebMvcTest(BasicController.class)
 public class MockMvcTest {
 
-	@Autowired
-	private MockMvc mvc;
+	@Autowired MockMvc mvc;
 	
-	@MockBean
-	private BasicService service;
+	@MockBean BasicService service;
 	
 	@Test
 	public void test() throws Exception {

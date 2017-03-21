@@ -18,11 +18,9 @@ import com.example.service.BasicService;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class MockTest {
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+	@Autowired TestRestTemplate restTemplate;
 	
-	@MockBean
-	private BasicService service;
+	@MockBean BasicService service;
 	
 	@Test
 	public void test() {
