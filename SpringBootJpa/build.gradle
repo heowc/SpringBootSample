@@ -29,6 +29,10 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+	compile('org.hibernate:hibernate-java8:5.0.11.Final')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr1')
+
 	compile('org.projectlombok:lombok:1.16.6')
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
