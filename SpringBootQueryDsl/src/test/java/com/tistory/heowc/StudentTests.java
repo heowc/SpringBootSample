@@ -13,13 +13,17 @@ import com.tistory.heowc.domain.Grade;
 import com.tistory.heowc.domain.Student;
 import com.tistory.heowc.repository.GradeRepository;
 import com.tistory.heowc.repository.StudentRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class StudentTests {
+
+	@PersistenceContext EntityManager entityManager;
 
 	@Autowired StudentRepository studentRepository;
 	
@@ -47,6 +51,8 @@ public class StudentTests {
 		studentRepository.save(wonchul);
 		studentRepository.save(naeun);
 		studentRepository.save(tistory);
+
+		entityManager.flush();
 	}
 	
 	@Test

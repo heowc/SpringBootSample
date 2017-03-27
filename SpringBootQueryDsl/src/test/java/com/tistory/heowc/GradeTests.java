@@ -1,6 +1,5 @@
 package com.tistory.heowc;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +29,7 @@ public class GradeTests {
 	
 	@Autowired
 	GradeRepository gradeRepository;
-	
+
 	@Before
 	public void beforeTest() {
 		System.out.println("============================== Before");
@@ -56,9 +55,8 @@ public class GradeTests {
 		studentRepository.save(tistory);
 
 		entityManager.flush();
-		entityManager.clear();
 	}
-	
+
 	@Test
 	public void test_findAllGrade() {
 		System.out.println("============================== findAllGrade");
@@ -66,27 +64,27 @@ public class GradeTests {
 						.forEach(System.out::println);
 
 	}
-	
+
 	@Test
 	public void test_findGradeJoinNameOfStudent() {
 		System.out.println("============================== findGradeJoinNameOfStudent");
 		gradeRepository.findGradeJoinNameOfStudent("wonchul")
 						.forEach(System.out::println);
 	}
-	
+
 	@Test
 	public void test_findGradeSubQueryNameOfStudent() {
 		System.out.println("============================== findGradeSubQueryNameOfStudent");
 		gradeRepository.findGradeSubQueryNameOfStudent("wonchul")
 						.forEach(System.out::println);
 	}
-	
+
 	@Test
 	public void test_deleteByNum() {
 		System.out.println("============================== deleteByNum");
 		gradeRepository.deleteByNum(3);
 	}
-	
+
 	@Test
 	public void test_setFixedNameByNum() {
 		System.out.println("============================== setFixedNameByNum");

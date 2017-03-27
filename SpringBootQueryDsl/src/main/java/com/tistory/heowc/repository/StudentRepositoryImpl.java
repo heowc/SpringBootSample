@@ -129,7 +129,7 @@ public class StudentRepositoryImpl implements StudentRepositoryCustom {
 
 	/*
 	 select 	case
-	 			when grade0_.grade_num>? then ?
+	 			when grade0_.grade_num>? then '고학년'
 	 			else '저학년'
 	 			end,
 	 			student.student_id,
