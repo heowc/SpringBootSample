@@ -2,12 +2,12 @@ package com.example.web;
 
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.domain.User;
 
 @Controller
 @RequestMapping("/")
@@ -27,9 +27,11 @@ public class HelloController {
 			return "redirect:/connect/facebook";
 		}
 
-		System.out.println(facebook.fetchObject("me", User.class));
-		model.addAttribute("facebookProfile", facebook.fetchObject("me", User.class));
+		User facebookUser = facebook.fetchObject("me", User.class);
+
+//		System.out.println(facebookUser);
+
+		model.addAttribute("facebookProfile", facebookUser);
 		return "main";
 	}
-
 }
