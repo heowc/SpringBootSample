@@ -1,0 +1,60 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id "org.asciidoctor.convert" version "1.5.3"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	maven { url 'https://repo.spring.io/libs-snapshot' }
+	mavenCentral()
+}
+
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+test {
+	outputs.dir snippetsDir
+}
+
+asciidoctor {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+jar {
+	dependsOn asciidoctor
+	from ("${asciidoctor.outputDir}/html5") {
+		into 'static/docs'
+	}
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	compile('org.projectlombok:lombok:1.16.6')
+	runtime('com.h2database:h2')
+
+	asciidoctor('org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.0.RC1')
+	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc:1.2.0.RC1')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
