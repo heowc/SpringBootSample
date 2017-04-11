@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserMapperTests {
 
-    @Autowired UserMapper userMapper;
+    @Autowired UserMapper userMapper ;
 
     @Test
     public void test_1insert() {
