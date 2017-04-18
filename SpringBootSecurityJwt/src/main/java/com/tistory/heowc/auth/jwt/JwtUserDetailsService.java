@@ -2,6 +2,7 @@ package com.tistory.heowc.auth.jwt;
 
 import java.io.IOException;
 
+import com.tistory.heowc.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -18,7 +19,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Autowired ObjectMapper objectMapper;
 	
-	@Autowired JwtUtil jwtUtil;
+	@Autowired
+	JwtUtil jwtUtil;
 	@Autowired JwtFactory jwtFactory;
 	
 	@Override

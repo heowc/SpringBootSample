@@ -1,13 +1,12 @@
 package com.tistory.heowc.auth.jwt.matcher;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SkipPathRequestMatcher implements RequestMatcher {
 
@@ -16,7 +15,7 @@ public class SkipPathRequestMatcher implements RequestMatcher {
 	public SkipPathRequestMatcher(List<String> skipPathList) {
 		if(!skipPathList.isEmpty()) {
 			List<RequestMatcher> requestMatcherList = skipPathList.stream()
-																	.map(skipPath -> new AntPathRequestMatcher(skipPath))
+																	.map(AntPathRequestMatcher::new)
 																	.collect(Collectors.toList());
 			skipRequestMatcher = new OrRequestMatcher(requestMatcherList);
 		}
@@ -24,10 +23,6 @@ public class SkipPathRequestMatcher implements RequestMatcher {
 	
 	@Override
 	public boolean matches(HttpServletRequest request) {
-		if(skipRequestMatcher.matches(request)) {
-			return false;
-		} else {
-			return true;
-		}
+		return !skipRequestMatcher.matches(request);
 	}
 }

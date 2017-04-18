@@ -35,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired ObjectMapper objectMapper;
 	
-	public static final String LOGIN_END_POINT = "/login";
-	public static final String TOKEN_END_POINT = "/token";
-	public static final String ROOT_END_POINT  = "/**";
+	private static final String LOGIN_END_POINT = "/login";
+	private static final String TOKEN_END_POINT = "/token";
+	private static final String ROOT_END_POINT  = "/**";
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new AntPathRequestMatcher(TOKEN_END_POINT, HttpMethod.POST.name());
 	}
 	
-	public AjaxAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
+	private AjaxAuthenticationFilter ajaxAuthenticationFilter() throws Exception {
 		AjaxAuthenticationFilter filter = new AjaxAuthenticationFilter(antPathRequestMatcher(), objectMapper);
 		filter.setAuthenticationManager(authenticationManager());
 		filter.setAuthenticationSuccessHandler(securityHandler);
@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new SkipPathRequestMatcher(Arrays.asList(LOGIN_END_POINT, TOKEN_END_POINT));
 	}
 	
-	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+	private JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
 		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(skipPathRequestMatcher());
 		filter.setAuthenticationManager(authenticationManager());
 		filter.setAuthenticationFailureHandler(securityHandler);
