@@ -20,11 +20,12 @@ public class ExcelReadComponent {
                                        final Function<Row, T> rowFunc)
                                             throws IOException, InvalidFormatException {
 
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
-        XSSFSheet sheet = workbook.getSheetAt(0);
-        int rowCount = sheet.getPhysicalNumberOfRows();
+        final XSSFWorkbook workbook = new XSSFWorkbook(file);
+        final XSSFSheet sheet = workbook.getSheetAt(0);
+        final int rowCount = sheet.getPhysicalNumberOfRows();
 
-        return IntStream.range(0, rowCount)
+        return IntStream
+                .range(0, rowCount)
                 .mapToObj(rowIndex -> rowFunc.apply(sheet.getRow(rowIndex)))
                 .collect(Collectors.toList());
     }
