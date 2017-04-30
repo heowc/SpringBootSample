@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.tistory.heowc.domain;
 
 import lombok.Data;
 
