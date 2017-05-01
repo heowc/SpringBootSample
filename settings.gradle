@@ -1,0 +1,76 @@
+rootProject.name = 'spring-boot-sample'
+
+include 'SpringBootAOP'
+findProject(':SpringBootAOP')?.name = 'spring-boot-aop'
+
+include 'SpringBootAsync'
+findProject(':SpringBootAsync')?.name = 'spring-boot-async'
+
+include 'SpringBootCache'
+findProject(':SpringBootCache')?.name = 'spring-boot-cache'
+
+include 'SpringBootCustomJackson'
+findProject(':SpringBootCustomJackson')?.name = 'spring-boot-custom-jackson'
+
+include 'SpringBootExcel'
+findProject(':SpringBootExcel')?.name = 'spring-boot-excel'
+
+include 'SpringBootException'
+findProject(':SpringBootException')?.name = 'spring-boot-exception'
+
+include 'SpringBootInterceptor'
+findProject(':SpringBootInterceptor')?.name = 'spring-boot-interceptor'
+
+include 'SpringBootJpa'
+findProject(':SpringBootJpa')?.name = 'spring-boot-jpa'
+
+include 'SpringBootJpaSecurity'
+findProject(':SpringBootJpaSecurity')?.name = 'spring-boot-jpa-security'
+
+include 'SpringBootLogStash'
+findProject(':SpringBootLogStash')?.name = 'spring-boot-logstash'
+
+include 'SpringBootMybatis'
+findProject(':SpringBootMybatis')?.name = 'spring-boot-mybatis'
+
+include 'SpringBootNotice'
+findProject(':SpringBootNotice')?.name = 'spring-boot-notice'
+
+include 'SpringBootOAuth2'
+findProject(':SpringBootOAuth2')?.name = 'spring-boot-oauth2'
+
+include 'SpringBootQueryDsl'
+findProject(':SpringBootQueryDsl')?.name = 'spring-boot-querydsl'
+
+include 'SpringBootRabbitMQ'
+findProject(':SpringBootRabbitMQ')?.name = 'spring-boot-rabbitmq'
+
+include 'SpringBootRest'
+findProject(':SpringBootRest')?.name = 'spring-boot-rest'
+
+include 'SpringBootRestDocs'
+findProject(':SpringBootRestDocs')?.name = 'spring-boot-restdocs'
+
+include 'SpringBootSecurityAddRedis'
+findProject(':SpringBootSecurityAddRedis')?.name = 'spring-boot-security-redis'
+
+include 'SpringBootSecurityJwt'
+findProject(':SpringBootSecurityJwt')?.name = 'spring-boot-security-jwt'
+
+include 'SpringBootSocial'
+findProject(':SpringBootSocial')?.name = 'spring-boot-social'
+
+include 'SpringBootSwagger'
+findProject(':SpringBootSwagger')?.name = 'spring-boot-swagger'
+
+include 'SpringBootTest'
+findProject(':SpringBootTest')?.name = 'spring-boot-test'
+
+include 'SpringBootValidator'
+findProject(':SpringBootValidator')?.name = 'spring-boot-validator'
+
+include 'SpringBootWebFlux'
+findProject(':SpringBootWebFlux')?.name = 'spring-boot-webflux'
+
+include 'SpringBootWebSocket'
+findProject(':SpringBootWebSocket')?.name = 'spring-boot-websocket'

@@ -1,0 +1,19 @@
+group 'com.tistory'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = '1.5.2.RELEASE'
+}
+
+dependencies {
+}
