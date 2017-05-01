@@ -1,7 +1,12 @@
 package com.tistory.heowc.config;
 
-import java.util.Arrays;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tistory.heowc.auth.BaseSecurityHandler;
+import com.tistory.heowc.auth.ajax.AjaxAuthenticationProvider;
+import com.tistory.heowc.auth.ajax.filter.AjaxAuthenticationFilter;
+import com.tistory.heowc.auth.jwt.JwtAuthenticationProvider;
+import com.tistory.heowc.auth.jwt.filter.JwtAuthenticationFilter;
+import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,13 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tistory.heowc.auth.BaseSecurityHandler;
-import com.tistory.heowc.auth.ajax.AjaxAuthenticationProvider;
-import com.tistory.heowc.auth.ajax.filter.AjaxAuthenticationFilter;
-import com.tistory.heowc.auth.jwt.JwtAuthenticationProvider;
-import com.tistory.heowc.auth.jwt.filter.JwtAuthenticationFilter;
-import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity

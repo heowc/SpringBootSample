@@ -1,10 +1,9 @@
 package com.tistory.heowc.auth.jwt;
 
+import com.tistory.heowc.auth.AuthFactory;
 import com.tistory.heowc.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.tistory.heowc.auth.AuthFactory;
 
 @Component
 public class JwtFactory implements AuthFactory {

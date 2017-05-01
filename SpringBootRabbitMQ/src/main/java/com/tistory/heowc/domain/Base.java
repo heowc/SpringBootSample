@@ -5,7 +5,6 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Base implements Serializable {
 
-	
 	private long index;
 	private String content;
 	
