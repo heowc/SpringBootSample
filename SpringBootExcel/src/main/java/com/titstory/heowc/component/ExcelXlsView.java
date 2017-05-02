@@ -1,5 +1,6 @@
 package com.titstory.heowc.component;
 
+import com.titstory.heowc.util.ExcelCommonUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
@@ -16,7 +17,6 @@ public class ExcelXlsView extends AbstractXlsView {
                                       Workbook workbook,
                                       HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
-
-
+        new ExcelCommonUtil(workbook, model, response).createExcel();
     }
 }
