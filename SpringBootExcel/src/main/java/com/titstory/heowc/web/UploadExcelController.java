@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,8 +22,6 @@ public class UploadExcelController {
     @PostMapping("excel")
     public List<Product> readExcel(@RequestParam("file") MultipartFile multipartFile)
                                                 throws IOException, InvalidFormatException {
-        return excelReadComponent
-                .readExcelToList(new File(multipartFile.getOriginalFilename()),
-                                    Product::new);
+        return excelReadComponent.readExcelToList(multipartFile, Product::new);
     }
 }
