@@ -7,9 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 @RunWith(SpringRunner.class)
@@ -24,7 +26,8 @@ public class SpringBootExcelApplicationTests {
 		File xlsxFile = new File("{path}\\test.xlsx");
 
 		excelReadComponent
-				.readExcelToList(xlsxFile, Product::new)
+				.readExcelToList(new MockMultipartFile("test.xlsx", new FileInputStream(xlsxFile)),
+								Product::new)
 				.forEach(System.out::println);
 	}
 

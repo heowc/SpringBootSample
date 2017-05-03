@@ -20,8 +20,7 @@ public class BasicController {
 	}
 	
 	@GetMapping("/clear")
-	public String refresh(@RequestParam("isbn") String isbn) {
+	public void refresh(@RequestParam("isbn") String isbn) {
 		repository.refresh(isbn);
-		return "Clear";
 	}
 }

@@ -1,11 +1,12 @@
 package com.example.event;
 
+import com.example.domain.Person;
 import org.apache.log4j.Logger;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
+import org.springframework.stereotype.Component;
 
-import com.example.domain.Person;
-
+@Component
 @RepositoryEventHandler(Person.class)
 public class PersonEventHandler {
 
