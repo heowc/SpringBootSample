@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("message")
 public class MessageController {
 
-    @Autowired MessageRepository repository;
+    @Autowired MessageRepository messageRepository;
 
 //    @GetMapping("{idx}")
 //    public Mono<Message> findOne(@PathVariable Long idx) {
@@ -19,11 +19,11 @@ public class MessageController {
 
     @GetMapping("{idx}")
     public Mono<Message> findOne(@PathVariable Long idx) {
-        return Mono.fromFuture(repository.getByIdx(idx));
+        return Mono.fromCompletionStage(messageRepository.getByIdx(idx));
     }
 
     @PostMapping
-    public Mono<Message> create(@RequestBody Message message) {
-        return Mono.just(repository.save(message));
+    public void create(@RequestBody Mono<Message> message) {
+        message.subscribe(entity -> messageRepository.save(entity));
     }
 }
