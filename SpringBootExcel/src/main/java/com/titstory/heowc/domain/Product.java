@@ -18,7 +18,7 @@ public class Product implements Serializable {
 
     public Product(Row row) {
         this(row.getCell(0).getStringCellValue(),
-                    row.getCell(1).getStringCellValue(),
-                    row.getCell(2).getStringCellValue());
+            row.getCell(1).getStringCellValue(),
+            row.getCell(2).getStringCellValue());
     }
 }

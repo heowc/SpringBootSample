@@ -39,9 +39,8 @@ public class ExcelCommonUtil {
     }
 
     private void setFileName(HttpServletResponse response, String fileName) {
-
         response.setHeader("Content-Disposition",
-                "attachment; filename=\"" + setFileExtension(fileName) + "\"");
+                            "attachment; filename=\"" + setFileExtension(fileName) + "\"");
     }
 
     private String setFileExtension(String fileName) {
@@ -75,7 +74,7 @@ public class ExcelCommonUtil {
 
         for (int i = 0; i < size; i++) {
             row.createCell(i)
-                    .setCellValue(cellList.get(i));
+                .setCellValue(cellList.get(i));
         }
     }
 }

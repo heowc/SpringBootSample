@@ -30,5 +30,4 @@ public class SpringBootExcelApplicationTests {
 								Product::new)
 				.forEach(System.out::println);
 	}
-
 }
