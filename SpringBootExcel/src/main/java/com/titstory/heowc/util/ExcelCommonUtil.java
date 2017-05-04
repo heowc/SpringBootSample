@@ -25,17 +25,25 @@ public class ExcelCommonUtil {
     }
 
     public void createExcel() {
-        String fileName = (String) model.get(ExcelConfig.FILE_NAME);
-        List<String> head = (List<String>) model.get(ExcelConfig.HEAD);
-        List<List<String>> body = (List<List<String>>) model.get(ExcelConfig.BODY);
-
-        setFileName(response, fileName);
+        setFileName(response, mapToFileName());
 
         Sheet sheet = workbook.createSheet();
 
-        createHead(sheet, head);
+        createHead(sheet, mapToHeadList());
 
-        createBody(sheet, body);
+        createBody(sheet, mapToBodyList());
+    }
+
+    private String mapToFileName() {
+        return (String) model.get(ExcelConfig.FILE_NAME);
+    }
+
+    private List<String> mapToHeadList() {
+        return (List<String>) model.get(ExcelConfig.HEAD);
+    }
+
+    private List<List<String>> mapToBodyList() {
+        return (List<List<String>>) model.get(ExcelConfig.BODY);
     }
 
     private void setFileName(HttpServletResponse response, String fileName) {
@@ -50,10 +58,10 @@ public class ExcelCommonUtil {
         if ( workbook instanceof SXSSFWorkbook) {
             fileName += ".xlsx";
         }
-
         if ( workbook instanceof HSSFWorkbook) {
             fileName += ".xls";
         }
+
         return fileName;
     }
 
