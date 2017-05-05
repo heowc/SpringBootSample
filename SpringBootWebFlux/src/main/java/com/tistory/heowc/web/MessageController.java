@@ -12,18 +12,18 @@ public class MessageController {
 
     @Autowired MessageRepository messageRepository;
 
-//    @GetMapping("{idx}")
-//    public Mono<Message> findOne(@PathVariable Long idx) {
-//        return Mono.just(new Message(idx, "Hello, Spring Web Flux " + idx));
-//    }
-
     @GetMapping("{idx}")
-    public Mono<Message> findOne(@PathVariable Long idx) {
-        return Mono.fromCompletionStage(messageRepository.getByIdx(idx));
+    public Mono<Message> findBy(@PathVariable Long idx) {
+        return Mono.fromCompletionStage(messageRepository.findByIdx(idx));
     }
 
     @PostMapping
     public void create(@RequestBody Mono<Message> message) {
         message.subscribe(entity -> messageRepository.save(entity));
+    }
+
+    @DeleteMapping("{idx}")
+    public void deleteByIdx(@PathVariable Long idx) {
+        messageRepository.deleteById(idx);
     }
 }

@@ -11,5 +11,5 @@ import java.util.concurrent.CompletableFuture;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    CompletableFuture<Message> getByIdx(Long idx);
+    CompletableFuture<Message> findByIdx(Long idx);
 }
