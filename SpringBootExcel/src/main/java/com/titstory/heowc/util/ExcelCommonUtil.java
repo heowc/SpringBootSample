@@ -65,8 +65,8 @@ public class ExcelCommonUtil {
         return fileName;
     }
 
-    private void createHead(Sheet sheet, List<String> cellList) {
-        createRow(sheet, cellList, 0);
+    private void createHead(Sheet sheet, List<String> headList) {
+        createRow(sheet, headList, 0);
     }
 
     private void createBody(Sheet sheet, List<List<String>> bodyList) {

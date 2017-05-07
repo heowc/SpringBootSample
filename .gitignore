@@ -1,7 +1,6 @@
-.idea/
+.idea/*
 
 *.class
-*.bin
 *.jar
 *.bat
 
@@ -9,7 +8,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -66,3 +64,13 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.gradle/
+SpringBootAOP/build/
+SpringBootAsync/build/
+SpringBootExcel/src/main/resources/static/
+SpringBootExcel/src/main/resources/templates/
+SpringBootRest/build/
+SpringBootSocial/build/
+SpringBootSocial/libs/
+SpringBootValidator/build/
+SpringBootWebFlux/build/

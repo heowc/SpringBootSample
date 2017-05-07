@@ -10,10 +10,14 @@ buildscript {
 	}
 }
 
+//plugins {
+//	id "de.undercouch.download" version "3.2.0"
+//}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 jar {
 	baseName = 'basic'
@@ -26,6 +30,16 @@ repositories {
 	mavenCentral()
 }
 
+//apply plugin: 'de.undercouch.download'
+//
+//import de.undercouch.gradle.tasks.download.Download
+//
+//task downloadSpringSocialKakao(type: Download) {
+//	src 'https://github.com/bongki/spring-social-kakao/releases/download/v1.0.0/spring-social-kakao-1.0.0.jar'
+//	dest buildDir
+//}
+//
+//compileJava.dependsOn downloadSpringSocialKakao
 
 dependencies {
 	compile('org.projectlombok:lombok:1.16.6')
@@ -34,6 +48,9 @@ dependencies {
 	compile("org.webjars:jquery:3.1.0")
 
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')
+//	compile('org.springframework.social:spring-social-kakao:1.0.0')
+	compile files("libs/spring-social-kakao-1.0.0.jar")
+
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
