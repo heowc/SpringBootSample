@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.config.xml;
+package org.springframework.social.naver.config.xml;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.api.model;
+package org.springframework.social.naver.api.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;

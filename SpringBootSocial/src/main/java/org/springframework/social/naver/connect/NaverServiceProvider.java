@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.connect;
+package org.springframework.social.naver.connect;
 
 import org.springframework.social.naver.api.Naver;
 import org.springframework.social.naver.api.NaverOAuth2ApiBinding;

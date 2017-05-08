@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.config.xml;
+package org.springframework.social.naver.config.xml;
 
 import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
 import org.springframework.social.config.xml.AbstractProviderConfigNamespaceHandler;

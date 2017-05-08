@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.api.abstracts;
+package org.springframework.social.naver.api.abstracts;
 
 public interface UserOperation {
 	String getId();

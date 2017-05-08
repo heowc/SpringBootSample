@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.connect;
+package org.springframework.social.naver.connect;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

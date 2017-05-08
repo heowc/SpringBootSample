@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.api;
+package org.springframework.social.naver.api;
 
 import org.springframework.social.ApiBinding;
 import org.springframework.social.naver.api.abstracts.UserOperation;

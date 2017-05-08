@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.connect;
+package org.springframework.social.naver.connect;
 
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;

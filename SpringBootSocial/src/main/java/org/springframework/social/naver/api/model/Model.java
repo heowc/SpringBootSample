@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.api.model;
+package org.springframework.social.naver.api.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

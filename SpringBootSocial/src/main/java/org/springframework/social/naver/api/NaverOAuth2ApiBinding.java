@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.api;
+package org.springframework.social.naver.api;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;

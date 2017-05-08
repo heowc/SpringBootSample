@@ -1,4 +1,4 @@
-package java.org.springframework.social.naver.api.util;
+package org.springframework.social.naver.api.util;
 
 import org.springframework.social.support.URIBuilder;
 import org.springframework.util.LinkedMultiValueMap;
