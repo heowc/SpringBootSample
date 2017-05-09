@@ -1,7 +1,5 @@
 package com.example;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

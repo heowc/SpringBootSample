@@ -71,7 +71,6 @@ SpringBootExcel/src/main/resources/static/
 SpringBootExcel/src/main/resources/templates/
 SpringBootRest/build/
 SpringBootSocial/build/
-SpringBootSocial/libs/
 SpringBootValidator/build/
 SpringBootWebFlux/build/
 /SpringBootSocial/src/main/resources/application-social.properties
