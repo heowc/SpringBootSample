@@ -38,13 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("userPassword")
 				.loginProcessingUrl("/customLogin")
 				.defaultSuccessUrl("/")
-				.permitAll()
 			.and()
 /* 3 */		.logout()
 				.logoutUrl("/customLogout")
 				.logoutSuccessUrl("/")
-				.invalidateHttpSession(true)
-				.permitAll()
 			.and()
 /* 4 */		.csrf().disable()
 			;
