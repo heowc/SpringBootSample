@@ -1,9 +1,12 @@
 package com.example.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.Netty4ClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.client.AsyncRestTemplate;
 
 import java.util.concurrent.Executor;
 
@@ -26,4 +29,14 @@ public class AsyncConfig extends AsyncConfigurerSupport {
 //	public Executor getAsyncExecutor() {
 //		return new SimpleAsyncTaskExecutor("heowc-async-");
 //	}
+
+	@Bean
+	public AsyncRestTemplate getAsyncRestTemplate() {
+		return new AsyncRestTemplate(new Netty4ClientHttpRequestFactory());
+	}
+
+//    @Bean
+//    public AsyncRestTemplate getAsyncRestTemplate() {
+//        return new AsyncRestTemplate(new HttpComponentsAsyncClientHttpRequestFactory());
+//    }
 }
