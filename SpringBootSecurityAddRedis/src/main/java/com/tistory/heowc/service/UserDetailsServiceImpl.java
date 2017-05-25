@@ -1,19 +1,19 @@
 package com.tistory.heowc.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tistory.heowc.component.UserDetailsImpl;
+import com.tistory.heowc.domain.Member;
+import com.tistory.heowc.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.tistory.heowc.component.UserDetailsImpl;
-import com.tistory.heowc.domain.Member;
-import com.tistory.heowc.repository.MemberRepository;
-
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired MemberRepository repository;
+	private final MemberRepository repository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String id) {

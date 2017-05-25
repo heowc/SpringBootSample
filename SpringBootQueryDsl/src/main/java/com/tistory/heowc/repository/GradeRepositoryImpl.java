@@ -1,19 +1,17 @@
 package com.tistory.heowc.repository;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tistory.heowc.domain.Grade;
 import com.tistory.heowc.domain.QGrade;
 import com.tistory.heowc.domain.QStudent;
+import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
+@RequiredArgsConstructor
 public class GradeRepositoryImpl implements GradeRepositoryCustom {
 
-	@Autowired
-	private JPAQueryFactory queryFactory;
+	private final JPAQueryFactory queryFactory;
 	
 	/*
 	 select 	grade.grade_num, grade.grade_name

@@ -7,7 +7,7 @@ import com.tistory.heowc.auth.ajax.filter.AjaxAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.JwtAuthenticationProvider;
 import com.tistory.heowc.auth.jwt.filter.JwtAuthenticationFilter;
 import com.tistory.heowc.auth.jwt.matcher.SkipPathRequestMatcher;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,14 +25,15 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired JwtAuthenticationProvider jwtProvider;
-	@Autowired AjaxAuthenticationProvider ajaxProvider;
-	
-	@Autowired BaseSecurityHandler securityHandler;
-	
-	@Autowired ObjectMapper objectMapper;
+
+	private final JwtAuthenticationProvider jwtProvider;
+	private final AjaxAuthenticationProvider ajaxProvider;
+
+	private final BaseSecurityHandler securityHandler;
+
+	private final ObjectMapper objectMapper;
 	
 	private static final String LOGIN_END_POINT = "/login";
 	private static final String TOKEN_END_POINT = "/token";

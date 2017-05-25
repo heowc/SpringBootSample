@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.tistory.heowc.domain.Member;
 
-@SuppressWarnings("serial")
 public class UserDetailsImpl implements UserDetails {
 
 	private Member member;

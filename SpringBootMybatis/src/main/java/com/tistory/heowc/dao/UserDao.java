@@ -1,16 +1,17 @@
 package com.tistory.heowc.dao;
 
 import com.tistory.heowc.domain.User;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class UserDao {
 
-    @Autowired SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     public void insert(User user) {
         sqlSession.insert("UserMapper.insert", user);

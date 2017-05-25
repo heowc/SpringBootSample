@@ -2,14 +2,14 @@ package com.tistory.heowc.auth.jwt;
 
 import com.tistory.heowc.auth.AuthFactory;
 import com.tistory.heowc.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class JwtFactory implements AuthFactory {
 
-	@Autowired
-	JwtUtil jwtUtil;
+	private final JwtUtil jwtUtil;
 	
 	@Override
 	public String createToken(String info) {

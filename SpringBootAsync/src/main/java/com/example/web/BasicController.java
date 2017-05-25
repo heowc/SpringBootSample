@@ -13,12 +13,17 @@ import org.springframework.web.client.AsyncRestTemplate;
 @RestController
 public class BasicController {
 
-	@Autowired BasicService service;
-
-	@Autowired AsyncRestTemplate asyncRestTemplate;
+	private final BasicService service;
+	private final AsyncRestTemplate asyncRestTemplate;
 
 	private static final Logger logger = Logger.getLogger(BasicController.class);
-	
+
+	@Autowired
+	public BasicController(BasicService service, AsyncRestTemplate asyncRestTemplate) {
+		this.service = service;
+		this.asyncRestTemplate = asyncRestTemplate;
+	}
+
 	@GetMapping("/async")
 	public String goAsync() {
 		service.onAsync();

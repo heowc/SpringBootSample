@@ -1,28 +1,23 @@
 package com.tistory.heowc.repository;
 
-import java.util.List;
-
-import com.tistory.heowc.domain.QGrade;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.Ops;
-import com.querydsl.core.types.Path;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.*;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.tistory.heowc.domain.QGrade;
 import com.tistory.heowc.domain.QStudent;
 import com.tistory.heowc.domain.Student;
+import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
+@RequiredArgsConstructor
 public class StudentRepositoryImpl implements StudentRepositoryCustom {
 
-	@Autowired
-	private JPAQueryFactory queryFactory;
+	private final JPAQueryFactory queryFactory;
 	
 	@Override
 	public Predicate equalName(String name) {

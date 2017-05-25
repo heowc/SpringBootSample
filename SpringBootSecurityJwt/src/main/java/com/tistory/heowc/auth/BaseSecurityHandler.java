@@ -1,12 +1,10 @@
 package com.tistory.heowc.auth;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tistory.heowc.auth.jwt.JwtFactory;
+import com.tistory.heowc.auth.jwt.JwtInfo;
+import com.tistory.heowc.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -14,17 +12,18 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tistory.heowc.auth.jwt.JwtFactory;
-import com.tistory.heowc.auth.jwt.JwtInfo;
-import com.tistory.heowc.domain.Member;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
+@RequiredArgsConstructor
 public class BaseSecurityHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
 
-	@Autowired JwtFactory JwtFactory;
-	
-	@Autowired ObjectMapper objectMapper;
+	private final JwtFactory JwtFactory;
+
+	private final ObjectMapper objectMapper;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request,

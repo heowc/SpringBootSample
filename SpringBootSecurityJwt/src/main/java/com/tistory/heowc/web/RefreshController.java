@@ -1,6 +1,11 @@
 package com.tistory.heowc.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tistory.heowc.auth.jwt.JwtFactory;
+import com.tistory.heowc.auth.jwt.JwtInfo;
+import com.tistory.heowc.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -10,18 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tistory.heowc.auth.jwt.JwtFactory;
-import com.tistory.heowc.auth.jwt.JwtInfo;
-import com.tistory.heowc.domain.Member;
-
 @RestController
 @RequestMapping("/refresh")
+@RequiredArgsConstructor
 public class RefreshController {
-	
-	@Autowired JwtFactory jwtFactory;
-	@Autowired ObjectMapper objectMapper;
+
+	private final JwtFactory jwtFactory;
+	private final ObjectMapper objectMapper;
 	
 	@GetMapping
 	public ResponseEntity<String> refreshToken(Authentication authentication) {

@@ -6,16 +6,16 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.tistory.heowc.auth.jwt.JwtInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
+@RequiredArgsConstructor
 public class JwtUtil {
 
-	@Autowired
-	private DateUtil dateUtil;
+	private final DateUtil dateUtil;
 	
 	public String createToken(String member) {
 		return createToken(member, dateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMMIT));

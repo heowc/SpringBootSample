@@ -1,22 +1,17 @@
 package com.example.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.domain.Customer;
 import com.example.domain.CustomerRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 public class CustomController {
 
-	@Autowired CustomerRepository repository;
-	
-	@Autowired PasswordEncoder passwordEncoder;
+	private final CustomerRepository repository;
+	private final PasswordEncoder passwordEncoder;
 	
 	@GetMapping(value="/")
 	public String index(){

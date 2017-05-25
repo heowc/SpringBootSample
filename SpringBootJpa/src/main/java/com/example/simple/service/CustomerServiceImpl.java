@@ -2,15 +2,16 @@ package com.example.simple.service;
 
 import com.example.simple.domain.Customer;
 import com.example.simple.domain.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomService {
 
-    @Autowired CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     public Customer insert(Customer customer) {

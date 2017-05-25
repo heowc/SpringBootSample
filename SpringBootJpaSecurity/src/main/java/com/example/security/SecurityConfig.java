@@ -1,5 +1,6 @@
 package com.example.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,13 +14,12 @@ import com.example.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-//	@Autowired DataSource dataSource;
-	
-	@Autowired UserDetailsServiceImpl userDetailsService;
-	
-	@Autowired PasswordEncoder passwordEncoder;
+//	private final DataSource dataSource;
+	private final UserDetailsServiceImpl userDetailsService;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {

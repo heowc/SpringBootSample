@@ -9,9 +9,14 @@ import com.example.service.TestService;
 @RestController
 public class TestController {
 
+
+	private final TestService service;
+
 	@Autowired
-	TestService service;
-	
+	public TestController(TestService service) {
+		this.service = service;
+	}
+
 	@GetMapping(value = "/noAop")
 	public String noAop(){
 		return service.test();

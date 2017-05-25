@@ -1,16 +1,16 @@
 package com.example.simple.web;
 
-import com.example.simple.service.CustomService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.simple.domain.Customer;
+import com.example.simple.service.CustomService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
+@RequiredArgsConstructor
 public class CustomController {
 
-	@Autowired CustomService service;
+	private final CustomService service;
 	
 	@PostMapping(value="/",
 				produces="application/json")

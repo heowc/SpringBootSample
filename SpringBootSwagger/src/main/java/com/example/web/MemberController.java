@@ -1,30 +1,21 @@
 package com.example.web;
 
+import com.example.domain.Member;
+import com.example.domain.MemberRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.ResponseHeader;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.domain.Member;
-import com.example.domain.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @Api(value = "Member for API")
 @RestController
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
-	@Autowired MemberRepository repository;
+	private final MemberRepository repository;
 
 	@ApiOperation(
 			value = "getId",

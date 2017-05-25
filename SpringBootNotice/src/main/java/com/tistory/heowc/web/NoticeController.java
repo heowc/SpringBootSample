@@ -1,19 +1,19 @@
 package com.tistory.heowc.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tistory.heowc.domain.NoticeAddPage;
+import com.tistory.heowc.service.NoticeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tistory.heowc.domain.NoticeAddPage;
-import com.tistory.heowc.service.NoticeService;
-
 @RestController
 @RequestMapping("/notice")
+@RequiredArgsConstructor
 public class NoticeController {
 
-	@Autowired NoticeService service;
+	private final NoticeService service;
 	
 	@GetMapping
 	public NoticeAddPage getNotices(

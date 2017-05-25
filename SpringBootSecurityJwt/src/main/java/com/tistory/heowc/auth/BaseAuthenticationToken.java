@@ -1,13 +1,11 @@
 package com.tistory.heowc.auth;
 
-import java.util.Collection;
-
+import com.tistory.heowc.domain.Member;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import com.tistory.heowc.domain.Member;
+import java.util.Collection;
 
-@SuppressWarnings("serial")
 public abstract class BaseAuthenticationToken extends AbstractAuthenticationToken {
 
 	private Member member;

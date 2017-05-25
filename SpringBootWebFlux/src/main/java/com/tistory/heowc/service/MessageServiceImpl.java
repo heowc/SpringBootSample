@@ -3,7 +3,7 @@ package com.tistory.heowc.service;
 
 import com.tistory.heowc.domain.Message;
 import com.tistory.heowc.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +13,10 @@ import java.util.concurrent.CompletableFuture;
 @Service
 @Transactional
 @Async
+@RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
 
-    @Autowired MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
 
     @Override
     public CompletableFuture<Message> findByOne(Long idx) {

@@ -1,20 +1,19 @@
 package com.example.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.domain.Person;
+import com.example.service.PersonService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.domain.Person;
-import com.example.service.PersonService;
-
 @RestController
+@RequiredArgsConstructor
 public class PersonController {
 
-	@Autowired
-	private PersonService personService;
+	private final PersonService personService;
 	
 	@GetMapping(value="findAll")
 	public ResponseEntity<Resources<Person>> findAll(){

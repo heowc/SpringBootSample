@@ -1,12 +1,8 @@
 package com.tistory.heowc.auth.ajax.filter;
 
-import java.io.IOException;
-import java.nio.file.AccessDeniedException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tistory.heowc.auth.ajax.AjaxAuthenticationToken;
+import com.tistory.heowc.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -14,13 +10,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tistory.heowc.auth.ajax.AjaxAuthenticationToken;
-import com.tistory.heowc.domain.Member;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 
 public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	ObjectMapper objectMapper;
+	private final ObjectMapper objectMapper;
 	
 	@Autowired
 	public AjaxAuthenticationFilter(

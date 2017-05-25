@@ -1,8 +1,11 @@
 package com.example.config;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.component.DecyptDataDeserializer;
+import com.example.component.EncyptDataSerializer;
+import com.example.domain.Model;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -10,26 +13,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.example.component.DecyptDataDeserializer;
-import com.example.component.EncyptDataSerializer;
-import com.example.domain.Model;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@SuppressWarnings("serial")
+@RequiredArgsConstructor
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
-	@Autowired
-	DecyptDataDeserializer deserializer;
-	
-	@Autowired
-	EncyptDataSerializer serializer;
-	
-	@Autowired
-	CustomJsonMapper mapper;
-	
+	private final DecyptDataDeserializer deserializer;
+	private final EncyptDataSerializer serializer;
+	private final CustomJsonMapper mapper;
+
 	@Override
 	public void configureMessageConverters(
 			List<HttpMessageConverter<?>> converters) {

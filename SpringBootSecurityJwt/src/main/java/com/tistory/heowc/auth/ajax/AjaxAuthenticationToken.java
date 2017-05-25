@@ -1,15 +1,12 @@
 package com.tistory.heowc.auth.ajax;
 
-import java.util.Collection;
-
+import com.tistory.heowc.auth.BaseAuthenticationToken;
+import com.tistory.heowc.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import com.tistory.heowc.auth.BaseAuthenticationToken;
-import com.tistory.heowc.domain.Member;
+import java.util.Collection;
 
-
-@SuppressWarnings("serial")
 public class AjaxAuthenticationToken extends BaseAuthenticationToken {
 
 	private String id;

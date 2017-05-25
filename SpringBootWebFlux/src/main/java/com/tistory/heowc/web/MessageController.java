@@ -2,15 +2,16 @@ package com.tistory.heowc.web;
 
 import com.tistory.heowc.domain.Message;
 import com.tistory.heowc.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("message")
+@RequiredArgsConstructor
 public class MessageController {
 
-    @Autowired MessageService messageService;
+    private final MessageService messageService;
 
     @GetMapping("{idx}")
     public Mono<Message> findByOne(@PathVariable Long idx) {

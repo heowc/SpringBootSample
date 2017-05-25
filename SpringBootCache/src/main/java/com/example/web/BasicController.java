@@ -11,9 +11,13 @@ import com.example.domain.Book;
 @RestController
 public class BasicController {
 
+	private final BookRepository repository;
+
 	@Autowired
-	BookRepository repository;
-	
+	public BasicController(BookRepository repository) {
+		this.repository = repository;
+	}
+
 	@GetMapping("/")
 	public Book getTest(@RequestParam("isbn") String isbn) {
 		return repository.getByIsbn(isbn);

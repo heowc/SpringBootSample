@@ -1,16 +1,14 @@
 package com.tistory.heowc.component;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import com.tistory.heowc.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.tistory.heowc.domain.Member;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-@SuppressWarnings("serial")
 public class UserDetailsImpl extends User {
 
 	private Member member;
