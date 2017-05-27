@@ -48,13 +48,15 @@ jar {
 }
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	compile('org.projectlombok:lombok:1.16.6')
 	runtime('com.h2database:h2')
 
-	asciidoctor('org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.0.RC1')
-	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc:1.2.0.RC1')
+	testCompile('io.rest-assured:rest-assured:3.0.2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.restdocs:spring-restdocs-restassured')
+	asciidoctor('org.springframework.restdocs:spring-restdocs-asciidoctor:1.2.1.RELEASE')
 }
