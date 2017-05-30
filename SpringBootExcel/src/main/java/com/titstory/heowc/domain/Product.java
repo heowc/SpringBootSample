@@ -1,12 +1,14 @@
 package com.titstory.heowc.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.Serializable;
 
 @Data
+@Builder
 @AllArgsConstructor
 public class Product implements Serializable {
 
@@ -16,9 +18,11 @@ public class Product implements Serializable {
 
     private String comment;
 
-    public Product(Row row) {
-        this(row.getCell(0).getStringCellValue(),
-            row.getCell(1).getStringCellValue(),
-            row.getCell(2).getStringCellValue());
+    public static Product rowOf(Row row) {
+        return Product.builder()
+                .uniqueId(row.getCell(0).getStringCellValue())
+                .name(row.getCell(1).getStringCellValue())
+                .comment(row.getCell(2).getStringCellValue())
+                .build();
     }
 }

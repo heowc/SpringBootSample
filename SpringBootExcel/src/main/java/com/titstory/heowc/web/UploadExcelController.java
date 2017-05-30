@@ -23,6 +23,6 @@ public class UploadExcelController {
     @PostMapping("excel")
     public List<Product> readExcel(@RequestParam("file") MultipartFile multipartFile)
                                                 throws IOException, InvalidFormatException {
-        return excelReadComponent.readExcelToList(multipartFile, Product::new);
+        return excelReadComponent.readExcelToList(multipartFile, Product::rowOf);
     }
 }
