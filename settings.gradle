@@ -48,6 +48,9 @@ findProject(':SpringBootQueryDsl')?.name = 'spring-boot-querydsl'
 include 'SpringBootRabbitMQ'
 findProject(':SpringBootRabbitMQ')?.name = 'spring-boot-rabbitmq'
 
+include 'SpringBootRedis'
+findProject(':SpringBootRedis')?.name = 'spring-boot-redis'
+
 include 'SpringBootRest'
 findProject(':SpringBootRest')?.name = 'spring-boot-rest'
 
