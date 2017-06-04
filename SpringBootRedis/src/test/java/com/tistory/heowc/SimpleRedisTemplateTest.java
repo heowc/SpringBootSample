@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,17 +22,18 @@ public class SimpleRedisTemplateTest {
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
+
 	@Resource(name = "redisTemplate")
-	private ValueOperations<String, String> listOps;
+	private ValueOperations<String, String> valueOps;
 
 	@Test
-	public void test1_push() throws Exception {
-		listOps.set(KEY, "wonchul");
+	public void test1_set() throws Exception {
+		valueOps.set(KEY, "wonchul");
 	}
 
 	@Test
-	public void test2_pop() throws Exception {
-		System.out.println(String.format("pop [ %s ]", listOps.get(KEY)));
+	public void test2_get() throws Exception {
+		System.out.println(String.format("pop [ %s ]", valueOps.get(KEY)));
+		redisTemplate.delete(KEY);
 	}
-
 }

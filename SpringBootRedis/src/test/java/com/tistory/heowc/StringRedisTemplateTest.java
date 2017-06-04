@@ -14,18 +14,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class StringRedisTemplateTest {
 
-	private static final String KEY = "test_string";
+	private static final String KEY_1 = "set_get";
 
 	@Autowired StringRedisTemplate stringRedisTemplate;
 
 	@Test
-	public void test1_push() throws Exception {
-		stringRedisTemplate.opsForValue().set(KEY, "wonchul");
+	public void test1_set() throws Exception {
+		stringRedisTemplate.opsForValue().set(KEY_1, "wonchul");
 	}
 
 	@Test
-	public void test2_pop() throws Exception {
-		System.out.println(String.format("pop [ %s ]", stringRedisTemplate.opsForValue().get(KEY)));
+	public void test2_get() throws Exception {
+		System.out.println(String.format("pop [ %s ]", stringRedisTemplate.opsForValue().get(KEY_1)));
+		stringRedisTemplate.delete(KEY_1);
 	}
-
 }
