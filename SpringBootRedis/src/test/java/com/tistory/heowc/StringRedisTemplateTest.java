@@ -1,5 +1,6 @@
 package com.tistory.heowc;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Slf4j
 public class StringRedisTemplateTest {
 
 	private static final String KEY_1 = "set_get";
@@ -25,7 +27,9 @@ public class StringRedisTemplateTest {
 
 	@Test
 	public void test2_get() throws Exception {
-		System.out.println(String.format("pop [ %s ]", stringRedisTemplate.opsForValue().get(KEY_1)));
+		log.info(
+				String.format("pop [ %s ]", stringRedisTemplate.opsForValue().get(KEY_1))
+		);
 		stringRedisTemplate.delete(KEY_1);
 	}
 }

@@ -24,6 +24,11 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
-	compileOnly('org.projectlombok:lombok')
+
+	compile('com.fasterxml.jackson.core:jackson-core:2.9.0.pr3')
+	compile('com.fasterxml.jackson.core:jackson-annotations:2.9.0.pr3')
+	compile('com.fasterxml.jackson.core:jackson-databind:2.9.0.pr3')
+
+	compile('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
