@@ -9,6 +9,9 @@ findProject(':SpringBootAsync')?.name = 'spring-boot-async'
 include 'SpringBootCache'
 findProject(':SpringBootCache')?.name = 'spring-boot-cache'
 
+include 'SpringBootCors'
+findProject(':SpringBootCors')?.name = 'spring-boot-cors'
+
 include 'SpringBootCustomJackson'
 findProject(':SpringBootCustomJackson')?.name = 'spring-boot-custom-jackson'
 
