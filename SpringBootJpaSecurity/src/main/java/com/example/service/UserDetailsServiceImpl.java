@@ -1,8 +1,8 @@
 package com.example.service;
 
-import com.example.domain.Customer;
-import com.example.domain.CustomerRepository;
-import com.example.security.UserDetailsImpl;
+import com.example.domain.User;
+import com.example.domain.UserRepository;
+import com.example.config.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private final CustomerRepository repository;
-	
-	@Override
-	public UserDetails loadUserByUsername(String userId) {
-		Customer customer = repository.findByUserId(userId);
-		if(customer == null){
-			throw new UsernameNotFoundException(userId);
-		}
-		
-		return new UserDetailsImpl(customer);
-	}
+    private final UserRepository repository;
 
+    @Override
+    public UserDetails loadUserByUsername(String id) {
+        User user = repository.findById(id);
+
+        if (user == null) {
+            throw new UsernameNotFoundException(id);
+        }
+
+        return new UserDetailsImpl(user);
+    }
 }

@@ -1,60 +1,57 @@
-package com.example.security;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
+package com.example.config.security;
 
 import com.example.service.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-//	private final DataSource dataSource;
 	private final UserDetailsServiceImpl userDetailsService;
-	private final PasswordEncoder passwordEncoder;
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**");
+
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-/* 1 */			.antMatchers("/**")
-				.authenticated()
+				.antMatchers(HttpMethod.POST, "/user").anonymous()
+				.antMatchers("/**").authenticated()
 			.and()
-/* 2 */		.formLogin()
-				.usernameParameter("userId")
-				.passwordParameter("userPassword")
-				.loginProcessingUrl("/customLogin")
-				.defaultSuccessUrl("/")
+			.formLogin()
+				.usernameParameter("id")
+				.passwordParameter("password")
+				.loginProcessingUrl("/custom-login")
+				.defaultSuccessUrl("/user")
 			.and()
-/* 3 */		.logout()
-				.logoutUrl("/customLogout")
+			.logout()
+				.logoutUrl("/custom-logout")
 				.logoutSuccessUrl("/")
 			.and()
-/* 4 */		.csrf().disable()
-			;
+			.csrf().disable();
 	}
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//1.	auth
-//			.inMemoryAuthentication()
-//				.withUser("admin").password("1234").roles("ADMIN");
-//2.	auth.jdbcAuthentication().dataSource(dataSource);
-//3.	
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-	}
+//		[ in-memory 인증 ]
+//		auth.inMemoryAuthentication()
+//			.withUser("heowc").password("1234").roles("USER");
 
+//		[ 별도의 service 인증 ]
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
 }
