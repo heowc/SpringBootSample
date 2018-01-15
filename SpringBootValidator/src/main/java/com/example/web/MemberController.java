@@ -1,41 +1,35 @@
 package com.example.web;
 
+import com.example.domain.ErrorMessage;
+import com.example.domain.Member;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.domain.Member;
-
+@Slf4j
 @RestController
+@RequestMapping("member")
 public class MemberController {
 
-	private static Logger logger = Logger.getLogger(MemberController.class);
-	
+	private static final int ZERO = 0;
+
 	@GetMapping
-	public String index(){
-		return "Hello StringBoot Validator!!";
-	}
-	
-	@GetMapping(value="/join")
-	public String join(Member member){
+	public String find(){
 		return "Error";
 	}
 	
-	@PostMapping(value="/join")
-	public String join(@Valid @RequestBody Member member, BindingResult bindingResult){
-		logger.info(member);
+	@PostMapping
+	public ResponseEntity<?> add(@Valid @RequestBody Member member, BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
-			for(ObjectError error : bindingResult.getAllErrors()){
-				logger.info(error.getDefaultMessage());
-			}
-			return "Error";
+
+			String errorMessage = bindingResult.getAllErrors().get(ZERO).getDefaultMessage();
+			return ResponseEntity.badRequest().body(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), errorMessage));
 		}
-		return "Success";
+
+		return ResponseEntity.ok(member);
 	}
 }
