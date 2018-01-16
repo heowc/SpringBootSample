@@ -22,7 +22,7 @@ public class UserController {
         return repository.findAll();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "{id}")
     public User findOne(@PathVariable Long id) {
         return repository.findOne(id);
     }

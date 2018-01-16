@@ -1,7 +1,7 @@
 package com.example.config.security;
 
 import com.example.service.UserDetailsServiceImpl;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,32 +12,56 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	private final UserDetailsServiceImpl userDetailsService;
+
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
+
+	@Autowired
+	private SecurityHandler securityHandler;
+
+	@Autowired
+	private ObjectMapper objectMapper;
+
+	private static final String LOGIN_ENTRY_POINT = "/login";
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
-	
+
+	@Bean
+	public RequestBodyToJsonFilter requestBodyToJsonFilter() throws Exception {
+		RequestBodyToJsonFilter requestBodyToJsonFilter = new RequestBodyToJsonFilter(requestMatcher() ,objectMapper);
+		requestBodyToJsonFilter.setAuthenticationManager(this.authenticationManager());
+		requestBodyToJsonFilter.setAuthenticationSuccessHandler(securityHandler);
+		return requestBodyToJsonFilter;
+	}
+
+	private RequestMatcher requestMatcher() {
+		return new AntPathRequestMatcher(LOGIN_ENTRY_POINT, HttpMethod.POST.name());
+	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/user").anonymous()
+				.antMatchers(HttpMethod.POST, LOGIN_ENTRY_POINT).anonymous()
 				.antMatchers("/**").authenticated()
 			.and()
-			.formLogin()
-				.usernameParameter("id")
-				.passwordParameter("password")
-				.loginProcessingUrl("/custom-login")
-				.defaultSuccessUrl("/user")
-			.and()
+				.addFilterBefore(requestBodyToJsonFilter(), UsernamePasswordAuthenticationFilter.class)
+//			.formLogin()
+//				.usernameParameter("id")
+//				.passwordParameter("password")
+//				.loginProcessingUrl("/custom-login")
+//				.defaultSuccessUrl("/user")
+//			.and()
 			.logout()
 				.logoutUrl("/custom-logout")
 				.logoutSuccessUrl("/")
