@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -30,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private ObjectMapper objectMapper;
 
 	private static final String LOGIN_ENTRY_POINT = "/login";
+	private static final String LOGOUT_ENTRY_POINT = "/logout";
+
+	private static final String ALL_ENTRY_POINT = "/**";
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){
@@ -53,18 +57,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers(HttpMethod.POST, LOGIN_ENTRY_POINT).anonymous()
-				.antMatchers("/**").authenticated()
+				.antMatchers(HttpMethod.GET, LOGOUT_ENTRY_POINT).anonymous()
+				.antMatchers(ALL_ENTRY_POINT).authenticated()
 			.and()
 				.addFilterBefore(requestBodyToJsonFilter(), UsernamePasswordAuthenticationFilter.class)
 //			.formLogin()
 //				.usernameParameter("id")
 //				.passwordParameter("password")
-//				.loginProcessingUrl("/custom-login")
+//				.loginProcessingUrl("/login")
 //				.defaultSuccessUrl("/user")
 //			.and()
 			.logout()
-				.logoutUrl("/custom-logout")
-				.logoutSuccessUrl("/")
+				.logoutUrl(LOGOUT_ENTRY_POINT)
+				.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 			.and()
 			.csrf().disable();
 	}

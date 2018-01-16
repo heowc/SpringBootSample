@@ -20,7 +20,7 @@ public class SecurityHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.getWriter().append(objectMapper.writeValueAsString(authentication));
+        response.getWriter().append(objectMapper.writeValueAsString(authentication)).flush();
         clearAuthenticationAttributes(request);
     }
 }
