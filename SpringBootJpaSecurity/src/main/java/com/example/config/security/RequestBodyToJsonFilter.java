@@ -31,16 +31,21 @@ public class RequestBodyToJsonFilter extends AbstractAuthenticationProcessingFil
             throw new AuthenticationServiceException("Authentication content-type not supported: " + request.getContentType());
         }
 
+        User user = getUser(request);
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getId(), user.getPassword());
+        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
+
+        return this.getAuthenticationManager().authenticate(authRequest);
+    }
+
+    private User getUser(HttpServletRequest request) {
         User user = toUser(request);
 
         if (validateUser(user)) {
             throw new AccessDeniedException("Access Denied");
         }
 
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(user.getId(), user.getPassword());
-        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
-
-        return this.getAuthenticationManager().authenticate(authRequest);
+        return user;
     }
 
     private boolean validateUser(User user) {

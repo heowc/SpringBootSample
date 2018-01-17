@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsServiceImpl userDetailsService;
 
 	@Autowired
-	private SecurityHandler securityHandler;
+	private JsonAuthenticationSuccessHandler jsonAuthenticationSuccessHandler;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public RequestBodyToJsonFilter requestBodyToJsonFilter() throws Exception {
 		RequestBodyToJsonFilter requestBodyToJsonFilter = new RequestBodyToJsonFilter(requestMatcher() ,objectMapper);
 		requestBodyToJsonFilter.setAuthenticationManager(this.authenticationManager());
-		requestBodyToJsonFilter.setAuthenticationSuccessHandler(securityHandler);
+		requestBodyToJsonFilter.setAuthenticationSuccessHandler(jsonAuthenticationSuccessHandler);
 		return requestBodyToJsonFilter;
 	}
 
