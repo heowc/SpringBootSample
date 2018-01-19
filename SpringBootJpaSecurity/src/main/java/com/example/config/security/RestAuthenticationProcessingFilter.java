@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RequestBodyToJsonFilter extends AbstractAuthenticationProcessingFilter {
+public class RestAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
     private ObjectMapper objectMapper;
 
-    public RequestBodyToJsonFilter(RequestMatcher requestMatcher, ObjectMapper objectMapper) {
+    public RestAuthenticationProcessingFilter(RequestMatcher requestMatcher, ObjectMapper objectMapper) {
         super(requestMatcher);
         this.objectMapper = objectMapper;
     }
