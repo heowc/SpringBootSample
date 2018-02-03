@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JsonAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Autowired
     private ObjectMapper objectMapper;

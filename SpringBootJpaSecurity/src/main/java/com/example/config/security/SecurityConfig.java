@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,13 +20,14 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    private JsonAuthenticationSuccessHandler jsonAuthenticationSuccessHandler;
+    private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -41,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public RestAuthenticationProcessingFilter requestBodyToJsonFilter() throws Exception {
+    public RestAuthenticationProcessingFilter restAuthenticationProcessingFilter() throws Exception {
         RestAuthenticationProcessingFilter restAuthenticationProcessingFilter = new RestAuthenticationProcessingFilter(requestMatcher(), objectMapper);
         restAuthenticationProcessingFilter.setAuthenticationManager(this.authenticationManager());
-        restAuthenticationProcessingFilter.setAuthenticationSuccessHandler(jsonAuthenticationSuccessHandler);
+        restAuthenticationProcessingFilter.setAuthenticationSuccessHandler(restAuthenticationSuccessHandler);
         return restAuthenticationProcessingFilter;
     }
 
@@ -55,12 +57,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, LOGIN_ENTRY_POINT).anonymous()
                 .antMatchers(HttpMethod.GET, LOGOUT_ENTRY_POINT).anonymous()
                 .antMatchers(ALL_ENTRY_POINT).authenticated()
                 .and()
-                .addFilterBefore(requestBodyToJsonFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(restAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
 //			.formLogin()
 //				.usernameParameter("id")
 //				.passwordParameter("password")
