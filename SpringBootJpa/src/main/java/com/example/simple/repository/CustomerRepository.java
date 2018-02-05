@@ -1,9 +1,9 @@
-package com.example.simple.domain;
+package com.example.simple.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import com.example.simple.domain.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-//@Repository
-public interface CustomerRepository extends CrudRepository<Customer, Long>{
+public interface CustomerRepository extends JpaRepository<Customer, Long>, CustomJpqlRepository {
 
 }
 

@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.simple.domain.Customer;
-import com.example.simple.domain.CustomerRepository;
+import com.example.simple.repository.CustomerRepository;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +20,10 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerRepositoryTests {
 
-    @Autowired CustomerRepository repository;
-    @Autowired TestEntityManager testEntityManager;
+    @Autowired
+    private CustomerRepository repository;
+    @Autowired
+    private TestEntityManager testEntityManager;
 
     // 비영속성 데이터
     private Customer getPersistenceContextCustomer() {
@@ -51,6 +53,11 @@ public class CustomerRepositoryTests {
     @Test
     public void test_select() {
         assertNull(repository.findOne(1L));
+    }
+
+    @Test
+    public void test_findByName() {
+        assertEquals(repository.findByName(null).size(), 0);
     }
 
     @Test
