@@ -6,20 +6,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.ResourceSupport;
 
 @Entity
-@Getter @Setter
-@NamedQuery(
-		name = "Person.findByFirstName",
-		query = "SELECT p FROM Person p WHERE p.firstName = :firstName")
+@Data
+@AllArgsConstructor
 public class Person {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String firstName;
-	private String lastName;
+    private String firstName;
+    private String lastName;
+
+    protected Person() {}
+
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

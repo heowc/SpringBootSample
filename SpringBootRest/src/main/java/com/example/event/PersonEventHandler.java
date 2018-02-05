@@ -14,7 +14,8 @@ public class PersonEventHandler {
 	
 	@HandleBeforeCreate
 	public void handlePersonCreate(Person p){
-		logger.info("=========================================HandleBeforeCreate");
+		logger.info("========================================= HandleBeforeCreate");
+		// validation logic...
 	}
 }
 
