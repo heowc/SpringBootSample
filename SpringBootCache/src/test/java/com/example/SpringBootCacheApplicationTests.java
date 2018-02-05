@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.component.BookRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +16,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.example.domain.Book;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class SpringBootCacheApplicationTests {
 
 	@Autowired
-	private TestRestTemplate restTemplate;
-	
+	private BookRepository repository;
+
 	private long startTime;
 	private long endTime;
 	
@@ -34,33 +35,33 @@ public class SpringBootCacheApplicationTests {
 	@After
 	public void onAfter() {
 		endTime = System.currentTimeMillis();
-		logger.info("소요시간:" + (endTime-startTime) + "ms");
+		logger.info("소요시간: {}ms", endTime-startTime);
 	}
 	
 	@Test
-	public void test1() throws Exception {
-		restTemplate.getForObject("/?isbn=a", Book.class);
+	public void test1() {
+		repository.getByIsbn("a");
 	}
 
 	@Test
-	public void test2() throws Exception {
-		restTemplate.getForObject("/?isbn=a", Book.class);
+	public void test2() {
+		repository.getByIsbn("a");
 	}
 	
 
 	@Test
-	public void test3() throws Exception {
-		restTemplate.getForObject("/?isbn=b", Book.class);
+	public void test3() {
+		repository.getByIsbn("b");
 	}
 	
 	@Test
-	public void test4() throws Exception {
-		restTemplate.getForObject("/?isbn=a", Book.class);
+	public void test4() {
+		repository.getByIsbn("a");
 	}
 	
 	@Test
-	public void test5() throws Exception {
-		restTemplate.getForObject("/clear?isbn=a", String.class);
-		restTemplate.getForObject("/?isbn=a", Book.class);
+	public void test5() {
+		repository.refresh("a");
+		repository.getByIsbn("a");
 	}
 }
