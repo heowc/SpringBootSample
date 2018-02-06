@@ -16,7 +16,7 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 							 HttpServletResponse response,
-							 Object handler) throws Exception {
+							 Object handler) {
 		logger.info("================ Before Method");
 		return true;
 	}
@@ -25,15 +25,16 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle( HttpServletRequest request,
 							HttpServletResponse response,
 							Object handler,
-							ModelAndView modelAndView) throws Exception {
+							ModelAndView modelAndView) {
 		logger.info("================ Method Executed");
+		response.getHeaders("interceptor").add("interceptor");
 	}
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request,
 								HttpServletResponse response, 
 								Object handler, 
-								Exception ex) throws Exception {
+								Exception ex) {
 		logger.info("================ Method Completed");
 	}
 }
