@@ -13,16 +13,10 @@ import org.springframework.web.client.AsyncRestTemplate;
 @RestController
 public class BasicController {
 
-	private final BasicService service;
-	private final AsyncRestTemplate asyncRestTemplate;
+	@Autowired
+	private BasicService service;
 
 	private static final Logger logger = Logger.getLogger(BasicController.class);
-
-	@Autowired
-	public BasicController(BasicService service, AsyncRestTemplate asyncRestTemplate) {
-		this.service = service;
-		this.asyncRestTemplate = asyncRestTemplate;
-	}
 
 	@GetMapping("/async")
 	public String goAsync() {
@@ -50,6 +44,9 @@ public class BasicController {
 						System.out::println
 				);
 	}
+
+	@Autowired
+	private AsyncRestTemplate asyncRestTemplate;
 
 	private ListenableFuture<ResponseEntity<String>> getRepositoryInfo(String userName) {
 		return asyncRestTemplate
