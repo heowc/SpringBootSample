@@ -19,8 +19,8 @@ public class MessageController {
     }
 
     @PostMapping
-    public Mono<Message> insert(@RequestBody Mono<Message> message) {
-        return Mono.fromCompletionStage(messageService.insert(message.block().getContent()));
+    public Mono<Message> insert(@RequestBody Message message) {
+        return Mono.fromCompletionStage(messageService.insert(message));
     }
 
     @PutMapping
