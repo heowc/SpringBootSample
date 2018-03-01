@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 public class SimpleBookRepository implements BookRepository {
 
 	private static final Logger logger = LoggerFactory.getLogger(SimpleBookRepository.class);
-	
+
 	@Override
-	@Cacheable(value="book", key="#isbn")
+	@Cacheable(value = "book", key = "#isbn")
 	public Book getByIsbn(String isbn) {
 		simulateSlowService();
 		return new Book(isbn, "Some book");
@@ -29,7 +29,7 @@ public class SimpleBookRepository implements BookRepository {
 	}
 
 	@Override
-	@CacheEvict(value="book", key="#isbn")
+	@CacheEvict(value = "book", key = "#isbn")
 	public void refresh(String isbn) {
 		logger.info("cache clear => " + isbn);
 	}

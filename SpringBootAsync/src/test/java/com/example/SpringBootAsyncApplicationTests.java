@@ -13,7 +13,8 @@ import org.springframework.util.StopWatch;
 @SpringBootTest
 public class SpringBootAsyncApplicationTests {
 
-	@Autowired BasicService service;
+	@Autowired
+	private BasicService service;
 
 	@Test
 	public void test_async() {

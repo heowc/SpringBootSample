@@ -6,7 +6,7 @@
 
 * spring boot 1.5.2.RELEASE
 
-* ( spring boot - web flux )
+* spring boot 2.0.0.RELEASE
 
 # Posting
 
