@@ -23,21 +23,21 @@ public class BasicController {
 	private Logger logger = LoggerFactory.getLogger(BasicController.class);
 
 	@GetMapping("/async")
-	public String goAsync() {
+	public Mono<String> goAsync() {
 		service.onAsync();
 		String str = "Hello Spring Boot Async!!";
 		logger.info(str);
 		logger.info("==================================");
-		return str;
+		return Mono.just(str);
 	}
 
 	@GetMapping("/sync")
-	public String goSync() {
+	public Mono<String> goSync() {
 		service.onSync();
 		String str = "Hello Spring Boot Sync!!";
 		logger.info(str);
 		logger.info("==================================");
-		return str;
+		return Mono.just(str);
 	}
 
 	private WebClient webClient = WebClient.builder()
@@ -49,7 +49,6 @@ public class BasicController {
 	public Mono<List> showGithubReposByUserName(@PathVariable String userName) {
 		return webClient.get()
 				.uri(String.format("/users/%s/repos", userName))
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
 				.retrieve()
 				.bodyToMono(List.class);
 	}
