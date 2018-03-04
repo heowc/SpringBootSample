@@ -10,16 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitRunner implements CommandLineRunner {
 
-    @Autowired
-    private UserRepository repository;
+	@Autowired
+	private UserRepository repository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @Override
-    public void run(String... args) {
-        User user = new User("heowc", "1234", "won chul", "010-xxxx-xxxx", "https://heowc.github.io");
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        repository.save(user);
-    }
+	@Override
+	public void run(String... args) {
+		User user = new User("heowc", "1234", "won chul", "010-xxxx-xxxx", "https://heowc.github.io");
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		repository.save(user);
+	}
 }

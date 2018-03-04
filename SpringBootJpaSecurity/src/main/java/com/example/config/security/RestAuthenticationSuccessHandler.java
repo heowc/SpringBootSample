@@ -14,13 +14,13 @@ import java.io.IOException;
 @Component
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        response.getWriter().append(objectMapper.writeValueAsString(authentication));
-        clearAuthenticationAttributes(request);
-    }
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+		response.getWriter().append(objectMapper.writeValueAsString(authentication.getDetails()));
+		clearAuthenticationAttributes(request);
+	}
 }
