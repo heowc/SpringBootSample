@@ -12,8 +12,10 @@ public class SimpleBookRepository implements BookRepository {
 
 	private static final Logger logger = LoggerFactory.getLogger(SimpleBookRepository.class);
 
+	private static final String CACHE_BOOK = "book";
+
 	@Override
-	@Cacheable(value = "book", key = "#isbn")
+	@Cacheable(value = CACHE_BOOK, key = "#isbn")
 	public Book getByIsbn(String isbn) {
 		simulateSlowService();
 		return new Book(isbn, "Some book");
@@ -21,15 +23,14 @@ public class SimpleBookRepository implements BookRepository {
 
 	private void simulateSlowService() {
 		try {
-			long time = 3000L;
-			Thread.sleep(time);
+			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
 			throw new IllegalStateException(e);
 		}
 	}
 
 	@Override
-	@CacheEvict(value = "book", key = "#isbn")
+	@CacheEvict(value = CACHE_BOOK, key = "#isbn")
 	public void refresh(String isbn) {
 		logger.info("cache clear => " + isbn);
 	}
