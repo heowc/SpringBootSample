@@ -13,12 +13,12 @@ public class TestController {
 	private TestService service;
 
 	@GetMapping(value = "/noAop")
-	public String noAop(){
+	public String noAop() {
 		return service.test();
 	}
-	
+
 	@GetMapping(value = "/aop")
-	public String aop(){
+	public String aop() {
 		return service.testAop();
 	}
 }

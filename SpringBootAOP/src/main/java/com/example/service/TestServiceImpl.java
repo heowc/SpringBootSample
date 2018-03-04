@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 public class TestServiceImpl implements TestService {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestServiceImpl.class);
-	
+
 	@Override
 	public String test() {
 		String msg = "Hello, Spring Boot No AOP";
 		logger.info(msg);
 		return msg;
 	}
-	
+
 	@Override
 	public String testAop() {
 		String msg = "Hello, Spring Boot AOP";

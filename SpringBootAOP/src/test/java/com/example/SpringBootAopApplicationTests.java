@@ -11,7 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SpringBootAopApplicationTests {
 
-	@Autowired TestService service;
+	@Autowired
+	private TestService service;
 
 	@Test
 	public void test_aop() {

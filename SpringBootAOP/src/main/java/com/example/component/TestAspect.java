@@ -15,24 +15,23 @@ import org.springframework.stereotype.Component;
 public class TestAspect {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestAspect.class);
-	
+
 	@Before("execution(* com.example.service.*.*Aop(..))")
 	public void onBeforeHandler(JoinPoint joinPoint) {
 		logger.info("=============== onBeforeThing");
 	}
-	
+
 	@After("execution(* com.example.service.*.*Aop(..))")
 	public void onAfterHandler(JoinPoint joinPoint) {
 		logger.info("=============== onAfterHandler");
 	}
-	
-	@AfterReturning(pointcut = "execution(* com.example.service.*.*Aop(..))",
-					returning = "str")
+
+	@AfterReturning(pointcut = "execution(* com.example.service.*.*Aop(..))", returning = "str")
 	public void onAfterReturningHandler(JoinPoint joinPoint, Object str) {
 		logger.info("@AfterReturning : " + str);
 		logger.info("=============== onAfterReturningHandler");
 	}
-	
+
 	@Pointcut("execution(* com.example.service.*.*Aop(..))")
 	public void onPointcut(JoinPoint joinPoint) {
 		logger.info("=============== onPointcut");
