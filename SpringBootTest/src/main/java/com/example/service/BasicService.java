@@ -1,10 +1,10 @@
 package com.example.service;
 
-import com.example.domain.TestVo;
+import com.example.domain.TestMessage;
 
 public interface BasicService {
 
-	public String test(int flag) throws Exception;
-	
-	public TestVo jsonTest();
+	String test(int flag);
+
+	TestMessage jsonTest();
 }

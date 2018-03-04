@@ -1,11 +1,9 @@
 package com.example;
 
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.json.JSONObject;
+import com.example.domain.TestMessage;
+import com.example.service.BasicService;
+import com.example.web.BasicController;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +13,35 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.domain.TestVo;
-import com.example.service.BasicService;
-import com.example.web.BasicController;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(BasicController.class)
 public class MockMvcTest {
 
-	@Autowired MockMvc mvc;
-	
-	@MockBean BasicService service;
-	
+	@Autowired
+	private MockMvc mvc;
+
+	@MockBean
+	private BasicService service;
+
+	@Autowired
+	private ObjectMapper mapper;
+
 	@Test
 	public void test() throws Exception {
-		
-		JSONObject json = new JSONObject();
-		json.put("name", "wonchul");
-		json.put("type", 0);
-		
+		TestMessage message = new TestMessage("wonchul", 0);
+		String result = mapper.writeValueAsString(message);
+
 		given(service.jsonTest())
-			.willReturn(new TestVo("wonchul", 0));
-		
+				.willReturn(message);
+
 		mvc.perform(get("/jsonTest")
-					.accept(MediaType.APPLICATION_JSON_UTF8))
-			.andExpect(status().isOk())
-			.andExpect(content().json(json.toString()));
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk())
+				.andExpect(content().json(result));
 	}
 }
