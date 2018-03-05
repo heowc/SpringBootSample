@@ -1,25 +1,39 @@
 package com.tistory.heowc.auth.jwt;
 
-import lombok.RequiredArgsConstructor;
+import com.tistory.heowc.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import com.tistory.heowc.auth.UserDetailsImpl;
+import org.springframework.util.Assert;
 
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
-	private final JwtUserDetailsService userDetailsService;
-	
+	@Autowired
+	private JwtUserDetailsService userDetailsService;
+
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String token = (String) authentication.getCredentials();
-		UserDetailsImpl user = userDetailsService.loadUserByUsername(token);
-		return new JwtAuthenticationToken(user.getMember(), user.getAuthorities());
+		if (authentication.getCredentials() == null) {
+			throw new BadCredentialsException("Bad token");
+		}
+
+		String token = authentication.getCredentials().toString();
+
+		if (JwtUtil.verify(token)) {
+			UserDetails userDetails = userDetailsService.loadUserByUsername(token);
+			return new JwtAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+		} else {
+			throw new BadCredentialsException("Bad token");
+		}
 	}
 
 	@Override

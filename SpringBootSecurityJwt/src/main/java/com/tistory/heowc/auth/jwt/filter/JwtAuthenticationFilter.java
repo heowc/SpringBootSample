@@ -1,14 +1,10 @@
 package com.tistory.heowc.auth.jwt.filter;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.tistory.heowc.auth.jwt.JwtAuthenticationToken;
+import com.tistory.heowc.auth.jwt.JwtInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
@@ -17,34 +13,35 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.StringUtils;
 
-import com.tistory.heowc.auth.jwt.JwtAuthenticationToken;
-import com.tistory.heowc.auth.jwt.JwtInfo;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	@Autowired
 	public JwtAuthenticationFilter(RequestMatcher requestMatcher) {
 		super(requestMatcher);
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,
-												HttpServletResponse response) throws AuthenticationException,
-																					IOException, ServletException {
+	                                            HttpServletResponse response) throws AuthenticationException {
 		String token = request.getHeader(JwtInfo.HEADER_NAME);
-		
-		if(!StringUtils.isEmpty(token)) {
-			return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
-		} else {
+
+		if (StringUtils.isEmpty(token)) {
 			throw new AccessDeniedException("Not empty Token");
+		} else {
+			return getAuthenticationManager().authenticate(new JwtAuthenticationToken(token));
 		}
 	}
 
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request,
-											HttpServletResponse response, 
-											FilterChain chain,
-											Authentication authResult) throws IOException, ServletException {
+	                                        HttpServletResponse response,
+	                                        FilterChain chain,
+	                                        Authentication authResult) throws IOException, ServletException {
 		SecurityContext context = SecurityContextHolder.createEmptyContext();
 		context.setAuthentication(authResult);
 		SecurityContextHolder.setContext(context);
@@ -53,8 +50,8 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request,
-												HttpServletResponse response,
-												AuthenticationException failed) throws IOException, ServletException {
+	                                          HttpServletResponse response,
+	                                          AuthenticationException failed) throws IOException, ServletException {
 		SecurityContextHolder.clearContext();
 		getFailureHandler().onAuthenticationFailure(request, response, failed);
 	}

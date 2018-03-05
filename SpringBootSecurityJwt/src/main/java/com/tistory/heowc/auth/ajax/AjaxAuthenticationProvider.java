@@ -1,27 +1,46 @@
 package com.tistory.heowc.auth.ajax;
 
-import com.tistory.heowc.auth.UserDetailsImpl;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
-public class AjaxAuthenticationProvider implements AuthenticationProvider {
+public class AjaxAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-	private final AjaxUserDetailsService userDetailsService;
-	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AjaxUserDetailsService userDetailsService;
+
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String username = authentication.getCredentials().toString();
-		UserDetailsImpl userDetails = userDetailsService.loadUserByUsername(username);
-		return new AjaxAuthenticationToken(userDetails.getMember(), userDetails.getAuthorities());
+	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+		if (authentication.getCredentials() == null) {
+			throw new BadCredentialsException("Bad credentials");
+		}
+
+		String presentedPassword = authentication.getCredentials().toString();
+
+		if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
+			throw new BadCredentialsException("Bad credentials");
+		}
 	}
 
 	@Override
-	public boolean supports(Class<?> authentication) {
-		return AjaxAuthenticationToken.class.isAssignableFrom(authentication);
+	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+		UserDetails loadedUser = userDetailsService.loadUserByUsername(username);
+
+		if (loadedUser == null) {
+			throw new InternalAuthenticationServiceException(
+					"UserDetailsService returned null, which is an interface contract violation");
+		}
+
+		return loadedUser;
 	}
 }

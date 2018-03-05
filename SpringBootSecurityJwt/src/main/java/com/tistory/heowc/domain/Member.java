@@ -1,27 +1,47 @@
 package com.tistory.heowc.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@SuppressWarnings("serial")
 @Entity
-@Data
-@AllArgsConstructor
-public class Member implements Serializable {
+public class Member {
 
 	@Id
 	private String id;
-	
+
+	private String password;
+
 	private String role;
-	
-	public Member(String id) {
+
+	protected Member() { }
+
+	public Member(String id, String password, String role) {
+		this.id = id;
+		this.password = password;
+		this.role = role;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
 		this.id = id;
 	}
-	
-	protected Member() {}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

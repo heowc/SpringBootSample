@@ -2,24 +2,29 @@ package com.tistory.heowc.component;
 
 import com.tistory.heowc.domain.Member;
 import com.tistory.heowc.repository.MemberRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@RequiredArgsConstructor
-public class InitComponent implements CommandLineRunner {
+public class InitComponent implements ApplicationRunner {
 
-	private final MemberRepository repository;
-	
-	@Transactional(readOnly = false)
+	@Autowired
+	private MemberRepository repository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Transactional
 	@Override
-	public void run(String... args) throws Exception {
-		Member user = new Member("wonchul", "USER");
+	public void run(ApplicationArguments args) {
+		Member user = new Member("wonchul", passwordEncoder.encode("1234"),"USER");
 		repository.save(user);
-		
-		Member admin = new Member("naeun", "ADMIN");
+
+		Member admin = new Member("naeun", passwordEncoder.encode("1234"), "ADMIN");
 		repository.save(admin);
 	}
 }
