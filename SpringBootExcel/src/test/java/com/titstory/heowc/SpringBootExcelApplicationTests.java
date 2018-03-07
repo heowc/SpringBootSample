@@ -27,7 +27,7 @@ public class SpringBootExcelApplicationTests {
 
 		excelReadComponent
 				.readExcelToList(new MockMultipartFile("test.xlsx", new FileInputStream(xlsxFile)),
-								Product::rowOf)
+								Product::ofRow)
 				.forEach(System.out::println);
 	}
 }

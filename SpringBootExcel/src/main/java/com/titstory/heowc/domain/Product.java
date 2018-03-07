@@ -1,28 +1,49 @@
 package com.titstory.heowc.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import org.apache.poi.ss.usermodel.Row;
 
-import java.io.Serializable;
 
-@Data
-@Builder
-@AllArgsConstructor
-public class Product implements Serializable {
+public class Product {
 
-    private String uniqueId;
+	private String uniqueId;
 
-    private String name;
+	private String name;
 
-    private String comment;
+	private String comment;
 
-    public static Product rowOf(Row row) {
-        return Product.builder()
-                .uniqueId(row.getCell(0).getStringCellValue())
-                .name(row.getCell(1).getStringCellValue())
-                .comment(row.getCell(2).getStringCellValue())
-                .build();
-    }
+	protected Product() { }
+
+	public Product(String uniqueId, String name, String comment) {
+		this.uniqueId = uniqueId;
+		this.name = name;
+		this.comment = comment;
+	}
+
+	public String getUniqueId() {
+		return uniqueId;
+	}
+
+	public void setUniqueId(String uniqueId) {
+		this.uniqueId = uniqueId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public static Product ofRow(Row row) {
+		return new Product(row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue(), row.getCell(2).getStringCellValue());
+	}
 }
