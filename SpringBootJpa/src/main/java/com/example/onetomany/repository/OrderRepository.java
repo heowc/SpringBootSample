@@ -1,9 +1,9 @@
 package com.example.onetomany.repository;
 
 import com.example.onetomany.domain.Order;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface OrderRepository extends CrudRepository<Order, Long> {
+import java.util.List;
+
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }

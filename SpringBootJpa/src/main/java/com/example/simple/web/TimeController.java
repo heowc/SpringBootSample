@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @RequestMapping("date")
 public class TimeController {
 
-    @GetMapping
-    public LocalDateTime getLocalDateTime() {
-        return LocalDateTime.now();
-    }
+	@GetMapping
+	public LocalDateTime getLocalDateTime() {
+		return LocalDateTime.now();
+	}
 }

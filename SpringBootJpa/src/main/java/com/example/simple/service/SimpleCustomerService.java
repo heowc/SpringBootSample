@@ -12,27 +12,27 @@ import java.util.List;
 @Transactional
 public class SimpleCustomerService implements CustomService {
 
-    @Autowired
-    private CustomerRepository repository;
+	@Autowired
+	private CustomerRepository repository;
 
-    @Override
-    public Customer upsert(Customer customer) {
-        return repository.save(customer);
-    }
+	@Override
+	public Customer upsert(Customer customer) {
+		return repository.save(customer);
+	}
 
-    @Override
-    public Customer find(Long idx) {
-        return repository.findOne(idx);
-    }
+	@Override
+	public Customer find(Long idx) {
+		return repository.findById(idx).orElseThrow(RuntimeException::new);
+	}
 
-    @Override
-    public List<Customer> findByName(String name) {
-        return repository.findByName(name);
-    }
+	@Override
+	public List<Customer> findByName(String name) {
+		return repository.findByName(name);
+	}
 
-    @Override
-    public Customer delete(Customer customer) {
-        repository.delete(customer);
-        return customer;
-    }
+	@Override
+	public Customer delete(Customer customer) {
+		repository.delete(customer);
+		return customer;
+	}
 }

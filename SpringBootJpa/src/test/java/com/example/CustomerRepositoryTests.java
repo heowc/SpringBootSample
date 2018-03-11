@@ -20,48 +20,50 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerRepositoryTests {
 
-    @Autowired
-    private CustomerRepository repository;
-    @Autowired
-    private TestEntityManager testEntityManager;
+	@Autowired
+	private CustomerRepository repository;
+	@Autowired
+	private TestEntityManager testEntityManager;
 
-    // 비영속성 데이터
-    private Customer getPersistenceContextCustomer() {
-        return new Customer("heo won chul", "010-xxxx-xxxx", "developer");
-    }
+	// 비영속성 데이터
+	private Customer getPersistenceContextCustomer() {
+		return new Customer("heo won chul", "010-xxxx-xxxx", "developer");
+	}
 
-    // 준영속성 데이터
-    private Customer getNotPersistenceContextCustomer() {
-        return new Customer(1L,"heo won chul", "010-xxxx-xxxx", "developer");
-    }
+	// 준영속성 데이터
+	private Customer getNotPersistenceContextCustomer() {
+		Customer customer = new Customer("heo won chul", "010-xxxx-xxxx", "developer");
+		customer.setIdx(1L);
+		return customer;
+	}
 
-    @Test
-    public void test_insert() {
-        assertEquals(repository.save(getPersistenceContextCustomer()), getNotPersistenceContextCustomer());
-        testEntityManager.flush();
-    }
+	@Test
+	public void test_insert() {
+		assertEquals(repository.save(getPersistenceContextCustomer()).getIdx(), getNotPersistenceContextCustomer().getIdx());
+		testEntityManager.flush();
+	}
 
-    @Test
-    public void test_update() {
-        Customer customer = repository.save(getPersistenceContextCustomer());
-        customer.setBigo("Developer");
+	@Test
+	public void test_update() {
+		Customer customer = repository.save(getPersistenceContextCustomer());
+		customer.setBigo("Developer");
 
-        assertNotEquals(repository.save(customer), getNotPersistenceContextCustomer());
-        testEntityManager.flush();
-    }
+		assertNotEquals(repository.save(customer).getBigo(), getNotPersistenceContextCustomer().getBigo());
+		testEntityManager.flush();
+	}
 
-    @Test
-    public void test_select() {
-        assertNull(repository.findOne(1L));
-    }
+	@Test
+	public void test_select() {
+		assertNull(repository.findById(1L).orElse(null));
+	}
 
-    @Test
-    public void test_findByName() {
-        assertEquals(repository.findByName(null).size(), 0);
-    }
+	@Test
+	public void test_findByName() {
+		assertEquals(repository.findByName(null).size(), 0);
+	}
 
-    @Test
-    public void test_delete() {
+	@Test
+	public void test_delete() {
 //        repository.delete(1L);
-    }
+	}
 }

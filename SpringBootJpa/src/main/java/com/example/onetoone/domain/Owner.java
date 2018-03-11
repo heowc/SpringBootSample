@@ -1,16 +1,11 @@
 package com.example.onetoone.domain;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 @Table(name = "OWNER")
-@RequiredArgsConstructor
 @GenericGenerator(
         name = "OwnerSequenceGenerator",
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -26,10 +21,49 @@ public class Owner {
     @Column(name = "OWNER_ID")
     private Long idx;
 
-    @Column(name = "OWNER_NAME") @NonNull
+    @Column(name = "OWNER_NAME")
     private String name;
 
     @OneToOne
     @JoinColumn(name = "OWNER_ID")
     private Market market;
+
+    protected Owner() { }
+
+    public Owner(String name) {
+        this.name = name;
+    }
+
+    public Long getIdx() {
+        return idx;
+    }
+
+    public void setIdx(Long idx) {
+        this.idx = idx;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Market getMarket() {
+        return market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+    }
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "idx=" + idx +
+                ", name='" + name + '\'' +
+                ", market=" + market +
+                '}';
+    }
 }

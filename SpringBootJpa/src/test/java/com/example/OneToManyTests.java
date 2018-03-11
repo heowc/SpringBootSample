@@ -1,60 +1,67 @@
 package com.example;
 
 import com.example.onetomany.domain.Order;
-import com.example.onetomany.repository.OrderRepository;
 import com.example.onetomany.domain.Product;
+import com.example.onetomany.repository.OrderRepository;
 import com.example.onetomany.repository.ProductRepository;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@Transactional
 public class OneToManyTests {
 
-    @Autowired TestEntityManager testEntityManager;
-    @Autowired OrderRepository orderRepository;
-    @Autowired ProductRepository productRepository;
+	@Autowired
+	private OrderRepository orderRepository;
 
-    @Before
-    public void before_init() {
-        Product javaProduct = new Product("java", "java content");
-        Product kotlinProduct = new Product("kotlin", "kotlin content");
-        Product scalaProduct = new Product("scala", "scala content");
+	@Autowired
+	private ProductRepository productRepository;
 
-        productRepository.save(javaProduct);
-        productRepository.save(kotlinProduct);
-        productRepository.save(scalaProduct);
+	private static final String PRODUCT_NAME = "java";
 
-        Order order1 = orderRepository.save(new Order(3, ""));
-        Order order2 = orderRepository.save(new Order(2, ""));
-        Order order3 = orderRepository.save(new Order(1, ""));
-        Order order4 = orderRepository.save(new Order(3, ""));
-        Order order5 = orderRepository.save(new Order(2, ""));
+	@Transactional
+	@Test
+	public void test_productFindByName() {
+		insertBaseData();
+		System.out.println("========================== Result =========================");
+		assertThat(productRepository.findByName(PRODUCT_NAME).getName()).isEqualTo(PRODUCT_NAME);
+	}
 
-        javaProduct.getOrders().add(order1);
-        kotlinProduct.getOrders().add(order2);
-        scalaProduct.getOrders().add(order3);
-        javaProduct.getOrders().add(order4);
-        kotlinProduct.getOrders().add(order5);
+	private void insertBaseData() {
+		Product javaProduct = new Product("java", "java content");
+		Product kotlinProduct = new Product("kotlin", "kotlin content");
+		Product scalaProduct = new Product("scala", "scala content");
 
-        testEntityManager.flush();
-        testEntityManager.clear();
-    }
+		productRepository.save(javaProduct);
+		productRepository.save(kotlinProduct);
+		productRepository.save(scalaProduct);
 
-    @Test
-    public void test_productFindOne() {
-        System.out.println(productRepository.findOne(1L));
-    }
+		javaProduct = productRepository.findByName(javaProduct.getName());
+		kotlinProduct = productRepository.findByName(kotlinProduct.getName());
+		scalaProduct = productRepository.findByName(scalaProduct.getName());
 
-    @Test
-    public void test_orderFindOne() {
-        System.out.println(orderRepository.findOne(1L));
-    }
+		List<Order> javaOrders = Arrays.asList(new Order(3, "", javaProduct), new Order(3, "", javaProduct));
+		List<Order> kotlinOrders = Arrays.asList(new Order(2, "", kotlinProduct), new Order(2, "", kotlinProduct));
+		List<Order> scalaOrders = Arrays.asList(new Order(1, "", scalaProduct));
+
+		orderRepository.saveAll(javaOrders);
+		orderRepository.saveAll(kotlinOrders);
+		orderRepository.saveAll(scalaOrders);
+
+		System.out.println("========================= Product =========================");
+		productRepository.findAll().forEach(System.out::println);
+		System.out.println("========================== Order ==========================");
+		orderRepository.findAll().forEach(System.out::println);
+	}
 }

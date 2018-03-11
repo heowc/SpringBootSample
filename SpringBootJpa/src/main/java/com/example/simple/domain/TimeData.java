@@ -1,24 +1,31 @@
 package com.example.simple.domain;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@RequiredArgsConstructor
-public class TimeData implements Serializable {
+public class TimeData {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long idx;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long idx;
 
-    @NonNull
-//    @Temporal(TemporalType.DATE)
-    private LocalDateTime date;
-    
-    public TimeData() {}
+	private LocalDateTime date;
+
+	protected TimeData() { }
+
+	public TimeData(LocalDateTime date) {
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "TimeData{" +
+				"idx=" + idx +
+				", date=" + date +
+				'}';
+	}
 }

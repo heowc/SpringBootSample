@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomJpqlRepository {
 
-    List<Customer> findByName(String name);
+	List<Customer> findByName(String name);
 }

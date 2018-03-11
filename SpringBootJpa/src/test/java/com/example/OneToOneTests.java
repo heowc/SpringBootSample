@@ -17,26 +17,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OneToOneTests {
 
-    @Autowired MarketRepository marketRepository;
-    @Autowired OwnerRepository ownerRepository;
+	@Autowired
+	MarketRepository marketRepository;
 
-    @Before
-    public void before_init() {
-        marketRepository.save(new Market("원철 중화 반점", "서울 구로구"));
-        marketRepository.save(new Market("나은 중화 반점", "서울 구로구"));
-        marketRepository.save(new Market("구글 중화 반점", "서울 구로구"));
+	@Autowired
+	OwnerRepository ownerRepository;
 
-        ownerRepository.save(new Owner("원철"));
-        ownerRepository.save(new Owner("나은"));
-        ownerRepository.save(new Owner("구글"));
+	@Before
+	public void before_init() {
+		marketRepository.save(new Market("원철 중화 반점", "서울 구로구"));
+		marketRepository.save(new Market("나은 중화 반점", "서울 구로구"));
+		marketRepository.save(new Market("구글 중화 반점", "서울 구로구"));
 
-        marketRepository.findAll().forEach(System.out::println);
-        ownerRepository.findAll().forEach(System.out::println);
-    }
+		ownerRepository.save(new Owner("원철"));
+		ownerRepository.save(new Owner("나은"));
+		ownerRepository.save(new Owner("구글"));
 
-    @Test
-    public void test_findOne() {
-        System.out.println(marketRepository.findOne(1L));
-        System.out.println(ownerRepository.findOne(1L));
-    }
+		marketRepository.findAll().forEach(System.out::println);
+		ownerRepository.findAll().forEach(System.out::println);
+	}
+
+	@Test
+	public void test_findOne() {
+		System.out.println(marketRepository.findById(1L).orElse(null));
+		System.out.println(ownerRepository.findById(1L).orElse(null));
+	}
 }

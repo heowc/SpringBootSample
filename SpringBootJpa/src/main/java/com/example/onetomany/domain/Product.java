@@ -1,21 +1,13 @@
 package com.example.onetomany.domain;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "TB_PRODUCT")
-@RequiredArgsConstructor
 @GenericGenerator(
         name = "ProductSequenceGenerator",
         strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -25,20 +17,67 @@ import java.util.List;
                @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
         }
 )
-public class Product implements Serializable {
+public class Product {
 
     @Id @GeneratedValue(generator = "ProductSequenceGenerator")
     @Column(name = "PRODUCT_IDX")
     private Long idx;
 
-    @Column(name = "NAME") @NonNull
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "CONTENT") @NonNull
+    @Column(name = "CONTENT")
     private String content;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product")
     private List<Order> orders = new ArrayList<>();
 
-    protected Product() {}
+    protected Product() { }
+
+	public Product(String name, String content) {
+		this.name = name;
+		this.content = content;
+	}
+
+	public Long getIdx() {
+		return idx;
+	}
+
+	public void setIdx(Long idx) {
+		this.idx = idx;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	@Override
+	public String toString() {
+		return "Product{" +
+				"idx=" + idx +
+				", name='" + name + '\'' +
+				", content='" + content + '\'' +
+				", orders=" + orders +
+				'}';
+	}
 }
