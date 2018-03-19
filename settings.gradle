@@ -81,6 +81,9 @@ findProject(':SpringBootValidator')?.name = 'spring-boot-validator'
 include 'SpringBootVertx'
 findProject(':SpringBootVertx')?.name = 'spring-boot-vertx'
 
+include 'SpringBootWar'
+findProject(':SpringBootWar')?.name = 'spring-boot-war'
+
 include 'SpringBootWebFlux'
 findProject(':SpringBootWebFlux')?.name = 'spring-boot-webflux'
 
