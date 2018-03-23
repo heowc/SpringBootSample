@@ -10,26 +10,26 @@ import reactor.core.publisher.Mono;
 @RequestMapping("message")
 public class MessageController {
 
-    @Autowired
-    private MessageService messageService;
+	@Autowired
+	private MessageService messageService;
 
-    @GetMapping("{idx}")
-    public Mono<Message> findByOne(@PathVariable Long idx) {
-        return Mono.fromCompletionStage(messageService.findByOne(idx));
-    }
+	@GetMapping("{idx}")
+	public Mono<Message> findByOne(@PathVariable Long idx) {
+		return Mono.fromCompletionStage(messageService.findByOne(idx));
+	}
 
-    @PostMapping
-    public Mono<Message> insert(@RequestBody Message message) {
-        return Mono.fromCompletionStage(messageService.insert(message));
-    }
+	@PostMapping
+	public Mono<Message> add(@RequestBody Message message) {
+		return Mono.fromCompletionStage(messageService.insert(message));
+	}
 
-    @PutMapping
-    public Mono<Message> update(@RequestBody Mono<Message> message) {
-        return Mono.fromCompletionStage(messageService.update(message.block()));
-    }
+	@PutMapping
+	public Mono<Message> modify(@RequestBody Message message) {
+		return Mono.fromCompletionStage(messageService.update(message));
+	}
 
-    @DeleteMapping("{idx}")
-    public void deleteByIdx(@PathVariable Long idx) {
-        messageService.delete(idx);
-    }
+	@DeleteMapping("{idx}")
+	public void remove(@PathVariable Long idx) {
+		messageService.delete(idx);
+	}
 }

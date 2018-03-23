@@ -27,9 +27,9 @@ public class MessageService {
 
 	public CompletableFuture<Message> update(Message message) {
 		return CompletableFuture.completedFuture(messageRepository.findById(message.getIdx()).orElseThrow(RuntimeException::new))
-				.thenApply(msg -> {
-					msg.setContent(message.getContent());
-					return msg;
+				.thenApply(m -> {
+					m.setContent(message.getContent());
+					return m;
 				});
 	}
 
