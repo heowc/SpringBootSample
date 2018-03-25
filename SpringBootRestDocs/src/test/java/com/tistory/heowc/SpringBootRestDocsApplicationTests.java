@@ -1,57 +1,32 @@
 package com.tistory.heowc;
 
-import com.tistory.heowc.domain.Programming;
-import com.tistory.heowc.repository.ProgrammingRepository;
-import org.junit.Before;
-import org.junit.Rule;
+import com.tistory.heowc.web.ProgrammingController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.JUnitRestDocumentation;
-import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@WebMvcTest(ProgrammingController.class)
+@AutoConfigureRestDocs(outputDir = "build/snippets")
 public class SpringBootRestDocsApplicationTests {
 
-	@Rule
-	public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("static/docs");
-
-	private RestDocumentationResultHandler documentationHandler;
-
+	@Autowired
 	private MockMvc mockMvc;
 
-	@Autowired
-	private WebApplicationContext context;
-
-	@Autowired
-	private ProgrammingRepository repository;
-
-	@Before
-	public void setUp() {
-		this.documentationHandler = document("{method-name}",
-										preprocessRequest(prettyPrint()),
-										preprocessResponse(prettyPrint()));
-
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-						.apply(documentationConfiguration(this.restDocumentation))
-						.alwaysDo(this.documentationHandler)
-						.build();
-
-		repository.save(new Programming("java", "oracle.com"));
-	}
-
 	@Test
-	public void test_findAll() throws Exception {
-
+	public void shouldReturnDefaultMessage() throws Exception {
+		this.mockMvc.perform(get("/programming"))
+				.andExpect(status().isOk())
+				.andDo(document("programming"));
 	}
 }
