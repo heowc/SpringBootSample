@@ -12,9 +12,9 @@ public class SpringBootSecurityAddRedisApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootSecurityAddRedisApplication.class, args);
 	}
-	
+
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 }
