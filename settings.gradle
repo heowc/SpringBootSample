@@ -6,6 +6,9 @@ findProject(':SpringBootAOP')?.name = 'spring-boot-aop'
 include 'SpringBootAsync'
 findProject(':SpringBootAsync')?.name = 'spring-boot-async'
 
+include 'SpringBootBatch'
+findProject(':SpringBootBatch')?.name = 'spring-boot-batch'
+
 include 'SpringBootCache'
 findProject(':SpringBootCache')?.name = 'spring-boot-cache'
 
