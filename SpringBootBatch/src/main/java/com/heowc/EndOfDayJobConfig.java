@@ -34,8 +34,9 @@ public class EndOfDayJobConfig {
                         logger.info("after job");
                     }
                 })
-                .start(step1())
-                .next(step2())
+                .start(step1()).on("*").to(step2())
+                .from(step1()).on("FAILED").to(step3())
+                .end()
                 .build();
     }
 
@@ -61,6 +62,13 @@ public class EndOfDayJobConfig {
     @Bean
     public Step step2() {
         return this.stepBuilderFactory.get("step2")
+                .tasklet((contribution, chunkContext) -> null)
+                .build();
+    }
+
+    @Bean
+    public Step step3() {
+        return this.stepBuilderFactory.get("step3")
                 .tasklet((contribution, chunkContext) -> null)
                 .build();
     }
