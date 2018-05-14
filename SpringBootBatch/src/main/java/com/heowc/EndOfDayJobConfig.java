@@ -34,8 +34,8 @@ public class EndOfDayJobConfig {
                         logger.info("after job");
                     }
                 })
-                .start(step1()).on("*").to(step2())
-                .from(step1()).on("FAILED").to(step3())
+                .start(step1()).on(ExitStatus.COMPLETED.getExitCode()).to(step2()) // *, ?
+                .from(step1()).on(ExitStatus.FAILED.getExitCode()).to(step3())
                 .end()
                 .build();
     }
