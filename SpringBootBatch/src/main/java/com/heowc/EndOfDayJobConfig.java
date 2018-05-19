@@ -1,18 +1,20 @@
 package com.heowc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.*;
+import org.springframework.batch.core.ExitStatus;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.flow.FlowExecutionStatus;
+import org.springframework.batch.core.job.flow.JobExecutionDecider;
+import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class EndOfDayJobConfig {
-
-    private static final Logger logger = LoggerFactory.getLogger(EndOfDayJobConfig.class);
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -22,36 +24,29 @@ public class EndOfDayJobConfig {
 
     @Bean
     public Job endOfDay() {
-        return this.jobBuilderFactory.get("endOfDay")
-                .listener(new JobExecutionListener() {
-                    @Override
-                    public void beforeJob(JobExecution jobExecution) {
-                        logger.info("before job");
-                    }
+        JobExecutionDecider decider = (jobExecution, stepExecution) -> {
+            ExitStatus status = execute() ? ExitStatus.COMPLETED : ExitStatus.FAILED;
+            return new FlowExecutionStatus(status.getExitCode());
+        };
 
-                    @Override
-                    public void afterJob(JobExecution jobExecution) {
-                        logger.info("after job");
-                    }
-                })
-                .start(step1()).on(ExitStatus.COMPLETED.getExitCode()).to(step2()) // *, ?
-                .from(step1()).on(ExitStatus.FAILED.getExitCode()).to(step3())
+        return this.jobBuilderFactory.get("endOfDay")
+                .start(step1())
+                .next(decider).on(ExitStatus.COMPLETED.getExitCode()).to(step2()) // *, ?
+                .from(decider).on(ExitStatus.FAILED.getExitCode()).stopAndRestart(step3()) // to(step3())
                 .end()
                 .build();
+    }
+
+    private boolean execute() {
+        return true;
     }
 
     @Bean
     public Step step1() {
         return this.stepBuilderFactory.get("step1")
-                .listener(new StepExecutionListener() {
-                    @Override
-                    public void beforeStep(StepExecution stepExecution) {
-                        logger.info("before step1");
-                    }
-
+                .listener(new StepExecutionListenerSupport() {
                     @Override
                     public ExitStatus afterStep(StepExecution stepExecution) {
-                        logger.info("after step1");
                         return ExitStatus.COMPLETED;
                     }
                 })
