@@ -20,16 +20,16 @@ public class MessageController {
 
 	@PostMapping
 	public Mono<Message> add(@RequestBody Message message) {
-		return Mono.fromCompletionStage(messageService.insert(message));
+		return Mono.fromCompletionStage(messageService.add(message));
 	}
 
 	@PutMapping
 	public Mono<Message> modify(@RequestBody Message message) {
-		return Mono.fromCompletionStage(messageService.update(message));
+		return Mono.fromCompletionStage(messageService.modify(message));
 	}
 
 	@DeleteMapping("{idx}")
 	public void remove(@PathVariable Long idx) {
-		messageService.delete(idx);
+		messageService.remove(idx);
 	}
 }

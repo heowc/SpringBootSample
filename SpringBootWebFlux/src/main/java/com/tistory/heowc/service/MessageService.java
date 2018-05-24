@@ -21,11 +21,11 @@ public class MessageService {
 		return CompletableFuture.completedFuture(messageRepository.findById(idx).orElse(null));
 	}
 
-	public CompletableFuture<Message> insert(Message message) {
+	public CompletableFuture<Message> add(Message message) {
 		return CompletableFuture.completedFuture(messageRepository.save(message));
 	}
 
-	public CompletableFuture<Message> update(Message message) {
+	public CompletableFuture<Message> modify(Message message) {
 		return CompletableFuture.completedFuture(messageRepository.findById(message.getIdx()).orElseThrow(RuntimeException::new))
 				.thenApply(m -> {
 					m.setContent(message.getContent());
@@ -33,7 +33,7 @@ public class MessageService {
 				});
 	}
 
-	public void delete(Long idx) {
+	public void remove(Long idx) {
 		messageRepository.deleteById(idx);
 	}
 }
