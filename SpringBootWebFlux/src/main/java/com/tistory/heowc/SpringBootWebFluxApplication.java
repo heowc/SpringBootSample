@@ -4,7 +4,6 @@ import com.tistory.heowc.domain.Message;
 import com.tistory.heowc.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +20,6 @@ public class SpringBootWebFluxApplication {
 
 	@Bean
 	public ApplicationRunner applicationRunner() {
-		return arguments -> messageService.insert(new Message("hi"));
+		return arguments -> messageService.add(new Message("hi"));
 	}
 }

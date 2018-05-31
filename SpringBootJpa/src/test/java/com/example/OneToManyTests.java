@@ -30,12 +30,16 @@ public class OneToManyTests {
 
 	private static final String PRODUCT_NAME = "java";
 
-	@Transactional
 	@Test
 	public void test_productFindByName() {
+		// given
 		insertBaseData();
-		System.out.println("========================== Result =========================");
-		assertThat(productRepository.findByName(PRODUCT_NAME).getName()).isEqualTo(PRODUCT_NAME);
+
+		// when
+		Product product = productRepository.findByName(PRODUCT_NAME);
+
+		// then
+		assertThat(product.getName()).isEqualTo(PRODUCT_NAME);
 	}
 
 	private void insertBaseData() {

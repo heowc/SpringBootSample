@@ -27,19 +27,19 @@ public class MessageHandler {
 
 	public Mono<ServerResponse> add(ServerRequest request) {
 		Mono<Message> messageMono = request.bodyToMono(Message.class);
-		return Mono.fromCompletionStage(service.insert(messageMono.block()))
+		return Mono.fromCompletionStage(service.add(messageMono.block()))
 				.flatMap(message -> ServerResponse.ok().contentType(APPLICATION_JSON).body(fromObject(message)));
 	}
 
 	public Mono<ServerResponse> modify(ServerRequest request) {
 		Mono<Message> messageMono = request.bodyToMono(Message.class);
-		return Mono.fromCompletionStage(service.update(messageMono.block()))
+		return Mono.fromCompletionStage(service.modify(messageMono.block()))
 				.flatMap(message -> ServerResponse.ok().contentType(APPLICATION_JSON).body(fromObject(message)));
 	}
 
 	public Mono<ServerResponse> remove(ServerRequest request) {
 		final Long id = Long.valueOf(request.pathVariable("id"));
-		service.delete(id);
+		service.remove(id);
 		return ServerResponse.ok().build();
 	}
 }
