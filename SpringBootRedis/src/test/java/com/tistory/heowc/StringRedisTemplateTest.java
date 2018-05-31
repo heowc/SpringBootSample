@@ -16,20 +16,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 public class StringRedisTemplateTest {
 
-	private static final String KEY_1 = "set_get";
+    private static final String KEY = "string";
 
-	@Autowired StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-	@Test
-	public void test1_set() throws Exception {
-		stringRedisTemplate.opsForValue().set(KEY_1, "wonchul");
-	}
+    @Test
+    public void test1_set() {
+        stringRedisTemplate.opsForValue().set(KEY, "wonchul");
+    }
 
-	@Test
-	public void test2_get() throws Exception {
-		log.info(
-				String.format("pop [ %s ]", stringRedisTemplate.opsForValue().get(KEY_1))
-		);
-		stringRedisTemplate.delete(KEY_1);
-	}
+    @Test
+    public void test2_get() {
+        log.info(
+                String.format("pop [ %s ]", stringRedisTemplate.opsForValue().get(KEY))
+        );
+        stringRedisTemplate.delete(KEY);
+    }
 }
