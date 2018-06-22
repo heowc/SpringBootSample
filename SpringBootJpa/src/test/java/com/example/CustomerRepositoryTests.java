@@ -32,8 +32,7 @@ public class CustomerRepositoryTests {
 
 	// 준영속성 데이터
 	private Customer getNotPersistenceContextCustomer() {
-		Customer customer = new Customer("heo won chul", "010-xxxx-xxxx", "developer");
-		return customer;
+		return new Customer("heo won chul", "010-xxxx-xxxx", "developer");
 	}
 
 	@Test
@@ -43,15 +42,5 @@ public class CustomerRepositoryTests {
 
 		assertNotEquals(repository.save(customer).getBigo(), getNotPersistenceContextCustomer().getBigo());
 		testEntityManager.flush();
-	}
-
-	@Test
-	public void test_select() {
-		assertNull(repository.findById(1L).orElse(null));
-	}
-
-	@Test
-	public void test_findByName() {
-		assertEquals(repository.findByName(null).size(), 0);
 	}
 }
