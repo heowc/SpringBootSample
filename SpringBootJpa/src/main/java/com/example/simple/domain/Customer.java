@@ -3,6 +3,7 @@ package com.example.simple.domain;
 import javax.persistence.*;
 
 @Entity
+@Access(AccessType.FIELD)
 @NamedQuery(
 		name = "Custom.findByName",
 		query = "SELECT c FROM Customer c WHERE c.name = :name ")
@@ -32,31 +33,19 @@ public class Customer {
 		return idx;
 	}
 
-	public void setIdx(Long idx) {
-		this.idx = idx;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getTel() {
 		return tel;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
 	public String getBigo() {
 		return bigo;
 	}
 
-	public void setBigo(String bigo) {
+	public void changeBigo(String bigo) {
 		this.bigo = bigo;
 	}
 

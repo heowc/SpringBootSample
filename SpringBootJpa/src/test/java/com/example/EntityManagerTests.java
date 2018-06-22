@@ -23,9 +23,7 @@ public class EntityManagerTests {
 
 	// 준영속성 데이터
 	private Customer getNotPersistenceContextCustomer() {
-		Customer customer = new Customer("heo won chul", "010-xxxx-xxxx", "developer");
-		customer.setIdx(1L);
-		return customer;
+		return new Customer("heo won chul", "010-xxxx-xxxx", "developer");
 	}
 
 	@Transactional
@@ -53,7 +51,7 @@ public class EntityManagerTests {
 
 		Customer customer = testEntityManager.find(Customer.class, 1L);
 		System.out.println(customer);
-		customer.setBigo("Developer");
+		customer.changeBigo("Developer");
 		testEntityManager.merge(customer); // Persistence Context 추가
 		testEntityManager.flush(); // Database 동기화
 //		testEntityManager.clear(); // Persistence Context 초기화
