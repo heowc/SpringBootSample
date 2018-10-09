@@ -19,7 +19,6 @@ public class Account {
     private String password;
 
     @Transient
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     protected Account() { }
@@ -27,6 +26,10 @@ public class Account {
     public Account(String id, String password) {
         this.id = id;
         this.password = password;
+    }
+
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     public String getId() {
@@ -38,6 +41,7 @@ public class Account {
     }
 
     public void resetPassword() {
-        this.password = RandomStringUtils.randomAlphanumeric(10);
+        String newPassword = RandomStringUtils.randomAlphanumeric(10);
+        this.password = passwordEncoder.encode(newPassword);
     }
 }
