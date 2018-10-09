@@ -28,7 +28,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-security')
 
-    compile('org.springframework:spring-aspects')
     compile('org.springframework:spring-instrument')
 
     compile('org.apache.commons:commons-lang3')
