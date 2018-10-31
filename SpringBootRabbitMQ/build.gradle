@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.2.RELEASE'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -11,20 +11,15 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'idea'
+apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-
-jar {
-	baseName = 'heowc'
-	version = '0.0.1-SNAPSHOT'
-}
+apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
 }
-
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-amqp')

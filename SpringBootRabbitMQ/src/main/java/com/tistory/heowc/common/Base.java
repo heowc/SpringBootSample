@@ -1,16 +1,20 @@
-package com.tistory.heowc.domain;
+package com.tistory.heowc.common;
 
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Base implements Serializable {
 
-	private long index;
+	private Long index;
 	private String content;
 	
 	public Base() {}
-	
-	public Base(long index, String content) {
+
+	public static Base of(Long index, String content) {
+		return new Base(index, content);
+	}
+
+	public Base(Long index, String content) {
 		this.index = index;
 		this.content = content;
 	}
@@ -22,7 +26,7 @@ public class Base implements Serializable {
 		this.content = content;
 	}
 	
-	public long getIndex() {
+	public Long getIndex() {
 		return index;
 	}
 	public String getContent() {

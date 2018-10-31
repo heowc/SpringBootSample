@@ -1,4 +1,4 @@
-package com.tistory.heowc.config;
+package com.tistory.heowc.sender;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
