@@ -75,9 +75,6 @@ findProject(':SpringBootSecurityAddRedis')?.name = 'spring-boot-security-redis'
 include 'SpringBootSecurityJwt'
 findProject(':SpringBootSecurityJwt')?.name = 'spring-boot-security-jwt'
 
-include 'SpringBootSocial'
-findProject(':SpringBootSocial')?.name = 'spring-boot-social'
-
 include 'SpringBootSwagger'
 findProject(':SpringBootSwagger')?.name = 'spring-boot-swagger'
 
