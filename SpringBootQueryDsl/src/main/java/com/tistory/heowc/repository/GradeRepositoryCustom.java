@@ -10,7 +10,4 @@ public interface GradeRepositoryCustom {
 	
 	List<Grade> findGradeSubQueryNameOfStudent(String name);
 	
-	Long deleteByNum(Integer num);
-	
-	Long setFixedNameByNum(Grade grade);
 }

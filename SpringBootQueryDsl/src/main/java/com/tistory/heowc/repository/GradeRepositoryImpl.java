@@ -57,32 +57,4 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom {
 				)
 				.fetch();
 	}
-
-	/*
-	 delete from grade where grade_num=?
-	*/
-
-	@Override
-	public Long deleteByNum(Integer num) {
-		QGrade grade = QGrade.grade;
-		return queryFactory
-				.delete(grade)
-				.where(grade.gradeNum.eq(num))
-				.execute();
-	}
-
-	/*
-	 update grade set grade_name=? where grade_num=?
-	 */
-
-	@Override
-	public Long setFixedNameByNum(Grade grade) {
-		QGrade _grade = QGrade.grade;
-		
-		return queryFactory
-				.update(_grade)
-				.where(_grade.gradeNum.eq(grade.getGradeNum()))
-				.set(_grade.gradeName, grade.getGradeName())
-				.execute();
-	}
 }

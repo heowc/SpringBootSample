@@ -1,6 +1,8 @@
 package com.tistory.heowc.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -30,7 +32,8 @@ public class Student implements Serializable {
 	
 	@Column(name = "STUDENT_HEIGHT")
 	private Double  height;
-	
+
+	@Setter(AccessLevel.NONE)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GRADE_NUM")
 	private Grade grade;

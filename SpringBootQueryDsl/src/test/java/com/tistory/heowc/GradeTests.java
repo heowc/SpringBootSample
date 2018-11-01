@@ -1,5 +1,10 @@
 package com.tistory.heowc;
 
+import com.tistory.heowc.domain.Grade;
+import com.tistory.heowc.domain.Student;
+import com.tistory.heowc.repository.GradeRepository;
+import com.tistory.heowc.repository.StudentRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,22 +13,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tistory.heowc.domain.Grade;
-import com.tistory.heowc.domain.Student;
-import com.tistory.heowc.repository.GradeRepository;
-import com.tistory.heowc.repository.StudentRepository;
+import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.Collections;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 public class GradeTests {
-
-	@PersistenceContext
-	EntityManager entityManager;
 
 	@Autowired
 	StudentRepository studentRepository;
@@ -32,63 +29,72 @@ public class GradeTests {
 	GradeRepository gradeRepository;
 
 	@Before
-	public void beforeTest() {
+	public void before_setup() {
 		System.out.println("============================== Before");
 
-		Grade firstGrade = Grade.of(1,"일학년");
-		Grade secondGrade = Grade.of(2, "이학년");
-		Grade thirdGrade = Grade.of(3, "삼학년");
+		Grade firstGrade = gradeRepository.save(Grade.of(1,"일학년"));
+		Grade secondGrade = gradeRepository.save(Grade.of(2, "이학년"));
+		Grade thirdGrade = gradeRepository.save(Grade.of(3, "삼학년"));
 
 		Student wonchul = Student.of("wonchul", 173.8);
 		Student naeun = Student.of("naeun", 165.2);
 		Student tistory = Student.of("tistory", 160.0);
 
-		firstGrade.getStudents().add(wonchul);
-		secondGrade.getStudents().add(naeun);
-		thirdGrade.getStudents().add(tistory);
-
-		gradeRepository.save(firstGrade);
-		gradeRepository.save(secondGrade);
-		gradeRepository.save(thirdGrade);
+		wonchul.setGrade(firstGrade);
+		naeun.setGrade(secondGrade);
+		tistory.setGrade(thirdGrade);
 
 		studentRepository.save(wonchul);
 		studentRepository.save(naeun);
 		studentRepository.save(tistory);
 
-		entityManager.flush();
+		studentRepository.flush();
 	}
 
 	@Test
 	public void test_findAllGrade() {
-		System.out.println("============================== findAllGrade");
-		gradeRepository.findAll()
-						.forEach(System.out::println);
+		// given
 
+		// when
+		List<Grade> gradeList = gradeRepository.findAll();
+
+		// then
+		assertThat(gradeList).size().isEqualTo(3);
 	}
 
 	@Test
 	public void test_findGradeJoinNameOfStudent() {
-		System.out.println("============================== findGradeJoinNameOfStudent");
-		gradeRepository.findGradeJoinNameOfStudent("wonchul")
-						.forEach(System.out::println);
+		// given
+
+		// when
+		List<Grade> gradeList = gradeRepository.findGradeJoinNameOfStudent("wonchul");
+
+		// then
+		assertThat(gradeList).size().isEqualTo(1);
+		assertThat(gradeList).element(0).satisfies(g -> {
+			assertThat(g.getGradeNum()).isEqualTo(1);
+			assertThat(g.getGradeName()).isEqualTo("일학년");
+		});
 	}
 
 	@Test
 	public void test_findGradeSubQueryNameOfStudent() {
-		System.out.println("============================== findGradeSubQueryNameOfStudent");
-		gradeRepository.findGradeSubQueryNameOfStudent("wonchul")
-						.forEach(System.out::println);
+		// given
+
+		// when
+		List<Grade> gradeList = gradeRepository.findGradeSubQueryNameOfStudent("wonchul");
+
+		// then
+		assertThat(gradeList).size().isEqualTo(1);
+		assertThat(gradeList).element(0).satisfies(g -> {
+			assertThat(g.getGradeNum()).isEqualTo(1);
+			assertThat(g.getGradeName()).isEqualTo("일학년");
+		});
 	}
 
-	@Test
-	public void test_deleteByNum() {
-		System.out.println("============================== deleteByNum");
-		gradeRepository.deleteByNum(3);
-	}
-
-	@Test
-	public void test_setFixedNameByNum() {
-		System.out.println("============================== setFixedNameByNum");
-		gradeRepository.setFixedNameByNum(new Grade(1,"<1>학년", null));
+	@After
+	public void after_clear() {
+		studentRepository.deleteAll();
+		gradeRepository.deleteAll();
 	}
 }
