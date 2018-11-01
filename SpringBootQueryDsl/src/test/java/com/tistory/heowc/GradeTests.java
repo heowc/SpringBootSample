@@ -15,6 +15,7 @@ import com.tistory.heowc.repository.StudentRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,13 +35,13 @@ public class GradeTests {
 	public void beforeTest() {
 		System.out.println("============================== Before");
 
-		Grade firstGrade = new Grade("일학년");
-		Grade secondGrade = new Grade("이학년");
-		Grade thirdGrade = new Grade("삼학년");
+		Grade firstGrade = Grade.of(1,"일학년");
+		Grade secondGrade = Grade.of(2, "이학년");
+		Grade thirdGrade = Grade.of(3, "삼학년");
 
-		Student wonchul = new Student("wonchul", 173.8);
-		Student naeun = new Student("naeun", 165.2);
-		Student tistory = new Student("tistory", 160.0);
+		Student wonchul = Student.of("wonchul", 173.8);
+		Student naeun = Student.of("naeun", 165.2);
+		Student tistory = Student.of("tistory", 160.0);
 
 		firstGrade.getStudents().add(wonchul);
 		secondGrade.getStudents().add(naeun);

@@ -1,18 +1,15 @@
 package com.tistory.heowc;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import com.querydsl.core.types.dsl.PathBuilder;
 import com.tistory.heowc.domain.Grade;
 import com.tistory.heowc.domain.Student;
 import com.tistory.heowc.repository.GradeRepository;
 import com.tistory.heowc.repository.StudentRepository;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -32,13 +29,13 @@ public class StudentTests {
 	@Before
 	public void beforeTest() {
 		System.out.println("============================== Before");
-		Grade firstGrade = new Grade("일학년");
-		Grade secondGrade = new Grade("이학년");
-		Grade thirdGrade = new Grade("삼학년");
+		Grade firstGrade = Grade.of(1, "일학년");
+		Grade secondGrade = Grade.of(2, "이학년");
+		Grade thirdGrade = Grade.of(3, "삼학년");
 
-		Student wonchul = new Student("wonchul", 173.8);
-		Student naeun = new Student("naeun", 165.2);
-		Student tistory = new Student("tistory", 160.0);
+		Student wonchul = Student.of("wonchul", 173.8);
+		Student naeun = Student.of("naeun", 165.2);
+		Student tistory = Student.of("tistory", 160.0);
 
 		firstGrade.getStudents().add(wonchul);
 		secondGrade.getStudents().add(naeun);

@@ -1,17 +1,13 @@
 package com.tistory.heowc.domain;
 
-import java.io.Serializable;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import java.io.Serializable;
 
 @Entity
 @Data
-@RequiredArgsConstructor
 @GenericGenerator(
 		name = "StudentSequenceGenerator",
 		strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -29,10 +25,10 @@ public class Student implements Serializable {
 	@Column(name = "STUDENT_ID")
 	private Integer id;
 
-	@Column(name = "STUDENT_NAME") @NonNull
+	@Column(name = "STUDENT_NAME")
 	private String  name;
 	
-	@Column(name = "STUDENT_HEIGHT") @NonNull
+	@Column(name = "STUDENT_HEIGHT")
 	private Double  height;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -40,4 +36,16 @@ public class Student implements Serializable {
 	private Grade grade;
 
 	protected Student() {}
+
+	public static Student of(String name, Double height) {
+		Student student = new Student();
+		student.setName(name);
+		student.setHeight(height);
+		return student;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+		grade.getStudents().add(this);
+	}
 }
