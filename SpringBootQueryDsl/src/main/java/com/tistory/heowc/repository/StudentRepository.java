@@ -8,7 +8,7 @@ import com.tistory.heowc.domain.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer>,
-											StudentRepositoryCustom,
-											QuerydslPredicateExecutor<Student> {
+        StudentRepositoryCustom,
+        QuerydslPredicateExecutor<Student> {
 
 }

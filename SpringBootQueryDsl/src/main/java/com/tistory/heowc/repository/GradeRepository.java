@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.tistory.heowc.domain.Grade;
 
 @Repository
-public interface GradeRepository extends JpaRepository<Grade, Integer>, 
-											GradeRepositoryCustom,
-		QuerydslPredicateExecutor<Grade> {
+public interface GradeRepository extends JpaRepository<Grade, Integer>,
+        GradeRepositoryCustom,
+        QuerydslPredicateExecutor<Grade> {
 
 }

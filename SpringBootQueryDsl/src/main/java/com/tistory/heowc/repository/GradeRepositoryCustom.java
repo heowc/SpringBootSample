@@ -6,11 +6,11 @@ import com.tistory.heowc.domain.Grade;
 
 public interface GradeRepositoryCustom {
 
-	public List<Grade> findGradeJoinNameOfStudent(String name);
+	List<Grade> findGradeJoinNameOfStudent(String name);
 	
-	public List<Grade> findGradeSubQueryNameOfStudent(String name);
+	List<Grade> findGradeSubQueryNameOfStudent(String name);
 	
-	public Long deleteByNum(Integer num);
+	Long deleteByNum(Integer num);
 	
-	public Long setFixedNameByNum(Grade grade);
+	Long setFixedNameByNum(Grade grade);
 }
