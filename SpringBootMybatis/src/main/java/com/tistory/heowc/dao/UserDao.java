@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class UserDao {
@@ -17,8 +15,8 @@ public class UserDao {
         sqlSession.insert("UserMapper.insert", user);
     }
 
-    public List<User> findByIdx(Long idx) {
-        return sqlSession.selectList("UserMapper.findByIdx", idx);
+    public User findByIdx(Long idx) {
+        return sqlSession.selectOne("UserMapper.findByIdx", idx);
     }
 
     public void deleteByIdx(Long idx) {

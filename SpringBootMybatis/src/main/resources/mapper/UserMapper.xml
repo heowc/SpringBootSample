@@ -5,18 +5,18 @@
 <mapper namespace="UserMapper">
 
     <insert id="insert">
-      INSERT INTO USER VALUES (#{idx}, #{name}, #{local})
+        INSERT INTO USER VALUES (#{idx}, #{name}, #{local})
     </insert>
 
     <select id="findByIdx" resultType="User">
-      SELECT * FROM USER WHERE IDX = #{idx}
+        SELECT * FROM USER WHERE IDX = #{idx}
     </select>
 
     <delete id="deleteByIdx">
-      DELETE FROM USER WHERE IDX = #{idx}
+        DELETE FROM USER WHERE IDX = #{idx}
     </delete>
 
     <update id="setFixedNameByIdx">
-      UPDATE USER SET NAME = #{name} WHERE IDX = #{idx}
+        UPDATE USER SET NAME = #{name} WHERE IDX = #{idx}
     </update>
 </mapper>
