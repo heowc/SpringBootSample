@@ -21,6 +21,9 @@ findProject(':SpringBootCors')?.name = 'spring-boot-cors'
 include 'SpringBootCustomJackson'
 findProject(':SpringBootCustomJackson')?.name = 'spring-boot-custom-jackson'
 
+include 'SpringBootDocker'
+findProject(':SpringBootDocker')?.name = 'spring-boot-docker'
+
 include 'SpringBootEvent'
 findProject(':SpringBootEvent')?.name = 'spring-boot-event'
 
