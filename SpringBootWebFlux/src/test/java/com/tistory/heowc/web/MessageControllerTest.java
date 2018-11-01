@@ -11,7 +11,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.util.logging.Logger;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class MessageControllerTest {
 
     private WebTestClient webClient = WebTestClient.bindToServer().baseUrl("http://localhost:8080/").build();
