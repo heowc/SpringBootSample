@@ -7,10 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Data
 public class Page {
 
-	private int pageNo;
-	private int recodeSize;
-	private long totalSize;
+	private Integer pageNo;
+	private Integer recodeSize;
+	private Long totalSize;
 	
 	@JsonIgnore
-	private int top;
+	private Integer top;
 }

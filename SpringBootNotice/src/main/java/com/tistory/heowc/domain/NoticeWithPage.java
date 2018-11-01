@@ -1,17 +1,17 @@
 package com.tistory.heowc.domain;
 
-import java.util.ArrayList;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
-public class NoticeAddPage {
+public class NoticeWithPage {
 
-	private ArrayList<Notice> notices;
+	private List<Notice> notices;
 	
 	private Page page;
 	
-	protected NoticeAddPage() {}
+	protected NoticeWithPage() { }
 }

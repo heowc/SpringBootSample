@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"></meta>
+    <meta charset="UTF-8" />
     <title>Spring Boot Notice Sample</title>
-    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -27,8 +30,7 @@
     </div>
 </div>
 </body>
-<script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
-<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script src="/resources/bootstrap-paging.js"></script>
 <script src="/resources/notice.js"></script>
 </html>

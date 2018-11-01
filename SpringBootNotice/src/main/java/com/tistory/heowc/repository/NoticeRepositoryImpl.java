@@ -1,20 +1,19 @@
 package com.tistory.heowc.repository;
 
-import java.util.ArrayList;
+import com.tistory.heowc.domain.Notice;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import com.tistory.heowc.domain.Notice;
+import java.util.List;
 
 public class NoticeRepositoryImpl implements NoticeRepositoryCustom {
 
-	@PersistenceContext EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<Notice> findTopByIdxLimit(int top, int limit) {
-		return (ArrayList<Notice>) em.createQuery("SELECT n FROM Notice n")
+	public List<Notice> findTopByIdxLimit(Integer top, Integer limit) {
+		return em.createQuery("SELECT n FROM Notice n", Notice.class)
 										.setFirstResult(top)
 										.setMaxResults(limit)
 										.getResultList();
