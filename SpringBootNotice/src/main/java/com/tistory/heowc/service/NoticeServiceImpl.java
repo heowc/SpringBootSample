@@ -6,11 +6,11 @@ import com.tistory.heowc.domain.Page;
 import com.tistory.heowc.repository.NoticeRepository;
 import com.tistory.heowc.util.PageUtil;
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,7 +20,7 @@ public class NoticeServiceImpl implements NoticeService {
 	private final NoticeRepository repository;
 
 	private static final int RECODE_SIZE = 10;
-	private static final Logger logger = Logger.getLogger(NoticeService.class);
+	private static final Logger logger = LoggerFactory.getLogger(NoticeService.class);
 	
 	@Transactional(readOnly=true)
 	@Override
