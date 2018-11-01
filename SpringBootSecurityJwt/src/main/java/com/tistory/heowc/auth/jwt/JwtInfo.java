@@ -2,8 +2,6 @@ package com.tistory.heowc.auth.jwt;
 
 import com.auth0.jwt.algorithms.Algorithm;
 
-import java.io.UnsupportedEncodingException;
-
 public class JwtInfo {
 
 	public static final String HEADER_NAME = "jwt-header";
@@ -17,7 +15,7 @@ public class JwtInfo {
 	public static Algorithm getAlgorithm() {
 		try {
 			return Algorithm.HMAC256(JwtInfo.TOKEN_KEY);
-		} catch (IllegalArgumentException | UnsupportedEncodingException e) {
+		} catch (IllegalArgumentException e) {
 			return Algorithm.none();
 		}
 	}

@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.RELEASE'
+		springBootVersion = '2.1.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-	compile('org.apache.poi:poi-ooxml:3.17') // .xlsx
-	compile('org.apache.poi:poi:3.17') // .xls
+	compile('org.apache.poi:poi-ooxml:4.0.0') // .xlsx
+	compile('org.apache.poi:poi:4.0.0') // .xls
 
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
