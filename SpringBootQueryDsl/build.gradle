@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.2.RELEASE'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -13,12 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'idea'
-
-jar {
-	baseName = 'heowc'
-	version = '0.0.1-SNAPSHOT'
-}
+apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -27,20 +22,12 @@ repositories {
     mavenCentral()
 }
 
-springBoot {
-	backupSource = false
-}
-
-bootRepackage {
-	mainClass = "com.tistory.heowc.SpringBootQueryDslApplication"
-}
-
 def queryDslOutput = file("src-gen/main/java")
 
 sourceSets {
     main {
         java {
-            srcDir "src-gen/main/java"
+            srcDir queryDslOutput
         }
     }
 }
@@ -83,7 +70,6 @@ dependencies {
 	/**
 	* querydsl dependency
 	*/
-	compile ("com.querydsl:querydsl-core:$querydslVersion")
 	compile ("com.querydsl:querydsl-apt:$querydslVersion")
 	compile ("com.querydsl:querydsl-jpa:$querydslVersion")
 }
