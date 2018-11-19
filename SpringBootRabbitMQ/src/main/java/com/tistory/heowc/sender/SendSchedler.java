@@ -1,8 +1,8 @@
 package com.tistory.heowc.sender;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tistory.heowc.common.Base;
-import com.tistory.heowc.common.Constat;
+import com.tistory.heowc.common.Message;
+import com.tistory.heowc.common.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -33,8 +33,8 @@ public class SendSchedler {
 
 		LongStream.range(1, 15000)
 			.parallel()
-			.mapToObj(i -> Base.of(i, "Hello, RabbitMQ!"))
-			.forEach(message -> rabbitTemplate.convertAndSend(Constat.QUEUE_NAME, message));
+			.mapToObj(i -> Message.of(i, "Hello, RabbitMQ!"))
+			.forEach(message -> rabbitTemplate.convertAndSend(Constant.QUEUE_NAME, message));
 
 		stopWatch.stop();
 		logger.info(stopWatch.toString());

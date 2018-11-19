@@ -2,19 +2,18 @@ package com.tistory.heowc.common;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class Base implements Serializable {
+public class Message implements Serializable {
 
 	private Long index;
 	private String content;
 	
-	public Base() {}
+	public Message() {}
 
-	public static Base of(Long index, String content) {
-		return new Base(index, content);
+	public static Message of(Long index, String content) {
+		return new Message(index, content);
 	}
 
-	public Base(Long index, String content) {
+	public Message(Long index, String content) {
 		this.index = index;
 		this.content = content;
 	}
@@ -35,6 +34,6 @@ public class Base implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Base [index=" + index + ", content=" + content + "]";
+		return "Message [index=" + index + ", content=" + content + "]";
 	}
 }
