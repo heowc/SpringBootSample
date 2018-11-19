@@ -1,6 +1,6 @@
-package com.titstory.heowc.component;
+package com.example.component;
 
-import com.titstory.heowc.constant.ExcelConstant;
+import com.example.constant.ExcelConstant;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-public class ExcelWriteComponent {
+public class ExcelWriter {
 
 	private Workbook workbook;
 	private Map<String, Object> model;
 	private HttpServletResponse response;
 
-	public ExcelWriteComponent(Workbook workbook, Map<String, Object> model, HttpServletResponse response) {
+	public ExcelWriter(Workbook workbook, Map<String, Object> model, HttpServletResponse response) {
 		this.workbook = workbook;
 		this.model = model;
 		this.response = response;

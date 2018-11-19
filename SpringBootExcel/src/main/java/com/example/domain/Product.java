@@ -1,4 +1,4 @@
-package com.titstory.heowc.domain;
+package com.example.domain;
 
 import org.apache.poi.ss.usermodel.Row;
 
@@ -43,7 +43,7 @@ public class Product {
 		this.comment = comment;
 	}
 
-	public static Product ofRow(Row row) {
+	public static Product from(Row row) {
 		return new Product(row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue(), row.getCell(2).getStringCellValue());
 	}
 }

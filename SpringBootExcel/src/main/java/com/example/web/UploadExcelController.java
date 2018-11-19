@@ -1,7 +1,7 @@
-package com.titstory.heowc.web;
+package com.example.web;
 
-import com.titstory.heowc.component.ExcelReadComponent;
-import com.titstory.heowc.domain.Product;
+import com.example.component.ExcelReader;
+import com.example.domain.Product;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +18,10 @@ import java.util.List;
 public class UploadExcelController {
 
 	@Autowired
-	private ExcelReadComponent excelReadComponent;
+	private ExcelReader excelReader;
 
 	@PostMapping("excel")
 	public List<Product> readExcel(@RequestParam("file") MultipartFile multipartFile) throws IOException, InvalidFormatException {
-		return excelReadComponent.readExcelToList(multipartFile, Product::ofRow);
+		return excelReader.readFileToList(multipartFile, Product::from);
 	}
 }

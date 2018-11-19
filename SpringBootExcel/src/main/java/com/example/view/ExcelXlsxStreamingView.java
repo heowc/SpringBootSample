@@ -1,5 +1,6 @@
-package com.titstory.heowc.component;
+package com.example.view;
 
+import com.example.component.ExcelWriter;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxStreamingView;
@@ -13,6 +14,6 @@ public class ExcelXlsxStreamingView extends AbstractXlsxStreamingView {
 
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request, HttpServletResponse response) {
-		new ExcelWriteComponent(workbook, model, response).create();
+		new ExcelWriter(workbook, model, response).create();
 	}
 }

@@ -1,6 +1,6 @@
-package com.titstory.heowc.component;
+package com.example.component;
 
-import com.titstory.heowc.constant.ExcelConstant;
+import com.example.constant.ExcelConstant;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
-public class ExcelReadComponent {
+public class ExcelReader {
 
-	public <T> List<T> readExcelToList(final MultipartFile multipartFile,
-	                                   final Function<Row, T> rowFunc) throws IOException, InvalidFormatException {
+	public <T> List<T> readFileToList(final MultipartFile multipartFile,
+									  final Function<Row, T> rowFunc) throws IOException, InvalidFormatException {
 
 		final Workbook workbook = readWorkbook(multipartFile);
 		final Sheet sheet = workbook.getSheetAt(0);

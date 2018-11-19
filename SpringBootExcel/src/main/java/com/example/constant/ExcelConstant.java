@@ -1,6 +1,6 @@
-package com.titstory.heowc.constant;
+package com.example.constant;
 
-public class ExcelConstant {
+public abstract class ExcelConstant {
 
 	public static final String FILE_NAME = "fileName";
 	public static final String HEAD = "head";

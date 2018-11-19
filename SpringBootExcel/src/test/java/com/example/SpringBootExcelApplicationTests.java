@@ -1,7 +1,7 @@
-package com.titstory.heowc;
+package com.example;
 
-import com.titstory.heowc.component.ExcelReadComponent;
-import com.titstory.heowc.domain.Product;
+import com.example.component.ExcelReader;
+import com.example.domain.Product;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,15 +19,15 @@ import java.io.IOException;
 public class SpringBootExcelApplicationTests {
 
 	@Autowired
-	ExcelReadComponent excelReadComponent;
+	ExcelReader excelReader;
 
 	@Test
 	public void test_readExcel() throws IOException, InvalidFormatException {
 		File xlsxFile = new File("{path}\\test.xlsx");
 
-		excelReadComponent
-				.readExcelToList(new MockMultipartFile("test.xlsx", new FileInputStream(xlsxFile)),
-								Product::ofRow)
+		excelReader
+				.readFileToList(new MockMultipartFile("test.xlsx", new FileInputStream(xlsxFile)),
+								Product::from)
 				.forEach(System.out::println);
 	}
 }

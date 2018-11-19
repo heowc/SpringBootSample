@@ -1,6 +1,6 @@
-package com.titstory.heowc.web;
+package com.example.web;
 
-import com.titstory.heowc.constant.ExcelConstant;
+import com.example.constant.ExcelConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,20 +16,20 @@ public class DownloadExcelController {
 
 	@GetMapping("excel-xls")
 	public ModelAndView xlsView() {
-		return new ModelAndView("excelXlsView", getDefaultMap());
+		return new ModelAndView("excelXlsView", initExcelData());
 	}
 
 	@GetMapping("excel-xlsx")
 	public ModelAndView xlsxView() {
-		return new ModelAndView("excelXlsxView", getDefaultMap());
+		return new ModelAndView("excelXlsxView", initExcelData());
 	}
 
 	@GetMapping("excel-xlsx-streaming")
 	public ModelAndView xlsxStreamingView() {
-		return new ModelAndView("excelXlsxStreamingView", getDefaultMap());
+		return new ModelAndView("excelXlsxStreamingView", initExcelData());
 	}
 
-	private Map<String, Object> getDefaultMap() {
+	private Map<String, Object> initExcelData() {
 		Map<String, Object> map = new HashMap<>();
 		map.put(ExcelConstant.FILE_NAME, "default_excel");
 		map.put(ExcelConstant.HEAD, Arrays.asList("ID", "NAME", "COMMENT"));
