@@ -1,6 +1,5 @@
 package com.tistory.heowc.sender;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tistory.heowc.common.Message;
 import com.tistory.heowc.common.Constant;
 import org.slf4j.Logger;
@@ -13,16 +12,14 @@ import org.springframework.util.StopWatch;
 import java.util.stream.LongStream;
 
 @Component
-public class SendSchedler {
+public class SendScheduler {
 
 	private final RabbitTemplate rabbitTemplate;
-	private final ObjectMapper mapper;
 
-	private static final Logger logger = LoggerFactory.getLogger(SendSchedler.class);
+	private static final Logger logger = LoggerFactory.getLogger(SendScheduler.class);
 
-	public SendSchedler(RabbitTemplate rabbitTemplate, ObjectMapper mapper) {
+	public SendScheduler(RabbitTemplate rabbitTemplate) {
 		this.rabbitTemplate = rabbitTemplate;
-		this.mapper = mapper;
 	}
 
 	@Scheduled(cron = "0/3 * * * * *")
