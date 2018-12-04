@@ -4,20 +4,17 @@ import com.tistory.heowc.domain.ErrorInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.NotContextException;
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
-public class GlobalControllerExceptionHandler {
+@RestController
+public class GlobalRestControllerAdvicer {
 
-	private static final Logger logger = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(GlobalRestControllerAdvicer.class);
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(NotContextException.class)
@@ -36,7 +33,6 @@ public class GlobalControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(RestClientException.class)
-	@ResponseBody
 	public ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) {
 		return new ErrorInfo(req.getRequestURL().toString(), ex);
 	}
