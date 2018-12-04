@@ -14,26 +14,31 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class GlobalRestControllerAdvicer {
 
-	private static final Logger logger = LoggerFactory.getLogger(GlobalRestControllerAdvicer.class);
+    private static final Logger logger = LoggerFactory.getLogger(GlobalRestControllerAdvicer.class);
 
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(NotContextException.class)
-	public ModelAndView handleNotContent() {
-		logger.info("NotContextException 입니다.");
-		// 커스텀 뷰 표현..
-		// error 같은 경우, 필요한 값이 있기 때문에 이하 생략... 
-		return new ModelAndView("error");
-	}
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotContextException.class)
+    public ModelAndView handleNotContent() {
+        logger.info("NotContextException 입니다.");
+        // 커스텀 뷰 표현..
+        // error 같은 경우, 필요한 값이 있기 때문에 이하 생략...
+        return new ModelAndView("error");
+    }
 
-	@ResponseStatus(HttpStatus.CONFLICT)
-	@ExceptionHandler(IllegalArgumentException.class)
-	public void handleConflict() {
-		logger.info("handleConflict");
-	}
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public void handleConflict() {
+        logger.info("handleConflict");
+    }
 
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(RestClientException.class)
-	public ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) {
-		return new ErrorInfo(req.getRequestURL().toString(), ex);
-	}
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(RestClientException.class)
+    public ErrorInfo handleBadRequest(HttpServletRequest req, Exception ex) {
+        return new ErrorInfo(req.getRequestURL().toString(), ex);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ErrorInfo handleEtcException(HttpServletRequest req, Exception ex) {
+        return new ErrorInfo(req.getRequestURL().toString(), ex);
+    }
 }

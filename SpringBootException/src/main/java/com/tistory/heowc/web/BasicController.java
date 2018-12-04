@@ -12,34 +12,39 @@ import javax.naming.NotContextException;
 @RestController
 public class BasicController {
 
-	@GetMapping("/")
-	public String basicError() {
-		throw new IllegalStateException("Basic Error");
-	}
+    @GetMapping("/")
+    public void basicError() {
+        throw new IllegalStateException("Basic Error");
+    }
 
-	@GetMapping("/extension")
-	public String extensionError() {
-		throw new ExtensionException("extension error");
-	}
+    @GetMapping("/extension")
+    public void extensionError() {
+        throw new ExtensionException("extension error");
+    }
 
-	@GetMapping("/extension2")
-	public String extension2Error() throws Exception {
-		throw new NotContextException();
-	}
+    @GetMapping("/extension2")
+    public void extension2Error() throws Exception {
+        throw new NotContextException();
+    }
 
-	@GetMapping("/extension3")
-	public String extension3Error() {
-		throw new IllegalArgumentException();
-	}
+    @GetMapping("/extension3")
+    public void extension3Error() {
+        throw new IllegalArgumentException();
+    }
 
-	@GetMapping("/extension4")
-	public String extension4Error() {
-		throw new RestClientException("restful error");
-	}
+    @GetMapping("/extension4")
+    public void extension4Error() {
+        throw new RestClientException("restful error");
+    }
 
-	// Spring 5 추가
-	@GetMapping("/extension5")
-	public String extension5Error() {
-		throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
-	}
+    @GetMapping("/extension5")
+    public void extension5Error() {
+        throw new IndexOutOfBoundsException();
+    }
+
+    // Spring 5 추가
+    @GetMapping("/extension6")
+    public void extension6Error() {
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
+    }
 }
