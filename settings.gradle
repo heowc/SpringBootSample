@@ -24,6 +24,9 @@ findProject(':SpringBootCustomJackson')?.name = 'spring-boot-custom-jackson'
 include 'SpringBootDocker'
 findProject(':SpringBootDocker')?.name = 'spring-boot-docker'
 
+include 'SpringBootDynamo'
+findProject(':SpringBootDynamo')?.name = 'spring-boot-dynamo'
+
 include 'SpringBootEvent'
 findProject(':SpringBootEvent')?.name = 'spring-boot-event'
 
