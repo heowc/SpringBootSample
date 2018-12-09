@@ -23,19 +23,10 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	awsSdkVersion = '2.1.4'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "software.amazon.awssdk:bom:${awsSdkVersion}"
-	}
-}
-
 
 dependencies {
-	compile("software.amazon.awssdk:dynamodb")
+	compile('com.amazonaws:aws-java-sdk-dynamodb:1.11.466')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.testcontainers:testcontainers:1.10.2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
