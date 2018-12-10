@@ -75,6 +75,48 @@ public class SpringBootDynamoApplicationTests extends AbstractIntegrationTest {
         assertThat(result.getItem().get("birth_year").getN()).isEqualTo("1992");
     }
 
+    @Test
+    public void 아이템_삽입_후_해당_데이터_수정_성공() {
+        // given
+        Map<String, AttributeValue> item = new HashMap<>();
+        item.put("id", new AttributeValue().withS("1"));
+        item.put("name", new AttributeValue().withS("wonchul"));
+        item.put("birth_year", new AttributeValue().withN("1992"));
+        dynamoDB.putItem(new PutItemRequest().withTableName(TABLE_NAME).withItem(item));
+
+        // when
+        Map<String, AttributeValue> updateKey = new HashMap<>();
+        updateKey.put("id", new AttributeValue().withS("1"));
+
+        Map<String, String> nameMap = new HashMap<>();
+        nameMap.put("#N", "name");
+        nameMap.put("#BY", "birth_year");
+
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":name", new AttributeValue().withS("WONCHUL"));
+        valueMap.put(":birth_year", new AttributeValue().withN("1992"));
+        dynamoDB.updateItem(
+                new UpdateItemRequest()
+                        .withTableName(TABLE_NAME)
+                        .withKey(updateKey)
+                        .withUpdateExpression("set #N = :name, #BY = :birth_year")
+                        .withExpressionAttributeNames(nameMap)
+                        .withExpressionAttributeValues(valueMap)
+        );
+
+        // then
+        Map<String, AttributeValue> key = new HashMap<>();
+        key.put("id", new AttributeValue().withS("1"));
+        GetItemResult result = dynamoDB.getItem(new GetItemRequest().withTableName(TABLE_NAME).withKey(key));
+
+        assertThat(result).isNotNull();
+        assertThat(result.getItem()).isNotNull();
+        assertThat(result.getItem()).isNotNull();
+        assertThat(result.getItem().get("id").getS()).isEqualTo("1");
+        assertThat(result.getItem().get("name").getS()).isEqualTo("WONCHUL");
+        assertThat(result.getItem().get("birth_year").getN()).isEqualTo("1992");
+    }
+
     @After
     public void clear() {
         dynamoDB.deleteTable("test");
