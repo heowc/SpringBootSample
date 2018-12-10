@@ -14,17 +14,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DynamoDBConfig {
 
-    @Value("${aws.region}")
-    private String region;
-
-    @Value("${aws.dynamo.endpoint}")
-    private String dynamoEndpoint;
-
     @Bean
-    public AmazonDynamoDB amazonDynamoDB() {
+    public AmazonDynamoDB amazonDynamoDB(
+            @Value("${aws.region}") String region,
+            @Value("${aws.dynamo.endpoint}") String dynamoEndpoint,
+            @Value("${aws.access-key}") String accessKey,
+            @Value("${aws.secret-key}") String secretKey) {
         return AmazonDynamoDBClientBuilder.standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(dynamoEndpoint, region))
-                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("accessKey", "secretKey")))
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
                 .build();
     }
 }
