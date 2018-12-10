@@ -117,6 +117,30 @@ public class SpringBootDynamoApplicationTests extends AbstractIntegrationTest {
         assertThat(result.getItem().get("birth_year").getN()).isEqualTo("1992");
     }
 
+    @Test
+    public void 아이템_삽입_후_해당_데이터_삭제_성공() {
+        // given
+        Map<String, AttributeValue> item = new HashMap<>();
+        item.put("id", new AttributeValue().withS("1"));
+        item.put("name", new AttributeValue().withS("wonchul"));
+        item.put("birth_year", new AttributeValue().withN("1992"));
+        dynamoDB.putItem(new PutItemRequest().withTableName(TABLE_NAME).withItem(item));
+
+        // when
+        Map<String, AttributeValue> deleteKey = new HashMap<>();
+        deleteKey.put("id", new AttributeValue().withS("1"));
+        dynamoDB.deleteItem(new DeleteItemRequest().withTableName(TABLE_NAME).withKey(deleteKey));
+
+        // then
+        Map<String, AttributeValue> key = new HashMap<>();
+        key.put("id", new AttributeValue().withS("1"));
+        GetItemResult result = dynamoDB.getItem(new GetItemRequest().withTableName(TABLE_NAME).withKey(key));
+
+        assertThat(result).isNotNull();
+        assertThat(result.getItem()).isNull();
+    }
+
+
     @After
     public void clear() {
         dynamoDB.deleteTable("test");
