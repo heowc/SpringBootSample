@@ -8,7 +8,7 @@
         INSERT INTO USER VALUES (#{idx}, #{name}, #{local})
     </insert>
 
-    <select id="findByIdx" resultType="User">
+    <select id="findByIdx" resultType="com.tistory.heowc.domain.User">
         SELECT * FROM USER WHERE IDX = #{idx}
     </select>
 
