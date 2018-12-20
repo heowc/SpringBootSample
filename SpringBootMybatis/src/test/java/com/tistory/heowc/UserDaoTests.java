@@ -22,13 +22,13 @@ public class UserDaoTests {
     @Test
     public void test_insert() {
         // given
-        User user = new User(1L, "wonchul", "seoul");
+        User user = new User(2L, "wonchul", "seoul");
 
         // when
-        userDao.insert(user);
+        Long idx = userDao.insert(user);
 
         // then
-        User byIdx = userDao.findByIdx(user.getIdx());
+        User byIdx = userDao.findByIdx(idx);
         assertThat(byIdx).hasFieldOrPropertyWithValue("idx", user.getIdx());
         assertThat(byIdx).hasFieldOrPropertyWithValue("name", user.getName());
         assertThat(byIdx).hasFieldOrPropertyWithValue("local", user.getLocal());
@@ -38,15 +38,15 @@ public class UserDaoTests {
     public void test_update() {
         // given
         User user = new User(1L, "wonchul", "seoul");
-        userDao.insert(user);
+        Long idx = userDao.insert(user);
 
         // when
-        user.setIdx(1L);
+        user.setIdx(idx);
         user.setName("heowc");
         userDao.setFixedNameByIdx(user);
 
         // then
-        User byIdx = userDao.findByIdx(user.getIdx());
+        User byIdx = userDao.findByIdx(idx);
         assertThat(byIdx).hasFieldOrPropertyWithValue("idx", user.getIdx());
         assertThat(byIdx).hasFieldOrPropertyWithValue("name", user.getName());
         assertThat(byIdx).hasFieldOrPropertyWithValue("local", user.getLocal());
@@ -56,13 +56,13 @@ public class UserDaoTests {
     public void test_delete() {
         // given
         User user = new User(1L, "wonchul", "seoul");
-        userDao.insert(user);
+        Long idx = userDao.insert(user);
 
         // when
-        userDao.deleteByIdx(user.getIdx());
+        userDao.deleteByIdx(idx);
 
         // then
-        User byIdx = userDao.findByIdx(user.getIdx());
+        User byIdx = userDao.findByIdx(idx);
         assertThat(byIdx).isNull();
     }
 

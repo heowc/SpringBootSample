@@ -11,8 +11,14 @@ public class UserDao {
 
     private final SqlSession sqlSession;
 
-    public void insert(User user) {
-        sqlSession.insert("UserMapper.insert", user);
+    public Long insert(User user) {
+        boolean isInserted = sqlSession.insert("UserMapper.insert", user) == 1 ? true : false;
+
+        if (isInserted) {
+            return user.getIdx();
+        } else {
+            return null;
+        }
     }
 
     public User findByIdx(Long idx) {
