@@ -22,13 +22,13 @@ public class UserMapperTests {
     @Test
     public void test_insert() {
         // given
-        User user = new User(1L, "wonchul", "seoul");
+        User user = new User(2L, "wonchul", "seoul");
 
         // when
-        Long idx = userMapper.insert(user);
+        userMapper.insert(user);
 
         // then
-        User byIdx = userMapper.findByIdx(idx);
+        User byIdx = userMapper.findByIdx(user.getIdx());
         assertThat(byIdx).hasFieldOrPropertyWithValue("idx", user.getIdx());
         assertThat(byIdx).hasFieldOrPropertyWithValue("name", user.getName());
         assertThat(byIdx).hasFieldOrPropertyWithValue("local", user.getLocal());
@@ -38,15 +38,15 @@ public class UserMapperTests {
     public void test_update() {
         // given
         User user = new User(1L, "wonchul", "seoul");
-        Long idx = userMapper.insert(user);
+        userMapper.insert(user);
 
         // when
-        user.setIdx(idx);
+        user.setIdx(user.getIdx());
         user.setName("heowc");
         userMapper.setFixedNameByIdx(user);
 
         // then
-        User byIdx = userMapper.findByIdx(idx);
+        User byIdx = userMapper.findByIdx(user.getIdx());
         assertThat(byIdx).hasFieldOrPropertyWithValue("idx", user.getIdx());
         assertThat(byIdx).hasFieldOrPropertyWithValue("name", user.getName());
         assertThat(byIdx).hasFieldOrPropertyWithValue("local", user.getLocal());
@@ -56,13 +56,13 @@ public class UserMapperTests {
     public void test_delete() {
         // given
         User user = new User(1L, "wonchul", "seoul");
-        Long idx = userMapper.insert(user);
+        userMapper.insert(user);
 
         // when
-        userMapper.deleteByIdx(idx);
+        userMapper.deleteByIdx(user.getIdx());
 
         // then
-        User byIdx = userMapper.findByIdx(idx);
+        User byIdx = userMapper.findByIdx(user.getIdx());
         assertThat(byIdx).isNull();
     }
 }

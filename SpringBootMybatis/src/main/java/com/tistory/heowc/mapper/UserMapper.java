@@ -8,8 +8,14 @@ public interface UserMapper {
 
     String userColumns = "`IDX`, `NAME`, `LOCAL`";
 
+    @SelectKey(
+            statement = "SELECT #{user.idx} FROM DUAL",
+            keyProperty = "idx",
+            before = false,
+            resultType = Long.class
+    )
     @Insert("INSERT INTO USER VALUES (#{user.idx}, #{user.name}, #{user.local})")
-    Long insert(@Param("user") User user);
+    int insert(@Param("user") User user);
 
     @Select("SELECT " + userColumns + " FROM USER WHERE IDX = #{idx}")
     User findByIdx(@Param("idx") Long idx);
