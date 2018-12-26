@@ -36,6 +36,9 @@ findProject(':SpringBootExcel')?.name = 'spring-boot-excel'
 include 'SpringBootException'
 findProject(':SpringBootException')?.name = 'spring-boot-exception'
 
+include 'SpringBootGracefulShutdown'
+findProject(':SpringBootGracefulShutdown')?.name = 'spring-boot-graceful-shutdown'
+
 include 'SpringBootInterceptor'
 findProject(':SpringBootInterceptor')?.name = 'spring-boot-interceptor'
 
