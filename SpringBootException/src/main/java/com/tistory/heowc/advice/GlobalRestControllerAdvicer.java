@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.naming.NotContextException;
 import javax.servlet.http.HttpServletRequest;
 
-@RestController
+@RestControllerAdvice
 public class GlobalRestControllerAdvicer {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalRestControllerAdvicer.class);
