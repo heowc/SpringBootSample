@@ -11,8 +11,10 @@ public class UserDao {
 
     private final SqlSession sqlSession;
 
+    private static final String NAMESPACE = "com.tistory.heowc.dao.User.";
+
     public Long insert(User user) {
-        boolean isInserted = sqlSession.insert("UserMapper.insert", user) == 1 ? true : false;
+        boolean isInserted = sqlSession.insert(NAMESPACE + "insert", user) == 1;
 
         if (isInserted) {
             return user.getIdx();
@@ -22,14 +24,14 @@ public class UserDao {
     }
 
     public User findByIdx(Long idx) {
-        return sqlSession.selectOne("UserMapper.findByIdx", idx);
+        return sqlSession.selectOne(NAMESPACE + "findByIdx", idx);
     }
 
     public void deleteByIdx(Long idx) {
-        sqlSession.delete("UserMapper.deleteByIdx", idx);
+        sqlSession.delete(NAMESPACE + "deleteByIdx", idx);
     }
 
     public void setFixedNameByIdx(User user) {
-        sqlSession.update("UserMapper.setFixedNameByIdx", user);
+        sqlSession.update(NAMESPACE + "setFixedNameByIdx", user);
     }
 }
