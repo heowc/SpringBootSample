@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-	compile('org.apache.poi:poi-ooxml:4.0.0') // .xlsx
+	compile('org.apache.poi:poi-ooxml:4.0.1') // .xlsx
 	compile('org.apache.poi:poi:4.0.0') // .xls
 
 	compile('org.springframework.boot:spring-boot-starter-web')
