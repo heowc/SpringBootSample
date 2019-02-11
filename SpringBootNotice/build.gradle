@@ -33,7 +33,7 @@ dependencies {
 	runtime('com.h2database:h2')
 	
 	compile("org.webjars:bootstrap:3.3.7")
-	compile("org.webjars:jquery:3.1.0")
+	compile("org.webjars:jquery:3.3.1-2")
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
