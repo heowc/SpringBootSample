@@ -30,7 +30,7 @@ configurations {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('io.vertx:vertx-web:3.5.4')
+	compile('io.vertx:vertx-web:3.6.3')
 	runtime('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
