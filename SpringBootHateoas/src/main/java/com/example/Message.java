@@ -42,8 +42,4 @@ public class Message implements Identifiable<Long> {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
-    public MessageResource toResource() {
-        return new MessageResource(this);
-    }
 }
