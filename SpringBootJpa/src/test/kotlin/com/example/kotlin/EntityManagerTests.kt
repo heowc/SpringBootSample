@@ -14,11 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner
 open class EntityManagerTests {
 
     @Autowired
-    private val testEntityManager: TestEntityManager? = null
+    lateinit var testEntityManager: TestEntityManager
 
     @Test
     fun test_insertClearAndFindAndUpdateClear() {
-        val customer = testEntityManager!!.persistFlushFind(com.example.kotlin.simple.domain.Customer(name = "heo won chul", tel = "010-xxxx-xxxx", bigo = "developer")) // 비영속성 데이터
+        val customer = testEntityManager.persistFlushFind(com.example.kotlin.simple.domain.Customer(name = "heo won chul", tel = "010-xxxx-xxxx", bigo = "developer")) // 비영속성 데이터
         customer.changeBigo("Developer")
         testEntityManager.flush() // Database 동기화
         //		  testEntityManager.clear(); // Persistence Context 초기화

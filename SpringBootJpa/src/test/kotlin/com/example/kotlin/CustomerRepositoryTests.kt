@@ -15,11 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner
 open class CustomerRepositoryTests {
 
     @Autowired
-    private val repository: CustomerRepository? = null
+    lateinit var repository: CustomerRepository
 
     @Test
     fun test_update() {
-        val customer = repository!!.save(Customer(name = "heo won chul", tel =  "010-xxxx-xxxx", bigo = "developer"))  // 비영속성 데이터
+        val customer = repository.save(Customer(name = "heo won chul", tel = "010-xxxx-xxxx", bigo = "developer"))  // 비영속성 데이터
         customer.changeBigo("Developer")
 
         assertNotEquals(repository.save(customer).bigo, "developer")

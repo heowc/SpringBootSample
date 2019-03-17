@@ -15,11 +15,11 @@ import java.time.LocalDateTime
 class TimeTests {
 
     @Autowired
-    internal var timeDataRepository: TimeDataRepository? = null
+    lateinit var timeDataRepository: TimeDataRepository
 
     @Test
     fun test_save() {
-        timeDataRepository!!.save(TimeData(date = LocalDateTime.now()))
+        timeDataRepository.save(TimeData(date = LocalDateTime.now()))
     }
 
 }

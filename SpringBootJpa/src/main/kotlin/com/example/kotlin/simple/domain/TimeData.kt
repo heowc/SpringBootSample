@@ -7,7 +7,7 @@ import javax.persistence.Id
 import java.time.LocalDateTime
 
 @Entity
-class TimeData(
+data class TimeData(
         @Id @GeneratedValue val idx: Long? = null,
         val date: LocalDateTime) {
 

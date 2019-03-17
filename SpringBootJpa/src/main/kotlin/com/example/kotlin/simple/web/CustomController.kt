@@ -8,23 +8,20 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/customer")
-class CustomController {
-
-    @Autowired
-    private val service: CustomService? = null
+class CustomController(val service: CustomService) {
 
     @PostMapping
     fun upsert(@RequestBody customer: Customer): ResponseEntity<*> {
-        return ResponseEntity.ok(service!!.upsert(customer))
+        return ResponseEntity.ok(service.upsert(customer))
     }
 
     @GetMapping(value = ["/findByName"])
     fun findByName(@RequestParam("name") name: String): ResponseEntity<*> {
-        return ResponseEntity.ok(service!!.findByName(name))
+        return ResponseEntity.ok(service.findByName(name))
     }
 
     @GetMapping(value = ["/{id}"])
     fun find(@PathVariable("id") id: Long?): ResponseEntity<*> {
-        return ResponseEntity.ok(service!!.find(id))
+        return ResponseEntity.ok(service.find(id))
     }
 }

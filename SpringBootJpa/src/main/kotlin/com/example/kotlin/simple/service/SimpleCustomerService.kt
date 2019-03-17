@@ -9,25 +9,22 @@ import java.util.function.Supplier
 
 @Service
 @Transactional
-class SimpleCustomerService : CustomService {
-
-    @Autowired
-    private val repository: CustomerRepository? = null
+class SimpleCustomerService(val repository: CustomerRepository) : CustomService {
 
     override fun upsert(customer: Customer): Customer {
-        return repository!!.save(customer)
+        return repository.save(customer)
     }
 
     override fun find(idx: Long?): Customer {
-        return repository!!.findById(idx!!).orElseThrow<RuntimeException> { RuntimeException() }
+        return repository.findById(idx!!).orElseThrow<RuntimeException> { RuntimeException() }
     }
 
     override fun findByName(name: String): List<Customer> {
-        return repository!!.findByName(name)
+        return repository.findByName(name)
     }
 
     override fun delete(customer: Customer): Customer {
-        repository!!.delete(customer)
+        repository.delete(customer)
         return customer
     }
 }
