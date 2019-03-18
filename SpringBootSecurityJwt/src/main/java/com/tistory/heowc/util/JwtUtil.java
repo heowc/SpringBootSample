@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
 
-public class JwtUtil {
+public abstract class JwtUtil {
 
 	public static String createToken(UserDetails userDetails) {
 		return createToken(userDetails, DateUtil.nowAfterDaysToDate(JwtInfo.EXPIRES_LIMIT));

@@ -12,7 +12,7 @@ public class IndexController {
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	@GetMapping(value = "/")
-	public ResponseEntity<?> index() {
+	public ResponseEntity<String> index() {
 		String msg = "Hello, Spring Boot Interceptor";
 		logger.info(msg);
 		return ResponseEntity.ok()

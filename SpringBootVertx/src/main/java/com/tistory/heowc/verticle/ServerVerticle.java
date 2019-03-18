@@ -21,6 +21,6 @@ public class ServerVerticle extends AbstractVerticle {
         super.start();
 
         Router router = routerLoader.load();
-        vertx.createHttpServer().requestHandler(router::accept).listen(appConfig.httpPort());
+        vertx.createHttpServer().requestHandler(router::handle).listen(appConfig.httpPort());
     }
 }

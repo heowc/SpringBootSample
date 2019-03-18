@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ExtensionException extends RuntimeException {
 
-	private String message;
+	private final String message;
 
 	public ExtensionException(String message) {
 		this.message = message;

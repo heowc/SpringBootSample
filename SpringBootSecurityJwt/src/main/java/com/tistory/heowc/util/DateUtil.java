@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
-public class DateUtil {
+public abstract class DateUtil {
 
 	public static Date nowToDate() {
 		return Date.from(LocalDateTime.now().toInstant(ZoneOffset.ofHours(9)));

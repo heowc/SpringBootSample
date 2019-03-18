@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface UserMapper {
 
-    String userColumns = "`IDX`, `NAME`, `LOCAL`";
+    String COLUMN = "`IDX`, `NAME`, `LOCAL`";
 
     @SelectKey(
             statement = "SELECT #{user.idx} FROM DUAL",
@@ -17,7 +17,7 @@ public interface UserMapper {
     @Insert("INSERT INTO USER VALUES (#{user.idx}, #{user.name}, #{user.local})")
     int insert(@Param("user") User user);
 
-    @Select("SELECT " + userColumns + " FROM USER WHERE IDX = #{idx}")
+    @Select("SELECT " + COLUMN + " FROM USER WHERE IDX = #{idx}")
     User findByIdx(@Param("idx") Long idx);
 
     @Delete("DELETE FROM USER WHERE IDX = #{idx}")

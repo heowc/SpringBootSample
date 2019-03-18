@@ -17,8 +17,7 @@ public class VertxConfig {
 
     @Bean
     public VertxOptions vertxOptions() {
-        VertxOptions vertxOptions = new VertxOptions();
-        return vertxOptions;
+        return new VertxOptions();
     }
 
     @Bean

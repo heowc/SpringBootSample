@@ -11,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit4.SpringRunner
 import java.util.*
-import java.util.function.Consumer
 
 @RunWith(SpringRunner::class)
 @DataJpaTest
-open class OneToManyTests {
+class OneToManyTests {
 
     @Autowired
     lateinit var orderRepository: OrderRepository
@@ -49,9 +48,9 @@ open class OneToManyTests {
         orderRepository.saveAll(scalaOrders)
 
         println("========================= Product =========================")
-        productRepository.findAll().forEach(Consumer<Product> { println(it) })
+        productRepository.findAll().forEach { println(it) }
         println("========================== Order ==========================")
-        orderRepository.findAll().forEach(Consumer<Order> { println(it) })
+        orderRepository.findAll().forEach { println(it) }
     }
 
     companion object {

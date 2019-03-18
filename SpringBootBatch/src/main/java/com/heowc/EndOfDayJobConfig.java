@@ -17,19 +17,16 @@ import org.springframework.context.annotation.Configuration;
 public class EndOfDayJobConfig {
 
     @Autowired
-    private JobBuilderFactory jobBuilderFactory;
-
-    @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job endOfDay() {
+    public Job endOfDay(JobBuilderFactory jobBuilderFactory) {
         JobExecutionDecider decider = (jobExecution, stepExecution) -> {
             ExitStatus status = execute() ? ExitStatus.COMPLETED : ExitStatus.FAILED;
             return new FlowExecutionStatus(status.getExitCode());
         };
 
-        return this.jobBuilderFactory.get("endOfDay")
+        return jobBuilderFactory.get("endOfDay")
                 .start(step1())
                 .next(decider).on(ExitStatus.COMPLETED.getExitCode()).to(step2()) // *, ?
                 .from(decider).on(ExitStatus.FAILED.getExitCode()).stopAndRestart(step3()) // to(step3())

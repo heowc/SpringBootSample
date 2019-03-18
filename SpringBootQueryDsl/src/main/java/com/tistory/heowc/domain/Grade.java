@@ -2,9 +2,11 @@ package com.tistory.heowc.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,24 +16,24 @@ import java.util.List;
 @AllArgsConstructor
 public class Grade implements Serializable {
 
-	private static final long serialVersionUID = -4432332213569816450L;
+    private static final long serialVersionUID = -4432332213569816450L;
 
-	@Id
-	@Column(name = "GRADE_NUM")
-	private Integer gradeNum;
+    @Id
+    @Column(name = "GRADE_NUM")
+    private Integer gradeNum;
 
-	@Column(name = "GRADE_NAME")
-	private String gradeName;
+    @Column(name = "GRADE_NAME")
+    private String gradeName;
 
-	@OneToMany(mappedBy = "grade")
-	private List<Student> students = new ArrayList<>();
+    @OneToMany(mappedBy = "grade")
+    private List<Student> students = new ArrayList<>();
 
-	protected Grade() {}
+    protected Grade() { }
 
-	public static Grade of(Integer gradeNum, String gradeName) {
-		Grade grade = new Grade();
-		grade.setGradeNum(gradeNum);
-		grade.setGradeName(gradeName);
-		return grade;
-	}
+    public static Grade of(Integer gradeNum, String gradeName) {
+        Grade grade = new Grade();
+        grade.setGradeNum(gradeNum);
+        grade.setGradeName(gradeName);
+        return grade;
+    }
 }

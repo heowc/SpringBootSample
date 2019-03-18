@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/user")
 public class UserController {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@GetMapping
-	public ResponseEntity<?> index() {
-		String msg = "Hello, User!";
-		logger.info(msg);
-		return ResponseEntity.ok()
-				.header("controller", "controller")
-				.body(msg);
-	}
+    @GetMapping
+    public ResponseEntity<String> index() {
+        String msg = "Hello, User!";
+        logger.info(msg);
+        return ResponseEntity.ok()
+                .header("controller", "controller")
+                .body(msg);
+    }
 }

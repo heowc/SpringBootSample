@@ -2,7 +2,7 @@ package com.tistory.heowc.auth.jwt;
 
 import com.auth0.jwt.algorithms.Algorithm;
 
-public class JwtInfo {
+public abstract class JwtInfo {
 
 	public static final String HEADER_NAME = "jwt-header";
 

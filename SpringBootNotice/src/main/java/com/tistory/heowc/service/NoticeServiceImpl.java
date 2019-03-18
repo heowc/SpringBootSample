@@ -28,8 +28,8 @@ public class NoticeServiceImpl implements NoticeService {
 		Page page = PageUtil.of(pageNo, RECODE_SIZE, repository.count());
 		List<Notice> noticeList = repository.findTopByIdxLimit(page.getTop(), page.getRecodeSize());
 		
-		logger.info("Notice 페이지 정보 ====> " + page);
-		logger.info("Notice 게시판 정보 ====> " + noticeList);
+		logger.info(String.format("Notice 페이지 정보 ====> %s", page));
+		logger.info(String.format("Notice 게시판 정보 ====> %s", noticeList));
 
 		return new NoticeWithPage(noticeList, page);
 	}

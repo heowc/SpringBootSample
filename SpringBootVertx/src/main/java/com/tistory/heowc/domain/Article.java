@@ -15,5 +15,5 @@ public class Article {
 
     @Id
     private Long id;
-    private String article;
+    private String content;
 }

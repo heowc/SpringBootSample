@@ -14,6 +14,6 @@ public class MessageReceiver {
 
 	@RabbitListener(queues = Constant.QUEUE_NAME)
 	public void onMessage(Message message) {
-		logger.info("Received < " + message.toString() + " >");
+		logger.info(String.format("Received < %s >", message.toString()));
 	}
 }

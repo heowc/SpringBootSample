@@ -26,7 +26,7 @@ public class RestAuthenticationProcessingFilter extends AbstractAuthenticationPr
 	}
 
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
 		if (isJson(request)) {
 			throw new AuthenticationServiceException("Authentication content-type not supported: " + request.getContentType());
 		}

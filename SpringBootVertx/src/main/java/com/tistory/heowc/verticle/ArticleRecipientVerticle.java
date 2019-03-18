@@ -8,15 +8,17 @@ import io.vertx.core.Handler;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.Json;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class ArticleRecipientVerticle extends AbstractVerticle {
 
     public static final String GET_ALL_ARTICLES = "get.articles.all";
 
-    private final ObjectMapper mapper = Json.mapper;
+    private static final ObjectMapper mapper = Json.mapper;
 
     @Autowired
     private EventBus eventBus;
@@ -37,7 +39,7 @@ public class ArticleRecipientVerticle extends AbstractVerticle {
             try {
                 future.complete(mapper.writeValueAsString(service.getAllArticle()));
             } catch (JsonProcessingException e) {
-                System.out.println("Failed to serialize result");
+                log.error("Failed to serialize result");
                 future.fail(e);
             }
         }, result -> {
