@@ -1,4 +1,4 @@
-package com.example.kotlin;
+package com.example.java;
 
 import com.example.java.onetomany.domain.Order;
 import com.example.java.onetomany.domain.Product;

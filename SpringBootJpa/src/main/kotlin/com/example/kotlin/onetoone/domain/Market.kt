@@ -15,4 +15,8 @@ data class Market(
         var owner: Owner? = null) {
 
     constructor() : this(null, null, null, null)
+
+    override fun toString(): String {
+        return "Market(idx=$idx, name=$name, location=$location, owner=${owner?.name})"
+    }
 }

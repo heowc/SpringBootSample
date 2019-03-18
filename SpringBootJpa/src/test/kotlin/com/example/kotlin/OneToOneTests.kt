@@ -25,13 +25,22 @@ open class OneToOneTests {
 
     @Before
     fun before_init() {
-        marketRepository.save(Market(name = "원철 중화 반점", location = "서울 구로구"))
-        marketRepository.save(Market(name = "나은 중화 반점", location = "서울 구로구"))
-        marketRepository.save(Market(name = "구글 중화 반점", location = "서울 구로구"))
+        val wonchulMarket = marketRepository.save(Market(name = "원철 중화 반점", location = "서울 구로구"))
+        val naeunMarket = marketRepository.save(Market(name = "나은 중화 반점",  location = "서울 구로구"))
+        val googleMarket = marketRepository.save(Market(name = "구글 중화 반점", location = "서울 구로구"))
 
-        ownerRepository.save(Owner(name = "원철"))
-        ownerRepository.save(Owner(name = "나은"))
-        ownerRepository.save(Owner(name = "구글"))
+        val wonchul = ownerRepository.save(Owner(name = "원철"))
+        wonchul.market = wonchulMarket
+        wonchulMarket.owner = wonchul
+
+        val naeun = ownerRepository.save(Owner(name = "나은"))
+        naeun.market = naeunMarket
+        naeunMarket.owner = naeun
+
+        val google = ownerRepository.save(Owner(name = "구글"))
+        google.market = googleMarket
+        googleMarket.owner = google
+
 
         marketRepository.findAll().forEach { println(it) }
         ownerRepository.findAll().forEach { println(it) }
