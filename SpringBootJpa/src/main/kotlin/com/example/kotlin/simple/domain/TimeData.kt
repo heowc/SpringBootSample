@@ -12,11 +12,4 @@ data class TimeData(
         val date: LocalDateTime) {
 
     constructor() : this(null, LocalDateTime.now())
-
-    override fun toString(): String {
-        return "TimeData{" +
-                "idx=" + idx +
-                ", date=" + date +
-                '}'.toString()
-    }
 }

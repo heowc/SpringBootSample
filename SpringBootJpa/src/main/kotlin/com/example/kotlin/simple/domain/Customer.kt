@@ -15,13 +15,4 @@ data class Customer(
     fun changeBigo(bigo: String) {
         this.bigo = bigo
     }
-
-    override fun toString(): String {
-        return "Customer{" +
-                "idx=" + idx +
-                ", name='" + name + '\''.toString() +
-                ", tel='" + tel + '\''.toString() +
-                ", bigo='" + bigo + '\''.toString() +
-                '}'.toString()
-    }
 }
