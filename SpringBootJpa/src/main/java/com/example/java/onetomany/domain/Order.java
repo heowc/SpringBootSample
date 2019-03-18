@@ -66,7 +66,7 @@ public class Order {
 				"idx=" + idx +
 				", productCount=" + productCount +
 				", bigo='" + bigo + '\'' +
-				", product=" + product +
+				", product=" + product.getName() +
 				'}';
 	}
 }
