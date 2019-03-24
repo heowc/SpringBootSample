@@ -1,4 +1,4 @@
-package com.example.component;
+package com.example.java.component;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -16,23 +16,23 @@ public class TestAspect {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestAspect.class);
 
-	@Before("execution(* com.example.service.*.*Aop(..))")
+	@Before("execution(* com.example.java.service.*.*Aop(..))")
 	public void onBeforeHandler(JoinPoint joinPoint) {
 		logger.info("=============== onBeforeThing");
 	}
 
-	@After("execution(* com.example.service.*.*Aop(..))")
+	@After("execution(* com.example.java.service.*.*Aop(..))")
 	public void onAfterHandler(JoinPoint joinPoint) {
 		logger.info("=============== onAfterHandler");
 	}
 
-	@AfterReturning(pointcut = "execution(* com.example.service.*.*Aop(..))", returning = "str")
+	@AfterReturning(pointcut = "execution(* com.example.java.service.*.*Aop(..))", returning = "str")
 	public void onAfterReturningHandler(JoinPoint joinPoint, Object str) {
 		logger.info("@AfterReturning : " + str);
 		logger.info("=============== onAfterReturningHandler");
 	}
 
-	@Pointcut("execution(* com.example.service.*.*Aop(..))")
+	@Pointcut("execution(* com.example.java.service.*.*Aop(..))")
 	public void onPointcut(JoinPoint joinPoint) {
 		logger.info("=============== onPointcut");
 	}

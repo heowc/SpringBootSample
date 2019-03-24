@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.java.service;
 
 public interface TestService {
 

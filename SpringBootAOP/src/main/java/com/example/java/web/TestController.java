@@ -1,10 +1,10 @@
-package com.example.web;
+package com.example.java.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.service.TestService;
+import com.example.java.service.TestService;
 
 @RestController
 public class TestController {
