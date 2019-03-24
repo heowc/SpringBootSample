@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.java.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,13 +11,21 @@ public class BasicService {
 	private static final Logger logger = LoggerFactory.getLogger(BasicService.class);
 
 	@Async
-	public void onAsync() throws InterruptedException {
-		Thread.sleep(1000);
+	public void onAsync() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		logger.info("onAsync");
 	}
 
-	public void onSync() throws InterruptedException {
-		Thread.sleep(1000);
+	public void onSync() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		logger.info("onSync");
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.java.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
