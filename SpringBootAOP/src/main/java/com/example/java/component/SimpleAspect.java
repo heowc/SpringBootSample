@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class TestAspect {
+public class SimpleAspect {
 
-	private static final Logger logger = LoggerFactory.getLogger(TestAspect.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimpleAspect.class);
 
 	@Before("execution(* com.example.java.service.*.*Aop(..))")
 	public void onBeforeHandler(JoinPoint joinPoint) {
