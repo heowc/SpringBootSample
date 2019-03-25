@@ -25,7 +25,7 @@ repositories {
 
 
 dependencies {
-	compile('com.amazonaws:aws-java-sdk-dynamodb:1.11.515')
+	compile('com.amazonaws:aws-java-sdk-dynamodb:1.11.524')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.testcontainers:testcontainers:1.10.6')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
