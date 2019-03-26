@@ -1,4 +1,4 @@
-package com.example;
+package com.example.java;
 
 import com.example.java.service.BasicService;
 import org.junit.Test;
