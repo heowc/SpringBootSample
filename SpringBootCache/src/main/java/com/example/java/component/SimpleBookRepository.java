@@ -1,6 +1,6 @@
-package com.example.component;
+package com.example.java.component;
 
-import com.example.domain.Book;
+import com.example.java.domain.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;

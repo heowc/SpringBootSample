@@ -1,6 +1,6 @@
-package com.example;
+package com.example.java;
 
-import com.example.component.BookRepository;
+import com.example.java.component.BookRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,14 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = SpringBootCacheApplication.class)
 public class SpringBootCacheApplicationTests {
 
 	@Autowired
 	private BookRepository repository;
 
 	private long startTime;
-	private long endTime;
 
 	private static final Logger logger = LoggerFactory.getLogger(SpringBootCacheApplicationTests.class);
 
@@ -30,8 +29,7 @@ public class SpringBootCacheApplicationTests {
 
 	@After
 	public void onAfter() {
-		endTime = System.currentTimeMillis();
-		logger.info("소요시간: {}ms", endTime - startTime);
+		logger.info("소요시간: {}ms", System.currentTimeMillis() - startTime);
 	}
 
 	@Test
