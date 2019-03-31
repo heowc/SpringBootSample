@@ -1,4 +1,4 @@
-package com.heowc.account;
+package com.example.java.account;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowire;

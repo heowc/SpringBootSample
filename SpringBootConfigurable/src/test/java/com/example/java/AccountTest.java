@@ -1,8 +1,8 @@
-package com.heowc;
+package com.example.java;
 
-import com.heowc.account.Account;
-import com.heowc.config.ConfigurableConfig;
-import com.heowc.config.SecurityConfig;
+import com.example.java.account.Account;
+import com.example.java.config.ConfigurableConfig;
+import com.example.java.config.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

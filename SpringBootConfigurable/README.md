@@ -1,5 +1,5 @@
 # requirement
 
 ```bash
-java -javaagent:{org.springframework:spring-instrument.jar 경로} ...
+java -javaagent:libs/spring-instrument-5.1.5.RELEASE ...
 ```

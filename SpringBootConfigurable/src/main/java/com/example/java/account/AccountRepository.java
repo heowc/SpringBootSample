@@ -1,4 +1,4 @@
-package com.heowc.account;
+package com.example.java.account;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
