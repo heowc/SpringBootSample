@@ -10,8 +10,6 @@ data class Customer(
         @Column(length = 14) val tel: String,
         var bigo: String) {
 
-    constructor() : this(null, "", "", "")
-
     fun changeBigo(bigo: String) {
         this.bigo = bigo
     }

@@ -16,8 +16,6 @@ class Account(@Id val id: String,
     @Transient
     lateinit var passwordEncoder: PasswordEncoder
 
-    constructor() : this("", "")
-
     fun resetPassword() {
         val newPassword = RandomStringUtils.randomAlphanumeric(10)
         this.password = passwordEncoder.encode(newPassword)

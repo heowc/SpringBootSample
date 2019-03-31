@@ -9,7 +9,4 @@ import java.time.LocalDateTime
 @Entity
 data class TimeData(
         @Id @GeneratedValue val idx: Long? = null,
-        val date: LocalDateTime) {
-
-    constructor() : this(null, LocalDateTime.now())
-}
+        val date: LocalDateTime)

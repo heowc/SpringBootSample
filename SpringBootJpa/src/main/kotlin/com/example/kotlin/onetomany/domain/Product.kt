@@ -11,15 +11,4 @@ data class Product(
         var name: String? = null,
         @Column(name = "CONTENT")
         var content: String? = null
-) {
-
-    constructor() : this(null, null, null)
-
-    override fun toString(): String {
-        return "Product{" +
-                "idx=" + idx +
-                ", name='" + name + '\''.toString() +
-                ", content='" + content + '\''.toString() +
-                '}'.toString()
-    }
-}
+)

@@ -14,15 +14,12 @@ data class Order(
         @ManyToOne @JoinColumn(name = "PRODUCT_IDX")
         var product: Product? = null
 ) {
-
-    constructor() : this(null, null, null, null)
-
     override fun toString(): String {
         return "Order{" +
                 "idx=" + idx +
                 ", productCount=" + productCount +
                 ", bigo='" + bigo + '\''.toString() +
-                ", product=" + product!!.name +
+                ", product=" + product?.name +
                 '}'.toString()
     }
 }

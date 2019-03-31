@@ -11,10 +11,4 @@ data class Owner(
         var name: String? = null,
         @OneToOne @JoinColumn(name = "OWNER_ID")
         var market: Market? = null
-) {
-    constructor() : this(null, null, null)
-
-    override fun toString(): String {
-        return "Owner(idx=$idx, name=$name, market=${market?.name})"
-    }
-}
+)
