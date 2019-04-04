@@ -1,4 +1,4 @@
-package com.tistory.heowc.config;
+package com.example.java.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

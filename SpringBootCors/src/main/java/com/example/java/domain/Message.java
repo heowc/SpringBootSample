@@ -1,4 +1,4 @@
-package com.tistory.heowc.domain;
+package com.example.java.domain;
 
 public class Message {
 

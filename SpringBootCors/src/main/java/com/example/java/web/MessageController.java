@@ -1,6 +1,6 @@
-package com.tistory.heowc.web;
+package com.example.java.web;
 
-import com.tistory.heowc.domain.Message;
+import com.example.java.domain.Message;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
