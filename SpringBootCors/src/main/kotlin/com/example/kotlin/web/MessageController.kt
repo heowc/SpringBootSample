@@ -9,7 +9,7 @@ class MessageController {
 
     //@CrossOrigin
     @GetMapping("{value}")
-    operator fun get(@PathVariable value: String): String {
+    fun get(@PathVariable value: String): String {
         return value
     }
 
