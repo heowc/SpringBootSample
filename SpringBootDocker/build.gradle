@@ -1,34 +1,41 @@
-buildscript {
-	ext {
-		springBootVersion = '2.1.3.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
-}
-
 plugins {
-	id 'com.google.cloud.tools.jib' version '0.9.11'
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'org.jetbrains.kotlin.jvm' version '1.2.71'
+	id 'org.jetbrains.kotlin.plugin.spring' version '1.2.71'
+	id 'com.google.cloud.tools.jib' version '1.0.2'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+compileKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ['-Xjsr305=strict']
+		jvmTarget = '1.8'
+	}
+}
+
+compileTestKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ['-Xjsr305=strict']
+		jvmTarget = '1.8'
+	}
 }
 
 jib {
@@ -38,14 +45,14 @@ jib {
 	to {
 		image = 'registry.hub.docker.com/heowc1992/my-app'
 		auth {
-		    username = dockerUsername
-		    password = dockerPassword
+			username = dockerUsername
+			password = dockerPassword
 		}
 	}
 	container {
 		jvmFlags = ['-Djava.security.egd=file:/dev/./urandom', '-Duser.timezone=GMT+09']
-		mainClass = 'com.heowc.Application'
-//		args = ['some args']
+		mainClass = 'com.example.java.SpringBootDockerApplication'
+//		mainClass = 'com.example.kotlin.SpringBootDockerApplicationKt'
 		ports = ['8080']
 	}
 }
