@@ -7,29 +7,18 @@ import org.springframework.stereotype.Service
 @Service
 class BasicService {
 
+    companion object {
+        private val logger = LoggerFactory.getLogger(BasicService::class.java)
+    }
+
     @Async
     fun onAsync() {
-        try {
-            Thread.sleep(1000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
+        Thread.sleep(1000)
         logger.info("onAsync")
     }
 
     fun onSync() {
-        try {
-            Thread.sleep(1000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
+        Thread.sleep(1000)
         logger.info("onSync")
-    }
-
-    companion object {
-
-        private val logger = LoggerFactory.getLogger(BasicService::class.java)
     }
 }

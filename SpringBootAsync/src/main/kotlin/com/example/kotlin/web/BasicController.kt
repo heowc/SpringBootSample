@@ -12,10 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
 
 @RestController
-class BasicController {
-
-    @Autowired
-    private lateinit var service: BasicService
+class BasicController (val service: BasicService) {
 
     private val logger = LoggerFactory.getLogger(BasicController::class.java)
 

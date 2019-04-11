@@ -17,9 +17,8 @@ class SpringBootCacheApplicationTests {
     @Autowired
     private lateinit var repository: BookRepository
 
-    private var startTime: Long = 0
-
     companion object {
+        private var startTime: Long = 0
         private val logger = LoggerFactory.getLogger(SpringBootCacheApplicationTests::class.java)
     }
 

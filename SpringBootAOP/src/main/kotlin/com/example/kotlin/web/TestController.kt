@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class TestController {
-
-    @Autowired
-    private lateinit var service: TestService
+class TestController (val service: TestService) {
 
     @GetMapping(value = ["/noAop"])
     fun noAop(): String {
