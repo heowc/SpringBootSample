@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_package = "com.example";
+option java_outer_classname = "MessageSenderProto";
+
+service MessageSender {
+
+    rpc send (MessageRequest) returns (MessageResponse) {}
+}
+
+message MessageRequest {
+    string from = 2;
+    string to = 3;
+    string contents = 4;
+}
+
+message MessageResponse {
+    string status = 1;
+    string reason = 2;
+}

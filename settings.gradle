@@ -39,6 +39,9 @@ findProject(':SpringBootException')?.name = 'spring-boot-exception'
 include 'SpringBootGracefulShutdown'
 findProject(':SpringBootGracefulShutdown')?.name = 'spring-boot-graceful-shutdown'
 
+include 'SpringBootGRpc'
+findProject(':SpringBootGRpc')?.name = 'spring-boot-grpc'
+
 include 'SpringBootHateoas'
 findProject(':SpringBootHateoas')?.name = 'spring-boot-hateoas'
 
