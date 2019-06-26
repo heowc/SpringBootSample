@@ -19,39 +19,39 @@ import java.util.Map;
 
 public class ExcelWriter {
 
-    private Workbook workbook;
-    private Map<String, Object> model;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+	private Workbook workbook;
+	private Map<String, Object> model;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 
-    public ExcelWriter(Workbook workbook, Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
-        this.workbook = workbook;
-        this.model = model;
-        this.request = request;
-        this.response = response;
-    }
+	public ExcelWriter(Workbook workbook, Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
+		this.workbook = workbook;
+		this.model = model;
+		this.request = request;
+		this.response = response;
+	}
 
-    public void create() {
-        setFileName(mapToFileName());
+	public void create() {
+		setFileName(mapToFileName());
 
-        Sheet sheet = workbook.createSheet();
+		Sheet sheet = workbook.createSheet();
 
-        createHead(sheet, mapToHeadList());
+		createHead(sheet, mapToHeadList());
 
-        createBody(sheet, mapToBodyList());
-    }
+		createBody(sheet, mapToBodyList());
+	}
 
-    private String mapToFileName() {
-        return (String) model.get(ExcelConstant.FILE_NAME);
-    }
+	private String mapToFileName() {
+		return (String) model.get(ExcelConstant.FILE_NAME);
+	}
 
-    private List<String> mapToHeadList() {
-        return (List<String>) model.get(ExcelConstant.HEAD);
-    }
+	private List<String> mapToHeadList() {
+		return (List<String>) model.get(ExcelConstant.HEAD);
+	}
 
-    private List<List<String>> mapToBodyList() {
-        return (List<List<String>>) model.get(ExcelConstant.BODY);
-    }
+	private List<List<String>> mapToBodyList() {
+		return (List<List<String>>) model.get(ExcelConstant.BODY);
+	}
 
     private void setFileName(String fileName) {
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
@@ -89,26 +89,26 @@ public class ExcelWriter {
             response.setHeader("Content-Type", "application/vnd.ms-excel");
         }
 
-        return fileName;
-    }
+		return fileName;
+	}
 
-    private void createHead(Sheet sheet, List<String> headList) {
-        createRow(sheet, headList, 0);
-    }
+	private void createHead(Sheet sheet, List<String> headList) {
+		createRow(sheet, headList, 0);
+	}
 
-    private void createBody(Sheet sheet, List<List<String>> bodyList) {
-        int rowSize = bodyList.size();
-        for (int i = 0; i < rowSize; i++) {
-            createRow(sheet, bodyList.get(i), i + 1);
-        }
-    }
+	private void createBody(Sheet sheet, List<List<String>> bodyList) {
+		int rowSize = bodyList.size();
+		for (int i = 0; i < rowSize; i++) {
+			createRow(sheet, bodyList.get(i), i + 1);
+		}
+	}
 
-    private void createRow(Sheet sheet, List<String> cellList, int rowNum) {
-        int size = cellList.size();
-        Row row = sheet.createRow(rowNum);
+	private void createRow(Sheet sheet, List<String> cellList, int rowNum) {
+		int size = cellList.size();
+		Row row = sheet.createRow(rowNum);
 
-        for (int i = 0; i < size; i++) {
-            row.createCell(i).setCellValue(cellList.get(i));
-        }
-    }
+		for (int i = 0; i < size; i++) {
+			row.createCell(i).setCellValue(cellList.get(i));
+		}
+	}
 }
