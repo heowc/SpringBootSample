@@ -8,7 +8,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +19,13 @@ public class ExcelWriter {
 
 	private Workbook workbook;
 	private Map<String, Object> model;
+	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public ExcelWriter(Workbook workbook, Map<String, Object> model, HttpServletResponse response) {
+	public ExcelWriter(Workbook workbook, Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) {
 		this.workbook = workbook;
 		this.model = model;
+		this.request = request;
 		this.response = response;
 	}
 
@@ -32,6 +37,22 @@ public class ExcelWriter {
 		createHead(sheet, mapToHeadList());
 
 		createBody(sheet, mapToBodyList());
+	}
+
+	private String getBrowser(HttpServletRequest request) {
+		String header = request.getHeader("User-Agent");
+
+		if (header.contains("MSIE")) {
+			return "MSIE";
+		} else if(header.contains("Trident")) {
+			return "MSIE11";
+		} else if(header.contains("Chrome")) {
+			return "Chrome";
+		} else if(header.contains("Opera")) {
+			return "Opera";
+		}
+
+		return "Firefox";
 	}
 
 	private String mapToFileName() {
@@ -47,19 +68,40 @@ public class ExcelWriter {
 	}
 
 	private void setFileName(HttpServletResponse response, String fileName) {
-		response.setHeader("Content-Disposition",
-				"attachment; filename=\"" + getFileExtension(fileName) + "\"");
+		String header = getBrowser(request);
+
+		try {
+			if (header.contains("MSIE")) {
+				String docName = URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+", "%20");
+				response.setHeader("Content-Disposition", "attachment;filename=" + getFileExtension(response, docName)  + ";");
+			} else if (header.contains("Firefox")) {
+				String docName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + getFileExtension(response, docName)  + "\"");
+			} else if (header.contains("Opera")) {
+				String docName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + getFileExtension(response, docName)  + "\"");
+			} else if (header.contains("Chrome")) {
+				String docName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + getFileExtension(response, docName)  + "\"");
+			}
+		} catch (UnsupportedEncodingException e) {
+			response.setHeader("Content-Disposition",
+					"attachment; filename=\"" + getFileExtension(response, fileName) + "\"");
+		}
 	}
 
-	private String getFileExtension(String fileName) {
+	private String getFileExtension(HttpServletResponse response, String fileName) {
 		if (workbook instanceof XSSFWorkbook) {
 			fileName += ".xlsx";
+			response.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		}
 		if (workbook instanceof SXSSFWorkbook) {
 			fileName += ".xlsx";
+			response.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		}
 		if (workbook instanceof HSSFWorkbook) {
 			fileName += ".xls";
+			response.setHeader("Content-Type", "application/vnd.ms-excel");
 		}
 
 		return fileName;
