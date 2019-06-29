@@ -1,6 +1,7 @@
 package com.example.component;
 
 import com.example.constant.ExcelConstant;
+import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,8 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 public class ExcelWriter {
 
@@ -32,7 +37,9 @@ public class ExcelWriter {
 	}
 
 	public void create() {
-		setFileName(mapToFileName());
+		applyFileNameForRequest(mapToFileName());
+
+		applyContentTypeForRequest();
 
 		Sheet sheet = workbook.createSheet();
 
@@ -53,43 +60,30 @@ public class ExcelWriter {
 		return (List<List<String>>) model.get(ExcelConstant.BODY);
 	}
 
-    private void setFileName(String fileName) {
+    private void applyFileNameForRequest(String fileName) {
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
-        String docName = null;
-
-        try {
-            switch (userAgent.getBrowser().getGroup()) {
-                case IE:
-                    docName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
-                    break;
-                case FIREFOX:
-                case OPERA:
-                case CHROME:
-                    docName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
-                    break;
-                default:
-                    docName = fileName;
-                    break;
-            }
-        } catch (UnsupportedEncodingException e) {
-            docName = fileName;
-        }
-
-        response.setHeader("Content-Disposition",
-                "attachment; filename=\"" + getFileExtension(docName) + "\"");
+        String encodedFileName = FileNameEncoder.encode(userAgent.getBrowser().getGroup(), fileName);
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + appendFileExtension(encodedFileName) + "\"");
     }
 
-    private String getFileExtension(String fileName) {
+    private String appendFileExtension(String fileName) {
         if (workbook instanceof XSSFWorkbook || workbook instanceof SXSSFWorkbook) {
             fileName += ".xlsx";
-            response.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
         if (workbook instanceof HSSFWorkbook) {
             fileName += ".xls";
-            response.setHeader("Content-Type", "application/vnd.ms-excel");
         }
 
 		return fileName;
+	}
+
+	private void applyContentTypeForRequest() {
+		if (workbook instanceof XSSFWorkbook || workbook instanceof SXSSFWorkbook) {
+			response.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		}
+		if (workbook instanceof HSSFWorkbook) {
+			response.setHeader("Content-Type", "application/vnd.ms-excel");
+		}
 	}
 
 	private void createHead(Sheet sheet, List<String> headList) {
@@ -109,6 +103,49 @@ public class ExcelWriter {
 
 		for (int i = 0; i < size; i++) {
 			row.createCell(i).setCellValue(cellList.get(i));
+		}
+	}
+
+	private enum FileNameEncoder {
+		IE(Browser.IE, (it) -> {
+			try {
+				return URLEncoder.encode(it, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
+			} catch (UnsupportedEncodingException e) {
+				return it;
+			}
+		}),
+		FIREFOX(Browser.FIREFOX, FileNameEncoder.simpleEncodeFunction),
+		OPERA(Browser.OPERA, FileNameEncoder.simpleEncodeFunction),
+		CHROME(Browser.CHROME, FileNameEncoder.simpleEncodeFunction),
+		UNKNOWN(Browser.UNKNOWN, UnaryOperator.identity());
+
+		private final Browser browser;
+		private UnaryOperator<String> encodeOperator;
+
+		private static final UnaryOperator<String> simpleEncodeFunction = it -> new String(it.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+
+		private static final Map<Browser, Function<String, String>> FILE_NAME_ENCODER_MAP;
+
+		static {
+			FILE_NAME_ENCODER_MAP = EnumSet.allOf(FileNameEncoder.class).stream()
+					.collect(Collectors.toMap(FileNameEncoder::getBrowser, FileNameEncoder::getEncodeOperator));
+		}
+
+		FileNameEncoder(Browser browser, UnaryOperator<String> encodeOperator) {
+			this.browser = browser;
+			this.encodeOperator = encodeOperator;
+		}
+
+		protected Browser getBrowser() {
+			return browser;
+		}
+
+		protected UnaryOperator<String> getEncodeOperator() {
+			return encodeOperator;
+		}
+
+		public static String encode(Browser browser, String fileName) {
+			return FILE_NAME_ENCODER_MAP.get(browser).apply(fileName);
 		}
 	}
 }
