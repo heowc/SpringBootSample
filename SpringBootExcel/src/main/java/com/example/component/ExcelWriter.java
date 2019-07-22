@@ -107,22 +107,20 @@ public class ExcelWriter {
 	}
 
 	private enum FileNameEncoder {
-		IE(Browser.IE, (it) -> {
+		IE(Browser.IE, it -> {
 			try {
 				return URLEncoder.encode(it, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
 			} catch (UnsupportedEncodingException e) {
 				return it;
 			}
 		}),
-		FIREFOX(Browser.FIREFOX, FileNameEncoder.simpleEncodeFunction),
-		OPERA(Browser.OPERA, FileNameEncoder.simpleEncodeFunction),
-		CHROME(Browser.CHROME, FileNameEncoder.simpleEncodeFunction),
+		FIREFOX(Browser.FIREFOX, getDefaultEncodeOperator()),
+		OPERA(Browser.OPERA, getDefaultEncodeOperator()),
+		CHROME(Browser.CHROME, getDefaultEncodeOperator()),
 		UNKNOWN(Browser.UNKNOWN, UnaryOperator.identity());
 
 		private final Browser browser;
 		private UnaryOperator<String> encodeOperator;
-
-		private static final UnaryOperator<String> simpleEncodeFunction = it -> new String(it.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
 
 		private static final Map<Browser, Function<String, String>> FILE_NAME_ENCODER_MAP;
 
@@ -142,6 +140,10 @@ public class ExcelWriter {
 
 		protected UnaryOperator<String> getEncodeOperator() {
 			return encodeOperator;
+		}
+
+		private static UnaryOperator<String> getDefaultEncodeOperator() {
+			return it -> new String(it.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
 		}
 
 		public static String encode(Browser browser, String fileName) {
