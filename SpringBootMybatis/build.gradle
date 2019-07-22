@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0')
 	compile('org.projectlombok:lombok')
 
 	runtime('com.h2database:h2')
