@@ -3,6 +3,7 @@ package com.example;
 import com.example.component.ExcelReader;
 import com.example.domain.Product;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,17 @@ import java.io.IOException;
 @SpringBootTest
 public class SpringBootExcelApplicationTests {
 
-	@Autowired
-	ExcelReader excelReader;
+    @Autowired
+    ExcelReader excelReader;
 
-	@Test
-	public void test_readExcel() throws IOException, InvalidFormatException {
-		File xlsxFile = new File("{path}\\test.xlsx");
+    @Test
+    @Ignore
+    public void test_readExcel() throws IOException, InvalidFormatException {
+        File xlsxFile = new File("{path}\\test.xlsx");
 
-		excelReader
-				.readFileToList(new MockMultipartFile("test.xlsx", new FileInputStream(xlsxFile)),
-								Product::from)
-				.forEach(System.out::println);
-	}
+        excelReader
+                .readFileToList(new MockMultipartFile("test.xlsx", new FileInputStream(xlsxFile)),
+                        Product::from)
+                .forEach(System.out::println);
+    }
 }

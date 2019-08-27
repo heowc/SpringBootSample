@@ -1,4 +1,4 @@
-package com.tistory.heowc;
+package com.example.java;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SpringBootCorsApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }
