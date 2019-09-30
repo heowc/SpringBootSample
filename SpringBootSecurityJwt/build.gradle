@@ -28,7 +28,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.auth0:java-jwt:3.8.2')
+	compile('com.auth0:java-jwt:3.8.3')
 
 	runtime('com.h2database:h2')
 
