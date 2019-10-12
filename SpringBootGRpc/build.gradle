@@ -34,7 +34,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('io.github.lognet:grpc-spring-boot-starter:3.4.1')
-	compile('com.google.protobuf:protobuf-java-util:3.9.1')
+	compile('com.google.protobuf:protobuf-java-util:3.10.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
@@ -52,7 +52,7 @@ protobuf {
 	}
 	plugins {
 		grpc {
-			artifact = 'io.grpc:protoc-gen-grpc-java:1.23.0'
+			artifact = 'io.grpc:protoc-gen-grpc-java:1.24.0'
 		}
 	}
 	generateProtoTasks {
