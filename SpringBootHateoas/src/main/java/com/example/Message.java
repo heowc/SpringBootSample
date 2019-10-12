@@ -1,10 +1,8 @@
 package com.example;
 
-import org.springframework.hateoas.Identifiable;
-
 import java.time.LocalDateTime;
 
-public class Message implements Identifiable<Long> {
+public class Message {
 
     private Long id;
     private String content;
@@ -18,7 +16,6 @@ public class Message implements Identifiable<Long> {
         this.createdAt = createdAt;
     }
 
-    @Override
     public Long getId() {
         return id;
     }

@@ -1,19 +1,19 @@
 package com.example;
 
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 
-public class MessageResource extends ResourceSupport {
+public class MessageModel extends RepresentationModel<MessageModel> {
 
     private String content;
     private LocalDateTime createdAt;
 
-    protected MessageResource() { }
+    protected MessageModel() { }
 
-    public MessageResource(Message message) {
-        this.content = message.getContent();
-        this.createdAt = message.getCreatedAt();
+    public MessageModel(Message message) {
+        content = message.getContent();
+        createdAt = message.getCreatedAt();
     }
 
     public String getContent() {

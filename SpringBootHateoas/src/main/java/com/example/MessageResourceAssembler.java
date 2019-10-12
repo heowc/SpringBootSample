@@ -1,20 +1,20 @@
 package com.example;
 
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 
-public class MessageResourceAssembler extends ResourceAssemblerSupport<Message, MessageResource> {
+public class MessageResourceAssembler extends RepresentationModelAssemblerSupport<Message, MessageModel> {
 
     public MessageResourceAssembler() {
-        super(MessageController.class, MessageResource.class);
+        super(MessageController.class, MessageModel.class);
     }
 
     @Override
-    public MessageResource toResource(Message entity) {
-        return createResourceWithId(entity.getId(), entity);
+    public MessageModel toModel(Message entity) {
+        return createModelWithId(entity.getId(), entity);
     }
 
     @Override
-    protected MessageResource instantiateResource(Message entity) {
-        return new MessageResource(entity);
+    protected MessageModel instantiateModel(Message entity) {
+        return new MessageModel(entity);
     }
 }
