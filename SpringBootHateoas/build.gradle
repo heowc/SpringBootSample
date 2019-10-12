@@ -26,5 +26,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.hateoas:spring-hateoas:1.0.0.RELEASE')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
