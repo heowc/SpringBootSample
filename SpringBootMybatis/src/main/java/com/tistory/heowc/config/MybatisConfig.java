@@ -10,7 +10,7 @@ public class MybatisConfig {
 
     @Bean
     ConfigurationCustomizer mybatisConfigurationCustomizer() {
-        return (configuration) -> {
+        return configuration -> {
             // customize ...
         };
     }

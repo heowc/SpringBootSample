@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.8.RELEASE'
+		springBootVersion = '2.2.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -26,11 +26,11 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	
+
 	compile('io.springfox:springfox-swagger2:2.9.2')
 	compile('io.springfox:springfox-swagger-ui:2.9.2')
-	
+
 	runtime('com.h2database:h2')
-	
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

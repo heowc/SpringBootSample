@@ -5,7 +5,6 @@ import com.tistory.heowc.domain.Member;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -35,6 +34,6 @@ public class AjaxAuthenticationFilter extends AbstractAuthenticationProcessingFi
     }
 
     private boolean isJson(HttpServletRequest request) {
-        return MediaType.APPLICATION_JSON_UTF8_VALUE.equalsIgnoreCase(request.getContentType());
+        return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(request.getContentType());
     }
 }

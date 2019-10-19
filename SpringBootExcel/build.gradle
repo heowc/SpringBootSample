@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.8.RELEASE'
+		springBootVersion = '2.2.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -29,7 +29,7 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils
 	compile group: 'eu.bitwalker', name: 'UserAgentUtils', version: '1.21'
-	
+
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
