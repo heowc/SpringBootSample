@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-	compile('org.apache.poi:poi-ooxml:4.1.0') // .xlsx
+	compile('org.apache.poi:poi-ooxml:4.1.1') // .xlsx
 	compile('org.apache.poi:poi:4.1.0') // .xls
 
 	// https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils
