@@ -10,15 +10,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Aspect
 @Component
 public class SimpleAspect {
 
 	private static final Logger logger = LoggerFactory.getLogger(SimpleAspect.class);
 
+	private static final AtomicInteger counter = new AtomicInteger();
+
 	@Before("execution(* com.example.java.service.*.*Aop(..))")
 	public void onBeforeHandler(JoinPoint joinPoint) {
 		logger.info("=============== onBeforeThing");
+		counter.incrementAndGet();
 	}
 
 	@After("execution(* com.example.java.service.*.*Aop(..))")
@@ -35,5 +40,9 @@ public class SimpleAspect {
 	@Pointcut("execution(* com.example.java.service.*.*Aop(..))")
 	public void onPointcut(JoinPoint joinPoint) {
 		logger.info("=============== onPointcut");
+	}
+
+	public static int count() {
+		return counter.get();
 	}
 }

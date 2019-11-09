@@ -1,27 +1,25 @@
 package com.example.java;
 
+import com.example.java.component.SimpleAspect;
 import com.example.java.service.TestService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
-public class SpringBootAopApplicationTests {
+class SpringBootAopApplicationTests {
 
 	@Autowired
 	private TestService service;
 
 	@Test
-	public void test_aop() {
+	void test_aopAndNoAop() {
+		assertThat(SimpleAspect.count()).isEqualTo(0);
 		service.testAop();
-	}
-
-	@Test
-	public void test_noAop() {
+		assertThat(SimpleAspect.count()).isEqualTo(1);
 		service.test();
+		assertThat(SimpleAspect.count()).isEqualTo(1);
 	}
-
 }
