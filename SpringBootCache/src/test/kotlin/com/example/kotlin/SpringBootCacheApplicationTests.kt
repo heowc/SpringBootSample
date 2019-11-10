@@ -1,17 +1,13 @@
 package com.example.kotlin
 
 import com.example.kotlin.component.BookRepository
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.*
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
 
-@RunWith(SpringRunner::class)
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.Alphanumeric::class)
 class SpringBootCacheApplicationTests {
 
     @Autowired
@@ -22,38 +18,38 @@ class SpringBootCacheApplicationTests {
         private val logger = LoggerFactory.getLogger(SpringBootCacheApplicationTests::class.java)
     }
 
-    @Before
-    fun onBefore() {
+    @BeforeEach
+    fun `onBefore`() {
         startTime = System.currentTimeMillis()
     }
 
-    @After
-    fun onAfter() {
+    @AfterEach
+    fun `onAfter`() {
         logger.info("소요시간: {}ms", System.currentTimeMillis() - startTime)
     }
 
     @Test
-    fun test1() {
+    fun `test1`() {
         repository.getByIsbn("a")
     }
 
     @Test
-    fun test2() {
+    fun `test2`() {
         repository.getByIsbn("a")
     }
 
     @Test
-    fun test3() {
+    fun `test3`() {
         repository.getByIsbn("b")
     }
 
     @Test
-    fun test4() {
+    fun `test4`() {
         repository.getByIsbn("a")
     }
 
     @Test
-    fun test5() {
+    fun `test5`() {
         repository.refresh("a")
         repository.getByIsbn("a")
     }

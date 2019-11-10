@@ -43,6 +43,6 @@ compileTestKotlin {
 }
 
 test {
-    jvmArgs '-javaagent:libs/spring-instrument-5.1.5.RELEASE.jar'
+    jvmArgs '-javaagent:libs/spring-instrument-5.2.1.RELEASE.jar'
 
 }
