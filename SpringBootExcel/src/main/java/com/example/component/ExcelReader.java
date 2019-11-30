@@ -7,6 +7,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +20,8 @@ import java.util.stream.IntStream;
 
 @Component
 public class ExcelReader {
+
+	Logger logger = LoggerFactory.getLogger(ExcelReader.class);
 
 	public <T> List<T> readFileToList(final MultipartFile multipartFile,
 									  final Function<Row, T> rowFunc) throws IOException, InvalidFormatException {
@@ -38,7 +42,9 @@ public class ExcelReader {
 	}
 
 	private void verifyFileExtension(MultipartFile multipartFile) throws InvalidFormatException {
-		if (!isExcelExtension(multipartFile.getOriginalFilename())) {
+		final String originalFilename = multipartFile.getOriginalFilename();
+		logger.info(originalFilename);
+		if (!isExcelExtension(originalFilename)) {
 			throw new InvalidFormatException("This file extension is not verify");
 		}
 	}
