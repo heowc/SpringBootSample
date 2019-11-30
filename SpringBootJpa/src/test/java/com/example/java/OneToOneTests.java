@@ -4,15 +4,12 @@ import com.example.java.onetoone.domain.Market;
 import com.example.java.onetoone.domain.Owner;
 import com.example.java.onetoone.repository.MarketRepository;
 import com.example.java.onetoone.repository.OwnerRepository;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootJpaApplication.class)
 @Transactional
 public class OneToOneTests {
@@ -23,7 +20,7 @@ public class OneToOneTests {
     @Autowired
     OwnerRepository ownerRepository;
 
-    @Before
+    @BeforeEach
     public void before_init() {
         Market wonchulMarket = marketRepository.save(new Market("원철 중화 반점", "서울 구로구"));
         Market naeunMarket = marketRepository.save(new Market("나은 중화 반점", "서울 구로구"));
@@ -46,7 +43,7 @@ public class OneToOneTests {
     }
 
     @Test
-    public void test_findOne() {
+    void test_findOne() {
         System.out.println(marketRepository.findById(1L).orElse(null));
         System.out.println(ownerRepository.findById(1L).orElse(null));
     }

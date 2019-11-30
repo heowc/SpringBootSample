@@ -4,20 +4,17 @@ import com.example.java.onetomany.domain.Order;
 import com.example.java.onetomany.domain.Product;
 import com.example.java.onetomany.repository.OrderRepository;
 import com.example.java.onetomany.repository.ProductRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
-public class OneToManyTests {
+class OneToManyTests {
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -28,7 +25,7 @@ public class OneToManyTests {
 	private static final String PRODUCT_NAME = "java";
 
 	@Test
-	public void test_productFindByName() {
+	void test_productFindByName() {
 		// given
 		insertBaseData();
 

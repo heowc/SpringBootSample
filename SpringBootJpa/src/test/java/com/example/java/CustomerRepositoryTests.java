@@ -2,26 +2,23 @@ package com.example.java;
 
 import com.example.java.simple.domain.Customer;
 import com.example.java.simple.repository.CustomerRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
-public class CustomerRepositoryTests {
+class CustomerRepositoryTests {
 
     @Autowired
     private CustomerRepository repository;
 
     @Test
-    public void test_update() {
+    void test_update() {
         Customer customer = repository.save(new Customer("heo won chul", "010-xxxx-xxxx", "developer")); // 비영속성 데이터
         customer.changeBigo("Developer");
 
-        assertNotEquals(repository.save(customer).getBigo(), "developer");
+        assertNotEquals("developer", repository.save(customer).getBigo());
     }
 }

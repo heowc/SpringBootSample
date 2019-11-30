@@ -5,14 +5,11 @@ import com.example.kotlin.onetomany.domain.Product
 import com.example.kotlin.onetomany.repository.OrderRepository
 import com.example.kotlin.onetomany.repository.ProductRepository
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.junit4.SpringRunner
 import java.util.*
 
-@RunWith(SpringRunner::class)
 @DataJpaTest
 class OneToManyTests {
 
