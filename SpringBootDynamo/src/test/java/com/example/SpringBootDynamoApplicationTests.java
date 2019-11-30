@@ -2,9 +2,9 @@ package com.example;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.model.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class SpringBootDynamoApplicationTests extends AbstractIntegrationTest {
     @Autowired
     private AmazonDynamoDB dynamoDB;
 
-    @Before
+    @BeforeEach
     public void setup() {
         dynamoDB.createTable(new CreateTableRequest()
                 .withTableName(TABLE_NAME)
@@ -141,7 +141,7 @@ public class SpringBootDynamoApplicationTests extends AbstractIntegrationTest {
     }
 
 
-    @After
+    @AfterEach
     public void clear() {
         dynamoDB.deleteTable("test");
     }
