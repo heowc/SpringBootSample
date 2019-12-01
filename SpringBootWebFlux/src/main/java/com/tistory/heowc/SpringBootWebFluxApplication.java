@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 public class SpringBootWebFluxApplication {
@@ -20,6 +21,6 @@ public class SpringBootWebFluxApplication {
 
 	@Bean
 	public ApplicationRunner applicationRunner() {
-		return arguments -> messageService.add(new Message("hi"));
+		return arguments -> messageService.add(Mono.just(new Message("hi")));
 	}
 }

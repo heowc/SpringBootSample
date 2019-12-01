@@ -19,13 +19,13 @@ public class MessageController {
 	}
 
 	@PostMapping
-	public Mono<Message> add(@RequestBody Message message) {
-		return Mono.fromCompletionStage(messageService.add(message));
+	public Mono<Message> add(@RequestBody Mono<Message> messageMono) {
+		return Mono.fromCompletionStage(messageService.add(messageMono));
 	}
 
 	@PutMapping
-	public Mono<Message> modify(@RequestBody Message message) {
-		return Mono.fromCompletionStage(messageService.modify(message));
+	public Mono<Message> modify(@RequestBody Mono<Message> messageMono) {
+		return Mono.fromCompletionStage(messageService.modify(messageMono));
 	}
 
 	@DeleteMapping("{idx}")

@@ -27,13 +27,13 @@ public class MessageHandler {
 
     public Mono<ServerResponse> add(ServerRequest request) {
         Mono<Message> messageMono = request.bodyToMono(Message.class);
-        return Mono.fromCompletionStage(service.add(messageMono.block()))
+        return Mono.fromCompletionStage(service.add(messageMono))
                 .flatMap(message -> ServerResponse.ok().contentType(APPLICATION_JSON).body(fromValue(message)));
     }
 
     public Mono<ServerResponse> modify(ServerRequest request) {
         Mono<Message> messageMono = request.bodyToMono(Message.class);
-        return Mono.fromCompletionStage(service.modify(messageMono.block()))
+        return Mono.fromCompletionStage(service.modify(messageMono))
                 .flatMap(message -> ServerResponse.ok().contentType(APPLICATION_JSON).body(fromValue(message)));
     }
 
