@@ -28,5 +28,5 @@ dependencies {
 	compile('com.amazonaws:aws-java-sdk-dynamodb:1.11.515')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.testcontainers:junit-jupiter:1.12.3')
+	testCompile('org.testcontainers:junit-jupiter:1.12.4')
 }
