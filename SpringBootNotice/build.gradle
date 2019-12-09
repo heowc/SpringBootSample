@@ -32,7 +32,7 @@ dependencies {
 	compile('org.projectlombok:lombok')
 	runtime('com.h2database:h2')
 
-	compile("org.webjars:bootstrap:4.3.1")
+	compile("org.webjars:bootstrap:4.4.1")
 	compile("org.webjars:jquery:3.4.0")
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
