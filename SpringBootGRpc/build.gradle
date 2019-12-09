@@ -34,7 +34,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('io.github.lognet:grpc-spring-boot-starter:3.5.0')
-	compile('com.google.protobuf:protobuf-java-util:3.11.0')
+	compile('com.google.protobuf:protobuf-java-util:3.11.1')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
