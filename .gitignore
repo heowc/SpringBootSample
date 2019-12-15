@@ -1,6 +1,11 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+.gradle
+**/out
+**/build
+
+
 ### STS ###
 .apt_generated
 .classpath
