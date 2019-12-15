@@ -2,18 +2,15 @@ package com.heowc;
 
 import com.heowc.domain.*;
 import com.heowc.service.PasswordChangingService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class PasswordChangingServiceTest {
+class PasswordChangingServiceTest {
 
     @Autowired
     private PasswordChangingService service;
@@ -22,7 +19,7 @@ public class PasswordChangingServiceTest {
     private MemberRepository repository;
 
     @Test
-    public void notFoundMemberId() {
+    void notFoundMemberId() {
         // given
         repository.save(new Member("heowc1992", "1234"));
 
@@ -34,7 +31,7 @@ public class PasswordChangingServiceTest {
     }
 
     @Test
-    public void doesNotMatchedPassword() {
+    void doesNotMatchedPassword() {
         // given
         repository.save(new Member("heowc1992", "1234"));
 
@@ -46,7 +43,7 @@ public class PasswordChangingServiceTest {
     }
 
     @Test
-    public void changePassword() {
+    void changePassword() {
         // given
         Member member = new Member("heowc1992", "1234");
         repository.save(member);

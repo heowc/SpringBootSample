@@ -18,7 +18,7 @@ class BasicController (val service: BasicService) {
 
     private val webClient = WebClient.builder()
             .baseUrl("https://api.github.com")
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .build()
 
     @GetMapping("/async")

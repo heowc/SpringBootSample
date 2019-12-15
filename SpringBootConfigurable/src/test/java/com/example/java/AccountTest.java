@@ -17,14 +17,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @Transactional
 @Import({ConfigurableConfig.class, SecurityConfig.class})
-public class AccountTest {
+class AccountTest {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @DisplayName("Account 비밀번호 리셋 테스트")
     @Test
-    public void test() {
+    void test() {
         // given
         Account account = new Account("heowc", "1234");
         entityManager.persist(account);

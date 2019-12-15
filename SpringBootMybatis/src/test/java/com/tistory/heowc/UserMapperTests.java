@@ -2,25 +2,22 @@ package com.tistory.heowc;
 
 import com.tistory.heowc.domain.User;
 import com.tistory.heowc.mapper.UserMapper;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class UserMapperTests {
+class UserMapperTests {
 
     @Autowired
     private UserMapper userMapper;
 
     @Test
-    public void test_insert() {
+    void test_insert() {
         // given
         User user = new User(2L, "wonchul", "seoul");
 
@@ -35,7 +32,7 @@ public class UserMapperTests {
     }
 
     @Test
-    public void test_update() {
+    void test_update() {
         // given
         User user = new User(1L, "wonchul", "seoul");
         userMapper.insert(user);
@@ -53,7 +50,7 @@ public class UserMapperTests {
     }
 
     @Test
-    public void test_delete() {
+    void test_delete() {
         // given
         User user = new User(1L, "wonchul", "seoul");
         userMapper.insert(user);
