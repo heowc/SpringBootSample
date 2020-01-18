@@ -1,31 +1,13 @@
-buildscript {
-	ext {
-		springBootVersion = '2.2.1.RELEASE'
-		gRpcVersion = '0.8.8'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("com.google.protobuf:protobuf-gradle-plugin:${gRpcVersion}")
-	}
-}
-
-
 plugins {
 	id "com.google.protobuf" version "0.8.8"
-	id "java"
+	id 'io.spring.dependency-management'
+	id 'org.springframework.boot'
+	id 'java'
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()

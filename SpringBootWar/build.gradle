@@ -1,28 +1,17 @@
-buildscript {
-    ext {
-        springBootVersion = '2.2.1.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
-
-war {
-    baseName = 'spring-boot'
+plugins {
+    id 'io.spring.dependency-management'
+    id 'org.springframework.boot'
+    id 'java'
+    id 'war'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = '1.8'
+
+war {
+    baseName = 'spring-boot'
+}
 
 repositories {
     mavenCentral()
