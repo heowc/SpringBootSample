@@ -1,5 +1,5 @@
 plugins {
-	id "com.google.protobuf" version "0.8.11"
+	id "com.google.protobuf" version "0.8.8"
 	id 'io.spring.dependency-management'
 	id 'org.springframework.boot'
 	id 'java'
@@ -28,6 +28,7 @@ sourceSets {
 		}
 	}
 }
+
 protobuf {
 	protoc {
 		path = protocPath
@@ -35,11 +36,6 @@ protobuf {
 	plugins {
 		grpc {
 			artifact = 'io.grpc:protoc-gen-grpc-java:1.26.0'
-		}
-	}
-	generateProtoTasks {
-		all()*.plugins {
-			grpc {}
 		}
 	}
 }
