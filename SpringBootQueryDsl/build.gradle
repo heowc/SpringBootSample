@@ -1,4 +1,5 @@
 plugins {
+    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
     id 'io.spring.dependency-management'
     id 'org.springframework.boot'
     id 'java'
@@ -8,58 +9,54 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
-def queryDslOutput = file("src-gen/main/java")
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	runtime('com.h2database:h2')
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    /**
+     * querydsl dependency
+     */
+    compile("com.querydsl:querydsl-apt")
+    compile("com.querydsl:querydsl-jpa")
+}
+
+def queryDslOutput = 'src-gen/main/java'
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = queryDslOutput
+}
 
 sourceSets {
     main {
         java {
-            srcDir queryDslOutput
+            srcDirs = ['src/main/java', queryDslOutput]
         }
     }
 }
 
-clean {
-    delete queryDslOutput
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
 }
 
-task generateQueryDSL(type: JavaCompile, group: 'build') {
-    doFirst {
-        if (!queryDslOutput.exists()) {
-            logger.info("Creating `$queryDslOutput` directory")
-
-            if (!queryDslOutput.mkdirs()) {
-                throw new InvalidUserDataException("Unable to create `$queryDslOutput` directory")
-            }
-        }
-    }
-
-    source = sourceSets.main.java
-    classpath = configurations.compile
-    options.compilerArgs = [
-            "-proc:only",
-            "-processor",
-            "com.querydsl.apt.jpa.JPAAnnotationProcessor"
-    ]
-    destinationDir = queryDslOutput
+configurations {
+    querydsl.extendsFrom compileClasspath
 }
 
-compileTestJava.dependsOn(generateQueryDSL)
-
-dependencies {
-	def querydslVersion = "4.2.1"
-
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	runtime('com.h2database:h2')
-	compile('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-	/**
-	* querydsl dependency
-	*/
-	compile ("com.querydsl:querydsl-apt:$querydslVersion")
-	compile ("com.querydsl:querydsl-jpa:$querydslVersion")
+test {
+    useJUnitPlatform()
 }

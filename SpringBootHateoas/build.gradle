@@ -17,3 +17,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+test {
+	useJUnitPlatform()
+}

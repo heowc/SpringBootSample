@@ -43,3 +43,7 @@ protobuf {
 		}
 	}
 }
+
+test {
+	useJUnitPlatform()
+}

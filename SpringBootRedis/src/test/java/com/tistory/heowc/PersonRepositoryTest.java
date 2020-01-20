@@ -2,19 +2,34 @@ package com.tistory.heowc;
 
 import com.tistory.heowc.domain.Person;
 import com.tistory.heowc.domain.PersonRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import redis.embedded.RedisServer;
+
+import java.io.IOException;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.Alphanumeric.class)
-@Slf4j
 class PersonRepositoryTest {
 
+    private static RedisServer redisServer;
     private static final String KEY = "1";
+
+    @BeforeAll
+    static void start() {
+        try {
+            redisServer = new RedisServer(6379);
+            redisServer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @AfterAll
+    static void end() {
+        redisServer.stop();
+    }
 
     @Autowired
     private PersonRepository repository;
@@ -26,10 +41,6 @@ class PersonRepositoryTest {
 
     @Test
     void test2_get() {
-        log.info(
-                String.format("pop [ %s ]", repository.findById(KEY))
-        );
-
         repository.deleteById(KEY);
     }
 }

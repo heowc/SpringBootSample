@@ -55,3 +55,7 @@ jib {
 		ports = ['8080']
 	}
 }
+
+test {
+	useJUnitPlatform()
+}

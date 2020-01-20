@@ -43,5 +43,5 @@ compileTestKotlin {
 
 test {
     jvmArgs '-javaagent:libs/spring-instrument-5.2.1.RELEASE.jar'
-
+    useJUnitPlatform()
 }

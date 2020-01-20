@@ -17,11 +17,10 @@ import java.io.IOException;
 
 public class RestAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-    public RestAuthenticationProcessingFilter(RequestMatcher requestMatcher, ObjectMapper objectMapper) {
+    public RestAuthenticationProcessingFilter(RequestMatcher requestMatcher) {
         super(requestMatcher);
-        this.objectMapper = objectMapper;
     }
 
     @Override

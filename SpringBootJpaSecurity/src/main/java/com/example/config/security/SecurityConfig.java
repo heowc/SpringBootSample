@@ -27,9 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     private static final String LOGIN_ENTRY_POINT = "/login";
     private static final String LOGOUT_ENTRY_POINT = "/logout";
 
@@ -42,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public RestAuthenticationProcessingFilter restAuthenticationProcessingFilter() throws Exception {
-        RestAuthenticationProcessingFilter restAuthenticationProcessingFilter = new RestAuthenticationProcessingFilter(requestMatcher(), objectMapper);
+        RestAuthenticationProcessingFilter restAuthenticationProcessingFilter = new RestAuthenticationProcessingFilter(requestMatcher());
         restAuthenticationProcessingFilter.setAuthenticationManager(this.authenticationManager());
         restAuthenticationProcessingFilter.setAuthenticationSuccessHandler(restAuthenticationSuccessHandler);
         return restAuthenticationProcessingFilter;
