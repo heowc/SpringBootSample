@@ -17,3 +17,11 @@ repositories {
 
 dependencies {
 }
+
+test {
+    useJUnitPlatform()
+    maxParallelForks = 4
+    testLogging {
+        exceptionFormat = "full"
+    }
+}

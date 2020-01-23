@@ -33,7 +33,7 @@ sourceSets {
 }
 protobuf {
 	protoc {
-		path = protocPath
+		artifact = 'com.google.protobuf:protoc:3.11.2'
 	}
 	plugins {
 		grpc {
