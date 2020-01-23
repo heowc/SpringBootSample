@@ -1,3 +1,5 @@
+![](https://github.com/heowc/SpringBootSample/workflows/Test/badge.svg)
+
 # Intro
 
 * Spring Boot Sample Code
