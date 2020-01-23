@@ -1,7 +1,7 @@
 package com.example.kotlin
 
 import com.example.kotlin.simple.domain.Customer
-import org.junit.Assert.assertNotEquals
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
