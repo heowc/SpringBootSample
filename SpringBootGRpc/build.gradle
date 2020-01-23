@@ -15,11 +15,12 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('io.github.lognet:grpc-spring-boot-starter:3.5.1')
+	compile('io.github.lognet:grpc-spring-boot-starter:3.5.0')
 	compile('com.google.protobuf:protobuf-java-util:3.11.0')
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-    	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-  	}
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 sourceSets {
@@ -30,14 +31,18 @@ sourceSets {
 		}
 	}
 }
-
 protobuf {
 	protoc {
 		path = protocPath
 	}
 	plugins {
 		grpc {
-			artifact = 'io.grpc:protoc-gen-grpc-java:1.26.0'
+			artifact = 'io.grpc:protoc-gen-grpc-java:1.25.0'
+		}
+	}
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {}
 		}
 	}
 }
