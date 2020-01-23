@@ -19,7 +19,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.3.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  	}
 }
 
 test {

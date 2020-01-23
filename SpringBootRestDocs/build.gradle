@@ -14,8 +14,11 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.restdocs:spring-restdocs-mockmvc")
+    
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  	}
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
 
 test {

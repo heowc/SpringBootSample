@@ -24,7 +24,10 @@ dependencies {
 	runtime('com.h2database:h2')
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  	}
 
     /**
      * querydsl dependency
