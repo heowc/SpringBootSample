@@ -6,6 +6,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-18.04
+    services:
+      dynamodb:
+        image: amazon/dynamodb-local:1.11.477
+        ports:
+          - 8000:8000
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 1.8
