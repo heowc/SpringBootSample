@@ -15,5 +15,4 @@ jobs:
       - name: Test task with Gradle Wrapper
         run: |
           chmod +x gradlew
-          ls -al
-          gradlew build
+          ./gradlew build
