@@ -57,6 +57,9 @@ findProject(':SpringBootJpaSecurity')?.name = 'spring-boot-jpa-security'
 include 'SpringBootLogStash'
 findProject(':SpringBootLogStash')?.name = 'spring-boot-logstash'
 
+include 'SpringBootMicroMeter'
+findProject(':SpringBootMicroMeter')?.name = 'spring-boot-micrometer'
+
 include 'SpringBootMybatis'
 findProject(':SpringBootMybatis')?.name = 'spring-boot-mybatis'
 
