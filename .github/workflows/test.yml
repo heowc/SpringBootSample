@@ -21,4 +21,4 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew --version
-          ./gradlew test
+          ./gradlew --parallel --max-workers=2 test
