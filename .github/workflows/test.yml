@@ -22,16 +22,11 @@ jobs:
         with:
           path: ~/.gradle/wrapper/dists/
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-            ${{ runner.os }}-gradle-wrapper-
       - uses: actions/cache@v1
         name: Load cached dependency
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
       - name: Check Gradle Version
         run: |
           chmod +x gradlew
