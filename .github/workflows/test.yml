@@ -20,7 +20,7 @@ jobs:
       - uses: actions/cache@v1
         name: Load cached Gradle Wrapper
         env:
-          # If the gradle version changes, this environment variable must also change.
+          # If the gradle version changes, this environment variable must also change. 
           gradle-version: gradle-6.0.1-all
         with:
           path: ~/.gradle/wrapper/dists/${{ env.gradle-version }}
