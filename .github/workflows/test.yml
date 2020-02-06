@@ -27,6 +27,13 @@ jobs:
           key: ${{ runner.os }}-gradle-wrapper-${{ env.gradle-version }}
           restore-keys: |
             ${{ runner.os }}-gradle-wrapper-${{ env.gradle-version }}
+      - uses: actions/cache@v1
+        name: Load cached dependency
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
       - name: Check Gradle Version
         run: |
           chmod +x gradlew
