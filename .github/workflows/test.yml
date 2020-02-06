@@ -17,8 +17,20 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Test task with Gradle Wrapper
+      - uses: actions/cache@v1
+        name: Load cached Gradle Wrapper
+        with:
+          path: ~/.gradle/wrapper/dists/
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      - uses: actions/cache@v1
+        name: Load cached dependency
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+      - name: Check Gradle Version
         run: |
           chmod +x gradlew
           ./gradlew --version
+      - name: Test task with Gradle Wrapper
+        run: |
           ./gradlew --parallel --max-workers=2 test
