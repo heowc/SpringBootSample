@@ -19,14 +19,12 @@ jobs:
           java-version: 1.8
       - uses: actions/cache@v1
         name: Load cached Gradle Wrapper
-        env:
-          # If the gradle version changes, this environment variable must also change. 
-          gradle-version: gradle-6.0.1-all
         with:
-          path: ~/.gradle/wrapper/dists/${{ env.gradle-version }}
-          key: ${{ runner.os }}-gradle-wrapper-${{ env.gradle-version }}
+          path: ~/.gradle/wrapper/dists/
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-wrapper-${{ env.gradle-version }}
+            ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+            ${{ runner.os }}-gradle-wrapper-
       - uses: actions/cache@v1
         name: Load cached dependency
         with:
