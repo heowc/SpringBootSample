@@ -17,8 +17,20 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Test task with Gradle Wrapper
+      - uses: actions/cache@v1
+        name: Load cached Gradle Wrapper
+        env:
+          # If the gradle version changes, this environment variable must also change.
+          gradle-version: gradle-6.0.1-all
+        with:
+          path: ~/.gradle/wrapper/dists/${{ env.gradle-version }}
+          key: ${{ runner.os }}-gradle-wrapper-${{ env.gradle-version }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-wrapper-${{ env.gradle-version }}
+      - name: Check Gradle Version
         run: |
           chmod +x gradlew
           ./gradlew --version
+      - name: Test task with Gradle Wrapper
+        run: |
           ./gradlew --parallel --max-workers=2 test
