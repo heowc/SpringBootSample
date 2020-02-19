@@ -22,4 +22,9 @@ class SpringBootAopApplicationTests {
 		service.test();
 		assertThat(SimpleAspect.count()).isEqualTo(1);
 	}
+
+	@Test
+	void test_failure() {
+		assertThat(true).isFalse();
+	}
 }
