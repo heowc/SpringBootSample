@@ -3,7 +3,7 @@ plugins {
 	id 'org.springframework.boot'
 	id 'org.jetbrains.kotlin.jvm'
 	id 'org.jetbrains.kotlin.plugin.spring'
-	id 'com.google.cloud.tools.jib' version '2.0.0'
+	id 'com.google.cloud.tools.jib' version '2.1.0'
 }
 
 group = 'com.example'
