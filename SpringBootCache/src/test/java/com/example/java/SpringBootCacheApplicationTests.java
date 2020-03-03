@@ -1,56 +1,43 @@
 package com.example.java;
 
 import com.example.java.component.BookRepository;
-import org.junit.jupiter.api.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.java.domain.Book;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 
-@SpringBootTest(classes = SpringBootCacheApplication.class)
-@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest
 class SpringBootCacheApplicationTests {
 
     @Autowired
     private BookRepository repository;
 
-    private long startTime;
+    @Autowired
+    private CacheManager cacheManager;
 
-    private static final Logger logger = LoggerFactory.getLogger(SpringBootCacheApplicationTests.class);
-
-    @BeforeEach
-    void onBefore() {
-        startTime = System.currentTimeMillis();
-    }
-
-    @AfterEach
-    void onAfter() {
-        logger.info("소요시간: {}ms", System.currentTimeMillis() - startTime);
+    @Test
+    void nullValue() {
+        final Cache bookCache = cacheManager.getCache("book");
+        assertThat(bookCache.get("a", Book.class)).isNull();
     }
 
     @Test
-    void test1() {
+    void notNullValue() {
+        final Cache bookCache = cacheManager.getCache("book");
         repository.getByIsbn("a");
+        assertThat(bookCache.get("a", Book.class)).isNotNull();
     }
 
     @Test
-    void test2() {
+    void refreshAndNullValue() {
+        final Cache bookCache = cacheManager.getCache("book");
         repository.getByIsbn("a");
-    }
-
-    @Test
-    void test3() {
-        repository.getByIsbn("b");
-    }
-
-    @Test
-    void test4() {
-        repository.getByIsbn("a");
-    }
-
-    @Test
-    void test5() {
+        assertThat(bookCache.get("a", Book.class)).isNotNull();
         repository.refresh("a");
-        repository.getByIsbn("a");
+        assertThat(bookCache.get("a", Book.class)).isNull();
     }
 }

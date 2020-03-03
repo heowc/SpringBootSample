@@ -9,20 +9,22 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.job.flow.FlowExecutionStatus;
 import org.springframework.batch.core.job.flow.JobExecutionDecider;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class EndOfDayJobConfig {
 
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
+    private final StepBuilderFactory stepBuilderFactory;
+
+    public EndOfDayJobConfig(StepBuilderFactory stepBuilderFactory) {
+        this.stepBuilderFactory = stepBuilderFactory;
+    }
 
     @Bean
     public Job endOfDay(JobBuilderFactory jobBuilderFactory) {
-        JobExecutionDecider decider = (jobExecution, stepExecution) -> {
-            ExitStatus status = execute() ? ExitStatus.COMPLETED : ExitStatus.FAILED;
+        final JobExecutionDecider decider = (jobExecution, stepExecution) -> {
+            final ExitStatus status = execute() ? ExitStatus.COMPLETED : ExitStatus.FAILED;
             return new FlowExecutionStatus(status.getExitCode());
         };
 
@@ -34,13 +36,13 @@ public class EndOfDayJobConfig {
                 .build();
     }
 
-    private boolean execute() {
+    private static boolean execute() {
         return true;
     }
 
     @Bean
     public Step step1() {
-        return this.stepBuilderFactory.get("step1")
+        return stepBuilderFactory.get("step1")
                 .listener(new StepExecutionListenerSupport() {
                     @Override
                     public ExitStatus afterStep(StepExecution stepExecution) {
@@ -53,14 +55,14 @@ public class EndOfDayJobConfig {
 
     @Bean
     public Step step2() {
-        return this.stepBuilderFactory.get("step2")
+        return stepBuilderFactory.get("step2")
                 .tasklet((contribution, chunkContext) -> null)
                 .build();
     }
 
     @Bean
     public Step step3() {
-        return this.stepBuilderFactory.get("step3")
+        return stepBuilderFactory.get("step3")
                 .tasklet((contribution, chunkContext) -> null)
                 .build();
     }

@@ -5,45 +5,45 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class Product {
 
-	private String uniqueId;
+    private String uniqueId;
 
-	private String name;
+    private String name;
 
-	private String comment;
+    private String comment;
 
-	protected Product() { }
+    protected Product() {}
 
-	public Product(String uniqueId, String name, String comment) {
-		this.uniqueId = uniqueId;
-		this.name = name;
-		this.comment = comment;
-	}
+    public Product(String uniqueId, String name, String comment) {
+        this.uniqueId = uniqueId;
+        this.name = name;
+        this.comment = comment;
+    }
 
-	public String getUniqueId() {
-		return uniqueId;
-	}
+    public String getUniqueId() {
+        return uniqueId;
+    }
 
-	public void setUniqueId(String uniqueId) {
-		this.uniqueId = uniqueId;
-	}
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getComment() {
-		return comment;
-	}
+    public String getComment() {
+        return comment;
+    }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
-	public static Product from(Row row) {
-		return new Product(row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue(), row.getCell(2).getStringCellValue());
-	}
+    public static Product from(Row row) {
+        return new Product(row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue(), row.getCell(2).getStringCellValue());
+    }
 }

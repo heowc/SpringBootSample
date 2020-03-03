@@ -8,10 +8,11 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,10 +21,8 @@ import java.util.Map;
 public class SimpleJobLauncherController {
 
     private final JobLauncher jobLauncher;
-
     private final Job job;
 
-    @Autowired
     public SimpleJobLauncherController(JobLauncher jobLauncher, Job job) {
         this.jobLauncher = jobLauncher;
         this.job = job;
@@ -31,8 +30,13 @@ public class SimpleJobLauncherController {
 
     @RequestMapping("/jobLauncher.html")
     public void handle() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-        Map<String, JobParameter> map = new HashMap<>();
-        map.put("create_date", new JobParameter(new Date()));
+        final Map<String, JobParameter> map = new HashMap<>();
+        map.put("create_date", new JobParameter(asDate(LocalDateTime.now())));
         jobLauncher.run(job, new JobParameters(map));
+    }
+
+
+    private static Date asDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }

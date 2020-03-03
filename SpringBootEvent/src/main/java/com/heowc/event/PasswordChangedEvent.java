@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent;
 
 public class PasswordChangedEvent extends ApplicationEvent {
 
-    private String memberId;
+    private final String memberId;
 
     public PasswordChangedEvent(Object source, String memberId) {
         super(source);

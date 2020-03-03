@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PasswordChangedEventListener {
 
-    private static final String MESSAGE_FORMAT = "%s's password is changed";
+    public static final String MESSAGE_FORMAT = "%s's password is changed";
 
-    @Autowired
-    private SendService sendService;
+    private final SendService sendService;
+
+    public PasswordChangedEventListener(SendService sendService) {
+        this.sendService = sendService;
+    }
 
     @EventListener
     public void onChange(PasswordChangedEvent event) {
