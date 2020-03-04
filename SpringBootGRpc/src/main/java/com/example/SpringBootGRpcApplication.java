@@ -1,5 +1,6 @@
 package com.example;
 
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ class MessageSenderImpl extends MessageSenderGrpc.MessageSenderImplBase {
 			}
 
 			MessageSenderProto.MessageResponse response = MessageSenderProto.MessageResponse.newBuilder()
-					.setStatus("success")
+					.setStatus(Status.OK.toString())
 					.setReason("ok")
 					.build();
 

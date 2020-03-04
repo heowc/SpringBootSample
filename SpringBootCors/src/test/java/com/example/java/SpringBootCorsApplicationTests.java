@@ -13,13 +13,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SpringBootCorsApplicationTests {
+class SpringBootCorsApplicationTests {
 
     @Autowired
     private MockMvc mvc;
 
     @Test
-    public void allow_http_call() throws Exception {
+    void allow_http_call() throws Exception {
         mvc.perform(get("/message/{value}", "spring"))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -27,7 +27,7 @@ public class SpringBootCorsApplicationTests {
     }
 
     @Test
-    public void not_allow_http_call() throws Exception {
+    void not_allow_http_call() throws Exception {
         mvc.perform(post("/message"))
                 .andExpect(status().isBadRequest())
                 .andDo(print())
