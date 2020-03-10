@@ -36,22 +36,9 @@ jobs:
           ./gradlew --parallel --max-workers=2 test
       - name: If failure then upload test reports
         if: failure()
-        run: |
-          # copy [armeria/.appveyor.report.sh](https://github.com/line/armeria/blob/5f01ce1e4d1a34ba5a26221675d7c1e33506461e/.appveyor.report.sh)
-          TARBALL_BASENAME="SpringBootSample-reports"
-          TARBALL="$TARBALL_BASENAME.tar"
-
-          echo 'Collecting the test reports ..'
-          find . -path '*/build/reports/tests' -type d \
-            -exec tar rf "$TARBALL" \
-              --xform="s:./:$TARBALL_BASENAME/:" \
-              --xform='s:/build/reports/tests::' \
-              {} ';'
-
-          echo 'Compressing the test reports ..'
-          gzip "$TARBALL"
-
-          echo 'Uploading the test reports ..'
-          curl -F "file=@$TARBALL.gz" 'https://file.io/'
-          echo
-          echo 'Download the test reports from the URL above.'
+        uses: heowc/action-file.io@master
+        with:
+          file_path: '*/build/reports/tests'
+          file_basename: SpringBootSample-reports
+          
+        
