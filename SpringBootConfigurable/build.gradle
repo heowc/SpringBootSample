@@ -1,6 +1,4 @@
 plugins {
-    id 'io.spring.dependency-management'
-    id 'org.springframework.boot'
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.spring'
     id 'org.jetbrains.kotlin.plugin.jpa'
@@ -19,14 +17,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.apache.commons:commons-lang3'
+
     runtimeOnly 'com.h2database:h2'
+
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-    	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-  	}
 }
 
 compileKotlin {
@@ -45,5 +41,4 @@ compileTestKotlin {
 
 test {
     jvmArgs '-javaagent:libs/spring-instrument-5.2.1.RELEASE.jar'
-    useJUnitPlatform()
 }

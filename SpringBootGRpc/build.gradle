@@ -1,8 +1,5 @@
 plugins {
 	id "com.google.protobuf" version "0.8.12"
-	id 'io.spring.dependency-management'
-	id 'org.springframework.boot'
-	id 'java'
 }
 
 group = 'com.example'
@@ -17,10 +14,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('io.github.lognet:grpc-spring-boot-starter:3.5.2')
 	compile('com.google.protobuf:protobuf-java-util:3.11.4')
-
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
 }
 
 sourceSets {
@@ -45,8 +38,4 @@ protobuf {
 			grpc {}
 		}
 	}
-}
-
-test {
-	useJUnitPlatform()
 }

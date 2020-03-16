@@ -1,7 +1,4 @@
 plugins {
-    id 'io.spring.dependency-management'
-    id 'org.springframework.boot'
-    id 'java'
     id 'war'
 }
 
@@ -20,12 +17,4 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-    
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-    	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-  	}
-}
-
-test {
-    useJUnitPlatform()
 }

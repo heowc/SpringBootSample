@@ -18,9 +18,21 @@ repositories {
 dependencies {
 }
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        exceptionFormat = "full"
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            exceptionFormat = "full"
+        }
     }
 }

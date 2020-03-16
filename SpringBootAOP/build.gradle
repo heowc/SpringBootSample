@@ -1,6 +1,4 @@
 plugins {
-	id 'io.spring.dependency-management'
-	id 'org.springframework.boot'
 	id 'org.jetbrains.kotlin.jvm'
 	id 'org.jetbrains.kotlin.plugin.spring'
 }
@@ -37,8 +35,4 @@ compileTestKotlin {
 		freeCompilerArgs = ['-Xjsr305=strict']
 		jvmTarget = '1.8'
 	}
-}
-
-test {
-	useJUnitPlatform()
 }

@@ -1,6 +1,4 @@
 plugins {
-    id 'io.spring.dependency-management'
-    id 'org.springframework.boot'
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.spring'
 }
@@ -18,8 +16,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 compileKotlin {
@@ -34,8 +30,4 @@ compileTestKotlin {
         freeCompilerArgs = ['-Xjsr305=strict']
         jvmTarget = '1.8'
     }
-}
-
-test {
-    useJUnitPlatform()
 }
