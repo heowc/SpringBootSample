@@ -1,6 +1,4 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm'
-    id 'org.jetbrains.kotlin.plugin.spring'
     id 'org.jetbrains.kotlin.plugin.jpa'
 }
 
@@ -19,25 +17,8 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3'
 
     runtimeOnly 'com.h2database:h2'
-
-    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 }
 
-compileKotlin {
-    kotlinOptions {
-        freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = '1.8'
-    }
-}
-
-compileTestKotlin {
-    kotlinOptions {
-        freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = '1.8'
-    }
-}
 
 test {
     jvmArgs '-javaagent:libs/spring-instrument-5.2.1.RELEASE.jar'
