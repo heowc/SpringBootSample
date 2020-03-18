@@ -15,8 +15,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	runtime('com.h2database:h2')
+	implementation 'com.h2database:h2'
 }

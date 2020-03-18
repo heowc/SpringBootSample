@@ -2,12 +2,20 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('net.logstash.logback:logstash-logback-encoder:6.3')
-	compile('org.projectlombok:lombok')
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.3'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 }

@@ -8,12 +8,17 @@ repositories {
 
 configurations {
 	compile.exclude module: "spring-boot-starter-tomcat"
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('io.vertx:vertx-web:3.8.5')
-	runtime('com.h2database:h2')
-	compileOnly('org.projectlombok:lombok')
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.vertx:vertx-web:3.8.5'
+	runtimeOnly 'com.h2database:h2'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 }

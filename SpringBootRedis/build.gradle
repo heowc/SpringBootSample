@@ -13,9 +13,9 @@ repositories {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-redis')
-	compile('com.github.kstyrc:embedded-redis:0.6')
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'com.github.kstyrc:embedded-redis:0.6'
 
-	compileOnly('org.projectlombok:lombok')
-	annotationProcessor('org.projectlombok:lombok')
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 }

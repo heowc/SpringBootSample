@@ -1,22 +1,25 @@
-plugins {
-	id 'io.spring.dependency-management'
-	id 'org.springframework.boot'
-	id 'java'
-}
-
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	runtime('com.h2database:h2')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.projectlombok:lombok')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.5.RELEASE')
-	compile('org.springframework.boot:spring-boot-starter-web')
+	runtimeOnly 'com.h2database:h2'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.5.RELEASE'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }

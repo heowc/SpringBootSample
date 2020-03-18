@@ -7,10 +7,10 @@ repositories {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-webflux')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-	runtime('com.h2database:h2')
+	runtimeOnly 'com.h2database:h2'
 
 	testImplementation('io.projectreactor.addons:reactor-test:3.0.7.RELEASE')
 }

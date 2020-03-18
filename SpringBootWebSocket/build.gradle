@@ -7,10 +7,10 @@ repositories {
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-websocket")
-	compile("org.webjars:webjars-locator:0.39")
-	compile("org.webjars:sockjs-client:1.1.2")
-	compile("org.webjars:stomp-websocket:2.3.3")
-	compile("org.webjars:bootstrap:4.4.1-1")
-	compile("org.webjars:jquery:3.4.0")
+	implementation"org.springframework.boot:spring-boot-starter-websocket"
+	implementation"org.webjars:webjars-locator:0.39"
+	implementation"org.webjars:sockjs-client:1.1.2"
+	implementation"org.webjars:stomp-websocket:2.3.3"
+	implementation"org.webjars:bootstrap:4.4.1-1"
+	implementation"org.webjars:jquery:3.4.0"
 }

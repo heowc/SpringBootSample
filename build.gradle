@@ -19,11 +19,14 @@ dependencies {
 }
 
 subprojects {
+    
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.springframework.boot'
 
     dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }

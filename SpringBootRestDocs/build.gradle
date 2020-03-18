@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
+    implementation "org.springframework.boot:spring-boot-starter-web"
 
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
 }
