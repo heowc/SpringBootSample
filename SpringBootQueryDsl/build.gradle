@@ -38,14 +38,6 @@ querydsl {
     querydslSourcesDir = queryDslOutput
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', queryDslOutput]
-        }
-    }
-}
-
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
