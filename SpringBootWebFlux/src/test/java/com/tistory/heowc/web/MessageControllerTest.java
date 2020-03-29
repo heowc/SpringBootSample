@@ -1,22 +1,31 @@
 package com.tistory.heowc.web;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import java.util.logging.Logger;
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class MessageControllerTest {
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class MessageControllerTest {
+    private static final Logger logger = LoggerFactory.getLogger(MessageControllerTest.class);
 
-    private WebTestClient webClient = WebTestClient.bindToServer().baseUrl("http://localhost:8080/").build();
+    @LocalServerPort
+    private int port;
 
-    private Logger logger = Logger.getLogger(MessageControllerTest.class.getName());
+    private WebTestClient webClient;
 
+    @BeforeEach
+    void init() {
+        webClient = WebTestClient.bindToServer().baseUrl("http://localhost:" + port).build();
+    }
     @Test
-    public void test_findByOne() {
+    void test_findByOne() {
         webClient.get()
                 .uri("message/{idx}", 1L)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -25,7 +34,7 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void test_insert() {
+    void test_insert() {
         webClient.post()
                 .uri("message")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -35,7 +44,7 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void test_update() {
+    void test_update() {
         webClient.put()
                 .uri("message")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,10 +54,9 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void test_deleteByIdx() {
+    void test_deleteByIdx() {
         webClient.delete()
                 .uri("message/{idx}", 1L)
                 .exchange().expectStatus().isOk();
     }
-
 }

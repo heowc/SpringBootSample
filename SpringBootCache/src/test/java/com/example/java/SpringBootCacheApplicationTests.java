@@ -22,22 +22,22 @@ class SpringBootCacheApplicationTests {
     @Test
     void nullValue() {
         final Cache bookCache = cacheManager.getCache("book");
-        assertThat(bookCache.get("a", Book.class)).isNull();
+        assertThat(bookCache.get("a1", Book.class)).isNull();
     }
 
     @Test
     void notNullValue() {
         final Cache bookCache = cacheManager.getCache("book");
-        repository.getByIsbn("a");
-        assertThat(bookCache.get("a", Book.class)).isNotNull();
+        repository.getByIsbn("b1");
+        assertThat(bookCache.get("b1", Book.class)).isNotNull();
     }
 
     @Test
     void refreshAndNullValue() {
         final Cache bookCache = cacheManager.getCache("book");
-        repository.getByIsbn("a");
-        assertThat(bookCache.get("a", Book.class)).isNotNull();
-        repository.refresh("a");
-        assertThat(bookCache.get("a", Book.class)).isNull();
+        repository.getByIsbn("c1");
+        assertThat(bookCache.get("c1", Book.class)).isNotNull();
+        repository.refresh("c1");
+        assertThat(bookCache.get("c1", Book.class)).isNull();
     }
 }

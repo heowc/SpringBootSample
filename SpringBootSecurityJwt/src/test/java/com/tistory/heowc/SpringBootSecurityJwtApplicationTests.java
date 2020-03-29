@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 
-@SpringBootTest
 class SpringBootSecurityJwtApplicationTests {
 
     private static final Logger logger = LoggerFactory.getLogger(SpringBootSecurityJwtApplication.class);

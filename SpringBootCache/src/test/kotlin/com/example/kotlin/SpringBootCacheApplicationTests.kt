@@ -23,20 +23,20 @@ class SpringBootCacheApplicationTests {
     }
 
     @Test
-    fun `a를 저장하면 book 캐시에 a에 해당하는 값이 있다`() {
+    fun `b를 저장하면 book 캐시에 a에 해당하는 값이 있다`() {
         cacheManager.getCache("book")?.let {
-            repository.getByIsbn("a")
-            assertThat(it.get("a")).isNotNull
+            repository.getByIsbn("b")
+            assertThat(it.get("b")).isNotNull
         }
     }
 
     @Test
-    fun `a를 저장하면 book 캐시에 값이 있지만 refresh하면 값이 없다`() {
+    fun `c를 저장하면 book 캐시에 값이 있지만 refresh하면 값이 없다`() {
         cacheManager.getCache("book")?.let {
-            repository.getByIsbn("a")
-            assertThat(it.get("a")).isNotNull
-            repository.refresh("a")
-            assertThat(it.get("a")).isNull()
+            repository.getByIsbn("c")
+            assertThat(it.get("c")).isNotNull
+            repository.refresh("c")
+            assertThat(it.get("c")).isNull()
         }
     }
 }

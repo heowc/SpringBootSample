@@ -1,6 +1,5 @@
 package com.example.web;
 
-import com.example.config.security.RestAuthenticationProcessingFilter;
 import com.example.config.security.RestAuthenticationSuccessHandler;
 import com.example.config.security.SecurityConfig;
 import com.example.domain.User;
