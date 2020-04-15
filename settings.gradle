@@ -90,6 +90,9 @@ findProject(':SpringBootSecurityAddRedis')?.name = 'spring-boot-security-redis'
 include 'SpringBootSecurityJwt'
 findProject(':SpringBootSecurityJwt')?.name = 'spring-boot-security-jwt'
 
+include 'SpringBootSpringDocOpenApi'
+findProject(':SpringBootSpringDocOpenApi')?.name = 'spring-boot-springdoc-openapi'
+
 include 'SpringBootSwagger'
 findProject(':SpringBootSwagger')?.name = 'spring-boot-swagger'
 
