@@ -4,7 +4,7 @@ image:
 tasks:
   - init: 'cd "$project" && ../gradlew classes && cd ..' # runs during prebuild
   - command: 'cd "$project" && ../gradlew bootRun'
-  - command: 'gp await-port 8080 && gp preview $(gp url 8080)'
+  - command: 'gp await-port 8080 && gp preview $(gp url 8080)/$path'
 
 ports:
   - port: 8080
