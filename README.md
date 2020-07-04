@@ -40,7 +40,7 @@
 - `spring-boot-security-redis`
 - `spring-boot-security-jwt`
 - `spring-boot-springdoc-openapi` [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#project=SpringBootSpringDocOpenApi,path=swagger-ui.html/https://github.com/heowc/SpringBootSample/tree/master/SpringBootSpringDocOpenApi)
-- `spring-boot-swagger` [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#project=SpringBootSwagger,path=swagger-ui/index.html/https://github.com/heowc/SpringBootSample/tree/master/SpringBootSwagger)
+- `spring-boot-swagger` [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#project=SpringBootSwagger,path=swagger-ui%2Findex.html/https://github.com/heowc/SpringBootSample/tree/master/SpringBootSwagger)
 - `spring-boot-test`
 - `spring-boot-validator`
 - `spring-boot-vertx`
