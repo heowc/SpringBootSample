@@ -2,6 +2,7 @@ package com.example.web;
 
 import com.example.domain.ErrorMessage;
 import com.example.domain.Member;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,76 +13,61 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MemberController.class)
 public class MemberControllerTest {
 
-	@Autowired
-	private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	private static final String TEST_END_POINT = "/member";
+    @Test
+    public void test_success() throws Exception {
+        final String memberToJson = toJsonString(new Member("heowc", 14, "01012345678"));
 
-	private static final String TEST_NAME = "heowc";
-	private static final int TEST_AGE = 14;
-	private static final String TEST_PHONE = "01012345678";
+        assertResponse(memberToJson, status().isOk(), memberToJson);
+    }
 
-	private static final String TEST_INVALID_NAME = null;
-	private static final int TEST_INVALID_AGE = TEST_AGE - 1;
-	private static final String TEST_INVALID_PHONE = "010xxxxxxxx";
+    @Test
+    public void test_InvalidByName() throws Exception {
+        final String memberToJson = toJsonString(new Member(null, 14, "01012345678"));
+        final String errorMessageToJson = toJsonString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "name null"));
 
-	private static final String INVALID_NAME_MSG = "name null";
-	private static final String INVALID_AGE_MSG = "min 14";
-	private static final String INVALID_PHONE_MSG = "Invalid phone number";
+        assertResponse(memberToJson, status().isBadRequest(), errorMessageToJson);
+    }
 
-	@Test
-	public void test_success() throws Exception {
-		Member member = new Member(TEST_NAME, TEST_AGE, TEST_PHONE);
-		String memberToJson = objectMapper.writeValueAsString(member);
+    @Test
+    public void test_InvalidByAge() throws Exception {
+        final String memberToJson = toJsonString(new Member("heowc", 13, "01012345678"));
+        final String errorMessageToJson = toJsonString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "min 14"));
 
-		mockRequest(memberToJson, status().isOk(), memberToJson);
-	}
+        assertResponse(memberToJson, status().isBadRequest(), errorMessageToJson);
+    }
 
-	@Test
-	public void test_InvalidByName() throws Exception {
-		Member member = new Member(TEST_INVALID_NAME, TEST_AGE, TEST_PHONE);
-		String memberToJson = objectMapper.writeValueAsString(member);
+    @Test
+    public void test_InvalidByPhone() throws Exception {
+        final String memberToJson = toJsonString(new Member("heowc", 14, "010xxxxxxxx"));
+        final String errorMessageToJson = toJsonString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "Invalid phone number"));
 
-		String errorMessageToJson = objectMapper.writeValueAsString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), INVALID_NAME_MSG));
+        assertResponse(memberToJson, status().isBadRequest(), errorMessageToJson);
+    }
 
-		mockRequest(memberToJson, status().isBadRequest(), errorMessageToJson);
-	}
+    private String toJsonString(Object obj) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(obj);
+    }
 
-	@Test
-	public void test_InvalidByAge() throws Exception {
-		Member member = new Member(TEST_NAME, TEST_INVALID_AGE, TEST_PHONE);
-		String memberToJson = objectMapper.writeValueAsString(member);
-
-		String errorMessageToJson = objectMapper.writeValueAsString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), INVALID_AGE_MSG));
-
-		mockRequest(memberToJson, status().isBadRequest(), errorMessageToJson);
-	}
-
-	@Test
-	public void test_InvalidByPhone() throws Exception {
-		Member member = new Member(TEST_NAME, TEST_AGE, TEST_INVALID_PHONE);
-		String memberToJson = objectMapper.writeValueAsString(member);
-
-		String errorMessageToJson = objectMapper.writeValueAsString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), INVALID_PHONE_MSG));
-
-		mockRequest(memberToJson, status().isBadRequest(), errorMessageToJson);
-	}
-
-	private void mockRequest(String memberToJson, ResultMatcher matcher, String result) throws Exception {
-		mvc.perform(post(TEST_END_POINT)
-				.content(memberToJson)
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(matcher)
-				.andExpect(content().json(result));
-	}
+    private void assertResponse(String memberToJson, ResultMatcher matcher, String result) throws Exception {
+        mvc.perform(post("/member")
+                .content(memberToJson)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(matcher)
+                .andExpect(content().json(result));
+    }
 }
