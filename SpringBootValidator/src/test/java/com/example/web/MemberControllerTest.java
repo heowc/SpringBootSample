@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MemberController.class)
-public class MemberControllerTest {
+class MemberControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -27,14 +27,14 @@ public class MemberControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void test_success() throws Exception {
+    void test_success() throws Exception {
         final String memberToJson = toJsonString(new Member("heowc", 14, "01012345678"));
 
         assertResponse(memberToJson, status().isOk(), memberToJson);
     }
 
     @Test
-    public void test_InvalidByName() throws Exception {
+    void test_InvalidByName() throws Exception {
         final String memberToJson = toJsonString(new Member(null, 14, "01012345678"));
         final String errorMessageToJson = toJsonString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "name null"));
 
@@ -42,7 +42,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void test_InvalidByAge() throws Exception {
+    void test_InvalidByAge() throws Exception {
         final String memberToJson = toJsonString(new Member("heowc", 13, "01012345678"));
         final String errorMessageToJson = toJsonString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "min 14"));
 
@@ -50,7 +50,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    public void test_InvalidByPhone() throws Exception {
+    void test_InvalidByPhone() throws Exception {
         final String memberToJson = toJsonString(new Member("heowc", 14, "010xxxxxxxx"));
         final String errorMessageToJson = toJsonString(new ErrorMessage(HttpStatus.BAD_REQUEST.value(), "Invalid phone number"));
 
