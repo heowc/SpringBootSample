@@ -1,6 +1,5 @@
 plugins {
     id 'org.jetbrains.kotlin.plugin.jpa'
-    id "org.jetbrains.kotlin.plugin.noarg"
 }
 
 group = 'com.example'
