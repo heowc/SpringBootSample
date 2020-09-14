@@ -33,7 +33,7 @@ jobs:
           ./gradlew --parallel --max-workers=2 test
       - name: If failure then upload test reports
         if: failure()
-        uses: heowc/action-file.io@master
+        uses: heowc/action-file.io@0.2.0
         with:
           file_path: '*/build/reports/tests'
           file_basename: SpringBootSample-reports
