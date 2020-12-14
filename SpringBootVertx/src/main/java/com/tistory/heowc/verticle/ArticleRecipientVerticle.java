@@ -7,7 +7,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-import io.vertx.core.json.Json;
+import io.vertx.core.json.jackson.DatabindCodec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ArticleRecipientVerticle extends AbstractVerticle {
     public static final String GET_ALL_ARTICLES = "get.articles.all";
 
     private static final Logger logger = LoggerFactory.getLogger(ArticleRecipientVerticle.class);
-    private static final ObjectMapper mapper = Json.mapper;
+    private static final ObjectMapper mapper = DatabindCodec.mapper();
 
     @Autowired
     private EventBus eventBus;
