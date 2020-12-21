@@ -10,6 +10,7 @@ import org.assertj.core.api.InstanceOfAssertFactories;
 import org.assertj.core.api.InstanceOfAssertFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.lognet.springboot.grpc.context.LocalRunningGrpcPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,16 +18,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringBootTest
+@SpringBootTest(properties = "grpc.port=0")
 class SpringBootGRpcApplicationTests {
 
     private static final Logger logger = LoggerFactory.getLogger(SpringBootGRpcApplicationTests.class);
+
+    @LocalRunningGrpcPort
+    private int port;
 
     private ManagedChannel channel;
 
     @BeforeEach
     void init() {
-        channel = ManagedChannelBuilder.forAddress("localhost", 6565)
+        channel = ManagedChannelBuilder.forAddress("localhost", port)
                 .usePlaintext()
                 .build();
     }
