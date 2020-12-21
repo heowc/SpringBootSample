@@ -10,7 +10,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	implementation 'org.springdoc:springdoc-openapi-ui:1.5.1'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.5.2'
 
 	runtimeOnly 'com.h2database:h2'
 }
