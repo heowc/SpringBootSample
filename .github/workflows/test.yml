@@ -1,5 +1,5 @@
 name: Test
-on: [push, pull_request]
+on: [push]
 jobs:
   test:
     runs-on: ubuntu-18.04
@@ -30,12 +30,11 @@ jobs:
           ./gradlew --version
       - name: Test task with Gradle Wrapper
         run: |
-          ./gradlew --parallel --max-workers=2 test
+          ./gradlew --parallel --max-workers=4 test
       - name: If failure then upload test reports
         if: failure()
-        uses: heowc/action-file.io@0.2.0
+        uses: actions/upload-artifact@v2
         with:
-          file_path: '*/build/reports/tests'
-          file_basename: SpringBootSample-reports
-          
-        
+          path: '*/build/reports/tests'
+          name: SpringBootSample-reports
+          retention-days: 7
