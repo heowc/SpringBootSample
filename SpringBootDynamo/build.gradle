@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.926'
+	implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.930'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	testImplementation 'org.testcontainers:junit-jupiter:1.15.1'
