@@ -8,7 +8,7 @@ repositories {
 
 dependencies {
 	implementation 'org.apache.poi:poi-ooxml:5.0.0' // .xlsx
-	implementation 'org.apache.poi:poi:4.1.2' // .xls
+	implementation 'org.apache.poi:poi:5.0.0' // .xls
 
 	implementation 'eu.bitwalker:UserAgentUtils:1.21'
 
