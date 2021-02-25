@@ -1,0 +1,49 @@
+POST http://localhost:8080/graphql
+Content-Type: application/graphql
+
+{
+  bookById(id: "book-1") {
+    id
+}}
+
+###
+
+POST http://localhost:8080/graphql
+Content-Type: application/graphql
+
+{
+  bookById(id: "book-2") {
+    id
+    name
+    pageCount
+}}
+
+###
+
+POST http://localhost:8080/graphql
+Content-Type: application/graphql
+
+{
+  bookById(id: "book-3") {
+    id
+    name
+    pageCount
+    author {
+      firstName
+      lastName
+    }
+}}
+
+###
+
+POST http://localhost:8080/graphql
+Content-Type: application/graphql
+
+{
+  authorById(id: "author-1") {
+    id
+    firstName
+    lastName
+}}
+
+###

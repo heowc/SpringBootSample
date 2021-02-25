@@ -39,6 +39,9 @@ findProject(':SpringBootException')?.name = 'spring-boot-exception'
 include 'SpringBootGracefulShutdown'
 findProject(':SpringBootGracefulShutdown')?.name = 'spring-boot-graceful-shutdown'
 
+include 'SpringBootGraphQL'
+findProject(':SpringBootGraphQL')?.name = 'spring-boot-graphql'
+
 include 'SpringBootGRpc'
 findProject(':SpringBootGRpc')?.name = 'spring-boot-grpc'
 

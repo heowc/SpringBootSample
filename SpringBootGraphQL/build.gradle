@@ -1,0 +1,13 @@
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'com.graphql-java:graphql-java:16.0'
+	implementation 'com.graphql-java:graphql-java-spring-boot-starter-webmvc:2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+}
