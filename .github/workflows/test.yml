@@ -15,12 +15,12 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 8.0.282+8
-      - uses: actions/cache@v2.1.4
+      - uses: actions/cache@v2.1.5
         name: Load cached Gradle Wrapper
         with:
           path: ~/.gradle/wrapper/dists/
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-      - uses: actions/cache@v2.1.4
+      - uses: actions/cache@v2.1.5
         name: Load cached dependency
         with:
           path: ~/.gradle/caches
