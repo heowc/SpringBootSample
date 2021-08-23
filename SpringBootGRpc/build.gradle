@@ -10,10 +10,13 @@ repositories {
 	mavenCentral()
 }
 
+var protobufVersion='3.17.3'
+var grpcVersion='1.40.0'
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'io.github.lognet:grpc-spring-boot-starter:4.5.5'
-	implementation 'com.google.protobuf:protobuf-java-util:3.17.3'
+	implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
 }
 
 sourceSets {
@@ -24,18 +27,22 @@ sourceSets {
 		}
 	}
 }
+
 protobuf {
 	protoc {
-		artifact = 'com.google.protobuf:protoc:3.17.3'
+		artifact = "com.google.protobuf:protoc:${protobufVersion}"
 	}
 	plugins {
 		grpc {
-			artifact = 'io.grpc:protoc-gen-grpc-java:1.40.0'
+			artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
 		}
 	}
-	generateProtoTasks {
-		all()*.plugins {
-			grpc {}
+}
+
+configurations.all {
+	resolutionStrategy.eachDependency { details ->
+		if ("io.grpc".equalsIgnoreCase(details.requested.group)) {
+			details.useVersion grpcVersion
 		}
 	}
 }
