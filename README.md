@@ -2,12 +2,6 @@
 
 * Spring Boot Sample Code
 
-# Version
-
-* java 1.8
-* kotlin 1.3.72
-* spring boot 2.3.0.RELEASE
-
 # subproject
 
 - `spring-boot-aop`

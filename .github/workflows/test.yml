@@ -16,16 +16,6 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
           cache: 'gradle'
-      - uses: actions/cache@v2.1.6
-        name: Load cached Gradle Wrapper
-        with:
-          path: ~/.gradle/wrapper/dists/
-          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-      - uses: actions/cache@v2.1.6
-        name: Load cached dependency
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
       - name: Check Gradle Version
         run: |
           chmod +x gradlew
