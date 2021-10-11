@@ -1,14 +1,15 @@
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
 }
 
+var poiVersion='5.0.0'
+
 dependencies {
-	implementation 'org.apache.poi:poi-ooxml:5.0.0' // .xlsx
-	implementation 'org.apache.poi:poi:5.0.0' // .xls
+	implementation "org.apache.poi:poi-ooxml:${poiVersion}" // .xlsx
+	implementation "org.apache.poi:poi:${poiVersion}" // .xls
 
 	implementation 'eu.bitwalker:UserAgentUtils:1.21'
 

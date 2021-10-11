@@ -9,7 +9,7 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1'
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
@@ -54,14 +54,14 @@ configure(subprojects.findAll { file("${it.projectDir}/src/main/kotlin").exists(
     compileKotlin {
         kotlinOptions {
             freeCompilerArgs = ['-Xjsr305=strict']
-            jvmTarget = '1.8'
+            jvmTarget = JavaVersion.VERSION_11
         }
     }
 
     compileTestKotlin {
         kotlinOptions {
             freeCompilerArgs = ['-Xjsr305=strict']
-            jvmTarget = '1.8'
+            jvmTarget = JavaVersion.VERSION_11
         }
     }
 }
