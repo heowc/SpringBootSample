@@ -10,11 +10,12 @@ jobs:
           - 8000:8000
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
+      - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
-          java-version: 8.0.282+8
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'gradle'
       - uses: actions/cache@v2.1.6
         name: Load cached Gradle Wrapper
         with:
