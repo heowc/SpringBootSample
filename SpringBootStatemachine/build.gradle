@@ -1,0 +1,18 @@
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.statemachine:spring-statemachine-starter'
+    testImplementation 'org.springframework.statemachine:spring-statemachine-test'
+
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.statemachine:spring-statemachine-bom:3.0.1'
+    }
+}
