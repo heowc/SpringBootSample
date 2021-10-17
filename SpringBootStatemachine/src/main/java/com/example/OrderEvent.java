@@ -1,7 +1,7 @@
 package com.example;
 
 public enum OrderEvent {
-    TAKEOVER("TAKEOVER", "배송 업체 인계", Role.ADMIN),
+    TAKE_OVER("TAKEOVER", "배송 업체 인계", Role.ADMIN),
     OUT_OF_STOCK("OUT_OF_STOCK", "재고부족", Role.ADMIN),
     // ...
 
