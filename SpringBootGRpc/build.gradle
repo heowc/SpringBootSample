@@ -10,7 +10,7 @@ repositories {
 }
 
 var protobufVersion='3.19.1'
-var grpcVersion='1.41.0'
+var grpcVersion='1.42.0'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
