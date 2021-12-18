@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -18,6 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         ValidationMessageSource() {
             setBasename(AbstractMessageInterpolator.USER_VALIDATION_MESSAGES);
             setDefaultEncoding(StandardCharsets.UTF_8.displayName());
+            setDefaultLocale(Locale.KOREAN);
         }
     }
 }

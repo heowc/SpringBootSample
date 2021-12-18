@@ -33,7 +33,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     ResponseEntity<List<ErrorMessage>> constraintViolationException(ConstraintViolationException exception,
                                                                     WebRequest request) {
-        logger.warn("path: {}, locale: {}, principal:{}", request.getContextPath(), request.getLocale(),
+        logger.warn("path: {}, locale: {}, principal: {}", request.getContextPath(), request.getLocale(),
                                                           request.getUserPrincipal());
 
         final List<ErrorMessage> body = exception.getConstraintViolations().stream()
@@ -45,7 +45,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<List<ErrorMessage>> methodArgumentNotValidException(MethodArgumentNotValidException exception,
                                                                        WebRequest request) {
-        logger.warn("path: {}, locale: {}, principal:{}", request.getContextPath(), request.getLocale(),
+        logger.warn("path: {}, locale: {}, principal: {}", request.getContextPath(), request.getLocale(),
                                                           request.getUserPrincipal());
 
         final List<ErrorMessage> body = exception.getBindingResult().getAllErrors().stream()
@@ -62,7 +62,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     ResponseEntity<List<ErrorMessage>> emptyBodyException(HttpMessageNotReadableException exception,
                                                           WebRequest request) {
-        logger.warn("path: {}, locale: {}, principal:{}", request.getContextPath(), request.getLocale(),
+        logger.warn("path: {}, locale: {}, principal: {}", request.getContextPath(), request.getLocale(),
                                                           request.getUserPrincipal());
 
         final String message = messageSource.getMessage("body.incorrect.message", new Object[]{ }, Locale.getDefault());
