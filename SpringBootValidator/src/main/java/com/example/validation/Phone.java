@@ -1,4 +1,4 @@
-package com.example.validator;
+package com.example.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -6,10 +6,10 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = PhoneValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Phone {
-	String message() default "Invalid phone number";
+	String message() default "{com.example.validation.Phone.message}";
 
 	Class<?>[] groups() default {};
 

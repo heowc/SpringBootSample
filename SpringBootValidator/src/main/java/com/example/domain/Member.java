@@ -1,27 +1,19 @@
 package com.example.domain;
 
-import com.example.validator.Phone;
+import com.example.validation.Phone;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-
-@Entity
 public class Member {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idx;
 
-	@NotNull(message = "name null")
+	@NotNull
 	private String name;
 
-	@NotNull(message = "age null")
-	@Min(value = 14, message = "min 14")
+	@NotNull
+	@Min(14)
 	private Integer age;
 
 	@Phone
