@@ -1,10 +1,10 @@
 pluginManagement {
     plugins {
-        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
-        id 'org.springframework.boot' version "${springBootVersion}"
-        id 'org.jetbrains.kotlin.jvm' version "${kotlinPluginVersion}"
-        id 'org.jetbrains.kotlin.plugin.spring' version "${kotlinPluginVersion}"
-        id 'org.jetbrains.kotlin.plugin.jpa' version "${kotlinPluginVersion}"
+        id 'io.spring.dependency-management' version "1.0.11.RELEASE"
+        id 'org.springframework.boot' version "2.5.5"
+        ['jvm', 'plugin.spring', 'plugin.jpa'].forEach(postfix -> {
+            id "org.jetbrains.kotlin.${postfix}" version "1.5.31"
+        })
     }
 }
 
