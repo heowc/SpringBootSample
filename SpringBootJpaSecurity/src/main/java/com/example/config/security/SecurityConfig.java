@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -28,11 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String LOGOUT_ENTRY_POINT = "/logout";
 
     private static final String ALL_ENTRY_POINT = "/**";
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public RestAuthenticationProcessingFilter restAuthenticationProcessingFilter() throws Exception {
@@ -75,6 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.withUser("heowc").password("1234").roles("USER");
 
 //		[ 별도의 service 인증 ]
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService);
     }
 }
