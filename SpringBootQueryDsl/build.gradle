@@ -18,8 +18,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    annotationProcessor "javax.annotation:javax.annotation-api"
-//    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
     annotationProcessor 'com.querydsl:querydsl-apt::jpa'
     implementation "com.querydsl:querydsl-jpa"
 }
