@@ -25,7 +25,7 @@ jobs:
           ./gradlew --parallel --max-workers=4 test
       - name: If failure then upload test reports
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: '*/build/reports/tests'
           name: SpringBootSample-reports
