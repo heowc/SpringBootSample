@@ -10,5 +10,5 @@ dependencies {
     implementation 'software.amazon.awssdk:dynamodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	testImplementation 'org.testcontainers:junit-jupiter:1.17.1'
+	testImplementation 'org.testcontainers:junit-jupiter:1.17.2'
 }
