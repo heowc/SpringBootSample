@@ -1,29 +1,29 @@
 package com.tistory.heowc.dao;
 
-import com.tistory.heowc.domain.User;
+import com.tistory.heowc.domain.Account;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserDao {
+public class AccountDao {
 
     private final SqlSession sqlSession;
 
-    private static final String NAMESPACE = "com.tistory.heowc.dao.User.";
+    private static final String NAMESPACE = "com.tistory.heowc.dao.Account.";
 
-    public Long insert(User user) {
-        boolean isInserted = sqlSession.insert(NAMESPACE + "insert", user) == 1;
+    public Long insert(Account account) {
+        boolean inserted = sqlSession.insert(NAMESPACE + "insert", account) == 1;
 
-        if (isInserted) {
-            return user.getIdx();
+        if (inserted) {
+            return account.getIdx();
         } else {
             return null;
         }
     }
 
-    public User findByIdx(Long idx) {
+    public Account findByIdx(Long idx) {
         return sqlSession.selectOne(NAMESPACE + "findByIdx", idx);
     }
 
@@ -31,7 +31,7 @@ public class UserDao {
         sqlSession.delete(NAMESPACE + "deleteByIdx", idx);
     }
 
-    public void setFixedNameByIdx(User user) {
-        sqlSession.update(NAMESPACE + "setFixedNameByIdx", user);
+    public void setFixedNameByIdx(Account account) {
+        sqlSession.update(NAMESPACE + "setFixedNameByIdx", account);
     }
 }
