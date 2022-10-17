@@ -14,7 +14,7 @@ var grpcVersion='1.50.0'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'io.github.lognet:grpc-spring-boot-starter:4.8.1'
+	implementation 'io.github.lognet:grpc-spring-boot-starter:4.9.0'
 	implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
 }
 
