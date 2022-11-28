@@ -1,6 +1,6 @@
 package com.example.kotlin.onetoone.domain
 
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "MARKET")

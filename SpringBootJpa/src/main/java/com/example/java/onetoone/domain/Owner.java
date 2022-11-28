@@ -1,6 +1,6 @@
 package com.example.java.onetoone.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "OWNER")

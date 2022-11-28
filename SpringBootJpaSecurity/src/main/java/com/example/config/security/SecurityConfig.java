@@ -44,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, LOGIN_ENTRY_POINT).permitAll()
-                .antMatchers(HttpMethod.GET, LOGOUT_ENTRY_POINT).permitAll()
-                .antMatchers(ALL_ENTRY_POINT).authenticated()
+                .requestMatchers(HttpMethod.POST, LOGIN_ENTRY_POINT).permitAll()
+                .requestMatchers(HttpMethod.GET, LOGOUT_ENTRY_POINT).permitAll()
+                .requestMatchers(ALL_ENTRY_POINT).authenticated()
                 .and()
                 .addFilterBefore(restAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
 //			.formLogin()

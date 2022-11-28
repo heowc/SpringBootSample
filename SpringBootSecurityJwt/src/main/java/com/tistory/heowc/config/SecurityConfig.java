@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/resources/**");
+        web.ignoring().requestMatchers("/resources/**");
     }
 
     @Override
@@ -66,10 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(ROOT_ENTRY_POINT).authenticated()
-                .antMatchers(TOKEN_ENTRY_POINT).permitAll()
-                .antMatchers(LOGIN_ENTRY_POINT).permitAll()
-                .antMatchers(ERROR_ENTRY_POINT).permitAll();
+                .requestMatchers(ROOT_ENTRY_POINT).authenticated()
+                .requestMatchers(TOKEN_ENTRY_POINT).permitAll()
+                .requestMatchers(LOGIN_ENTRY_POINT).permitAll()
+                .requestMatchers(ERROR_ENTRY_POINT).permitAll();
     }
 
     @Bean
