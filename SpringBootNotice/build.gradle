@@ -25,6 +25,6 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 
-	implementation "org.webjars:bootstrap:5.2.2"
+	implementation "org.webjars:bootstrap:5.2.3"
 	implementation "org.webjars:jquery:3.6.1"
 }
