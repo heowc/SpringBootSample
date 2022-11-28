@@ -1,7 +1,7 @@
 pluginManagement {
     plugins {
         id 'io.spring.dependency-management' version "1.1.0"
-        id 'org.springframework.boot' version "2.7.5"
+        id 'org.springframework.boot' version "3.0.0"
         ['jvm', 'plugin.spring', 'plugin.jpa'].forEach(postfix -> {
             id "org.jetbrains.kotlin.${postfix}" version "1.5.31"
         })
