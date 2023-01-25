@@ -15,7 +15,7 @@ class WebConfig {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/message/**")
                         .allowedOrigins("*")
-                        .allowedMethods(HttpMethod.POST.name)
+                        .allowedMethods(HttpMethod.POST.name())
                         .allowCredentials(false)
                         .maxAge(3600)
             }
