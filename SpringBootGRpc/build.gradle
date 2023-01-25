@@ -9,12 +9,12 @@ repositories {
 	mavenCentral()
 }
 
-var protobufVersion='3.21.9'
-var grpcVersion='1.51.0'
+var protobufVersion='3.21.11'
+var grpcVersion='1.52.1'
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'io.github.lognet:grpc-spring-boot-starter:4.9.0'
+	implementation 'io.github.lognet:grpc-spring-boot-starter:4.9.1'
 	implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
 }
 
