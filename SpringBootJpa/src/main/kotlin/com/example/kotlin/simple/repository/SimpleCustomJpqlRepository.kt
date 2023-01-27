@@ -1,7 +1,7 @@
 package com.example.kotlin.simple.repository
 
 import com.example.kotlin.simple.domain.Customer
-import javax.persistence.EntityManager
+import jakarta.persistence.EntityManager
 
 class SimpleCustomJpqlRepository(val em: EntityManager) : CustomJpqlRepository {
 

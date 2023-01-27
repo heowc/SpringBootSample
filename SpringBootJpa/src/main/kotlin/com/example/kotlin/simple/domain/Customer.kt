@@ -1,6 +1,6 @@
 package com.example.kotlin.simple.domain
 
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 @NamedQuery(name = "Custom.findByName", query = "SELECT c FROM Customer c WHERE c.name = :name ")

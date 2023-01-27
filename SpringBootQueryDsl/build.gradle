@@ -19,6 +19,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
-    annotationProcessor 'com.querydsl:querydsl-apt::jpa'
-    implementation "com.querydsl:querydsl-jpa"
+    annotationProcessor 'com.querydsl:querydsl-apt::jakarta'
+    implementation "com.querydsl:querydsl-jpa::jakarta"
 }

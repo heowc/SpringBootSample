@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -29,7 +29,7 @@ public class Student implements Serializable {
 
 	@Column(name = "STUDENT_NAME")
 	private String  name;
-	
+
 	@Column(name = "STUDENT_HEIGHT")
 	private Double  height;
 

@@ -1,6 +1,6 @@
 package com.example.kotlin.onetomany.domain
 
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "TB_PRODUCT")

@@ -9,7 +9,7 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1'
-sourceCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -26,10 +26,7 @@ subprojects {
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
-
-        testImplementation('org.springframework.boot:spring-boot-starter-test') {
-            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-        }
+        testImplementation('org.springframework.boot:spring-boot-starter-test')
     }
 
     test {
@@ -54,14 +51,14 @@ configure(subprojects.findAll { file("${it.projectDir}/src/main/kotlin").exists(
     compileKotlin {
         kotlinOptions {
             freeCompilerArgs = ['-Xjsr305=strict']
-            jvmTarget = JavaVersion.VERSION_11
+            jvmTarget = JavaVersion.VERSION_17
         }
     }
 
     compileTestKotlin {
         kotlinOptions {
             freeCompilerArgs = ['-Xjsr305=strict']
-            jvmTarget = JavaVersion.VERSION_11
+            jvmTarget = JavaVersion.VERSION_17
         }
     }
 }

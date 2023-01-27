@@ -30,13 +30,8 @@ public class SimpleJobLauncherController {
 
     @RequestMapping("/jobLauncher.html")
     public void handle() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-        final Map<String, JobParameter> map = new HashMap<>();
-        map.put("create_date", new JobParameter(asDate(LocalDateTime.now())));
+        final Map<String, JobParameter<?>> map = new HashMap<>();
+        map.put("create_date", new JobParameter<>(LocalDateTime.now().toString(), String.class));
         jobLauncher.run(job, new JobParameters(map));
-    }
-
-
-    private static Date asDate(LocalDateTime localDateTime) {
-        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }

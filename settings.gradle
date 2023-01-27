@@ -1,9 +1,9 @@
 pluginManagement {
     plugins {
         id 'io.spring.dependency-management' version "1.1.0"
-        id 'org.springframework.boot' version "2.7.5"
+        id 'org.springframework.boot' version "3.0.0"
         ['jvm', 'plugin.spring', 'plugin.jpa'].forEach(postfix -> {
-            id "org.jetbrains.kotlin.${postfix}" version "1.5.31"
+            id "org.jetbrains.kotlin.${postfix}" version "1.8.0"
         })
     }
 }
@@ -76,8 +76,8 @@ findProject(':SpringBootMybatis')?.name = 'spring-boot-mybatis'
 include 'SpringBootNotice'
 findProject(':SpringBootNotice')?.name = 'spring-boot-notice'
 
-include 'SpringBootOAuth2'
-findProject(':SpringBootOAuth2')?.name = 'spring-boot-oauth2'
+//include 'SpringBootOAuth2'
+//findProject(':SpringBootOAuth2')?.name = 'spring-boot-oauth2'
 
 include 'SpringBootQueryDsl'
 findProject(':SpringBootQueryDsl')?.name = 'spring-boot-querydsl'
@@ -105,10 +105,6 @@ findProject(':SpringBootSpringDocOpenApi')?.name = 'spring-boot-springdoc-openap
 
 include 'SpringBootStatemachine'
 findProject(':SpringBootStatemachine')?.name = 'spring-boot-statemachine'
-
-// See https://github.com/springfox/springfox/issues/3462
-//include 'SpringBootSwagger'
-//findProject(':SpringBootSwagger')?.name = 'spring-boot-swagger'
 
 include 'SpringBootTest'
 findProject(':SpringBootTest')?.name = 'spring-boot-test'
