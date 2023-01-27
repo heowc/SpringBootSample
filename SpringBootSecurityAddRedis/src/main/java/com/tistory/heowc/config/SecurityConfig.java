@@ -1,45 +1,34 @@
 package com.tistory.heowc.config;
 
-import com.tistory.heowc.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
-	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
+    @Bean
+    WebSecurityCustomizer customizer() {
+        return web -> {
+            web.ignoring().requestMatchers("/resources/**");
+        };
+    }
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Override
-	public void configure(WebSecurity web) {
-		web.ignoring().requestMatchers("/resources/**");
-	}
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-	}
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.authorizeRequests()
-				.anyRequest().authenticated()
-				.and()
-				.formLogin()
-				.usernameParameter("id")
-				.passwordParameter("pw")
-				.defaultSuccessUrl("/user", true)
-				.permitAll()
-				.and()
-				.csrf().disable();
-	}
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .usernameParameter("id")
+                .passwordParameter("pw")
+                .defaultSuccessUrl("/user", true)
+                .permitAll()
+                .and()
+                .csrf().disable();
+        return http.build();
+    }
 }
