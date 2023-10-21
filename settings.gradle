@@ -103,6 +103,9 @@ findProject(':SpringBootSecurityJwt')?.name = 'spring-boot-security-jwt'
 include 'SpringBootSpringDocOpenApi'
 findProject(':SpringBootSpringDocOpenApi')?.name = 'spring-boot-springdoc-openapi'
 
+include 'SpringBootSse'
+findProject(':SpringBootSse')?.name = 'spring-boot-sse'
+
 include 'SpringBootStatemachine'
 findProject(':SpringBootStatemachine')?.name = 'spring-boot-statemachine'
 
