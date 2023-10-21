@@ -28,11 +28,6 @@ public class SpringBootSseApplication {
                new Member(now),
                new Member(now),
                new Member(now),
-               new Member(now),
-               new Member(now),
-               new Member(now),
-               new Member(now),
-               new Member(now),
                new Member(now.minusDays(1)),
                new Member(now.minusDays(1)),
                new Member(now.minusDays(1))
