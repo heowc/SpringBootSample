@@ -29,4 +29,12 @@ public class Member {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+               "id=" + id +
+               ", createdAt=" + createdAt +
+               '}';
+    }
 }
