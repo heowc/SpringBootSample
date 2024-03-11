@@ -6,7 +6,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform('software.amazon.awssdk:bom:2.24.10')
+    implementation platform('software.amazon.awssdk:bom:2.25.6')
     implementation 'software.amazon.awssdk:dynamodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
