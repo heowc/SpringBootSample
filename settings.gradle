@@ -22,9 +22,6 @@ findProject(':SpringBootBatch')?.name = 'spring-boot-batch'
 include 'SpringBootCache'
 findProject(':SpringBootCache')?.name = 'spring-boot-cache'
 
-include 'SpringBootConfigurable'
-findProject(':SpringBootConfigurable')?.name = 'spring-boot-configurable'
-
 include 'SpringBootCors'
 findProject(':SpringBootCors')?.name = 'spring-boot-cors'
 
