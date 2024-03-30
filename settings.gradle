@@ -76,6 +76,9 @@ findProject(':SpringBootNotice')?.name = 'spring-boot-notice'
 //include 'SpringBootOAuth2'
 //findProject(':SpringBootOAuth2')?.name = 'spring-boot-oauth2'
 
+include 'SpringBootQuartz'
+findProject(':SpringBootQuartz')?.name = 'spring-boot-quartz'
+
 include 'SpringBootQueryDsl'
 findProject(':SpringBootQueryDsl')?.name = 'spring-boot-querydsl'
 
