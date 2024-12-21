@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @Transactional
 public class InitRunner implements ApplicationRunner {
-	
-	@Autowired NoticeRepository repository;
-	
+
+	@Autowired
+    private NoticeRepository repository;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		for (int i = 0; i < 50; i++) {
-			repository.save(new Notice((long) i, "title " + i, "content " + i));
+		for (long i = 0; i < 50; i++) {
+			repository.save(new Notice(i, "title " + i, "content " + i));
 		}
 	}
 }
