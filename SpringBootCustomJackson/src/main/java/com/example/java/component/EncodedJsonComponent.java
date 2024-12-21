@@ -6,9 +6,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.*;
 import org.springframework.boot.jackson.JsonComponent;
-import org.springframework.util.Base64Utils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Iterator;
 
 @JsonComponent
@@ -33,7 +34,8 @@ public class EncodedJsonComponent {
                 System.out.println(field + ":" + node.get(field));
             }
 
-            String name = new String(Base64Utils.decodeFromString(node.get("name").asText()));
+            String name = new String(Base64.getDecoder().decode(node.get("name").asText()),
+                                     StandardCharsets.UTF_8);
             int type = node.get("type").asInt();
             System.out.println("---------------------------------------------------");
             return new Model(name, type);
@@ -52,7 +54,7 @@ public class EncodedJsonComponent {
                               SerializerProvider provider) throws IOException {
             json.writeStartObject();
             json.writeFieldName("name");
-            json.writeString(Base64Utils.encodeToString(value.getName().getBytes()));
+            json.writeString(Base64.getEncoder().encodeToString(value.getName().getBytes()));
             json.writeFieldName("type");
             json.writeNumber(value.getType());
             json.writeEndObject();

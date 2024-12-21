@@ -5,8 +5,8 @@ import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.*
 import org.springframework.boot.jackson.JsonComponent
-import org.springframework.util.Base64Utils
 import java.io.IOException
+import java.util.Base64
 
 @JsonComponent
 class EncodedJsonComponent {
@@ -28,7 +28,7 @@ class EncodedJsonComponent {
                 println(field + ":" + node.get(field))
             }
 
-            val name = String(Base64Utils.decodeFromString(node.get("name").asText()))
+            val name = String(Base64.getDecoder().decode(node.get("name").asText()))
             val type = node.get("type").asInt()
             println("---------------------------------------------------")
             return Model(name, type)
@@ -46,7 +46,7 @@ class EncodedJsonComponent {
                                provider: SerializerProvider) {
             json.writeStartObject()
             json.writeFieldName("name")
-            json.writeString(Base64Utils.encodeToString(value.name.toByteArray()))
+            json.writeString(Base64.getEncoder().encodeToString(value.name.toByteArray()))
             json.writeFieldName("type")
             json.writeNumber(value.type)
             json.writeEndObject()
