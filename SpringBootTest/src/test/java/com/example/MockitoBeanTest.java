@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class MockTest {
+public class MockitoBeanTest {
 
     @Autowired
     TestRestTemplate restTemplate;
@@ -25,7 +25,7 @@ public class MockTest {
         given(service.test(0))
                 .willReturn("Spring Boot Service Test");
 
-        String result = restTemplate.getForObject("/test?flag=0", String.class);
+        final String result = restTemplate.getForObject("/test?flag=0", String.class);
         assertThat(result)
                 .isEqualTo("Spring Boot Service Test");
     }

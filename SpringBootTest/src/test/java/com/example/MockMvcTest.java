@@ -30,8 +30,8 @@ public class MockMvcTest {
 
     @Test
     public void test() throws Exception {
-        TestMessage message = new TestMessage("wonchul", 0);
-        String result = mapper.writeValueAsString(message);
+        final TestMessage message = new TestMessage("wonchul", 0);
+        final String result = mapper.writeValueAsString(message);
 
         given(service.jsonTest())
                 .willReturn(message);
