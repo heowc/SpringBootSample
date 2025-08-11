@@ -13,6 +13,6 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.statemachine:spring-statemachine-bom:4.0.0'
+        mavenBom 'org.springframework.statemachine:spring-statemachine-bom:4.0.1'
     }
 }
