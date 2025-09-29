@@ -9,7 +9,7 @@ repositories {
 	mavenCentral()
 }
 
-var protobufVersion='4.32.0'
+var protobufVersion='4.32.1'
 var grpcVersion='1.75.0'
 
 dependencies {
